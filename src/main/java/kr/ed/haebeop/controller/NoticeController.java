@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class NoticeController {
     private NoticeService noticeService;
 
     @GetMapping("list.do")
-    public String getnoticeList(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
+    public String getnoticeList(HttpServletRequest request, Model model) throws Exception{
 
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
@@ -40,4 +41,55 @@ public class NoticeController {
 
         return "/notice/noticeList";
     }
+
+    @GetMapping("detail.do")
+    public String getNotice (HttpServletRequest request, Model model) throws Exception{
+        int no = Integer.parseInt(request.getParameter("no"));
+
+        Notice notice = noticeService.noticeDetail(no);
+        model.addAttribute("notice", notice);
+
+        return "/notice/noticeDetail";
+    }
+
+    @GetMapping("insert.do")
+    public String insertForm (HttpServletRequest request, Model model) {
+        return "/notice/noticeInsert";
+    }
+
+    @PostMapping("insert.do")
+    public String noticeInsert (HttpServletRequest request, Model model){
+        Notice notice = new Notice();
+        notice.setTitle(request.getParameter("title"));
+        notice.setContent(request.getParameter("content"));
+        noticeService.noticeInsert(notice);
+        return "redirect:list.do";
+    }
+
+    @GetMapping("delete.do")
+    public String noticeDelete(HttpServletRequest request, Model model) throws Exception {
+        int no = Integer.parseInt(request.getParameter("no"));
+        noticeService.noticeDelete(no);
+        return "redirect:list.do";
+    }
+
+    @GetMapping("edit.do")
+    public String editForm(HttpServletRequest request, Model model) throws Exception {
+        int no = Integer.parseInt(request.getParameter("no"));
+        Notice notice = noticeService.noticeDetail(no);
+        model.addAttribute("notice", notice);
+        return "/notice/noticeEdit";
+    }
+
+    @PostMapping("edit.do")
+    public String noticeEdit(HttpServletRequest request, Model model) throws Exception {
+        int no = Integer.parseInt(request.getParameter("no"));
+        Notice notice = new Notice();
+        notice.setNo(no);
+        notice.setTitle(request.getParameter("title"));
+        notice.setContent(request.getParameter("content"));
+        noticeService.noticeEdit(notice);
+        return "redirect:list.do";
+    }
+
 }
