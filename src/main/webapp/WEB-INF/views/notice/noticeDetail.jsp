@@ -21,9 +21,9 @@
 
 <!--Banner Start-->
 <section class="page-title background-primary is-relative"  style="background-image: url('${path}/resources/img/bannerPage.jpg'); background-position: center; background-size: cover; height: 200px;">
-    <div class="container-fluid bg-primary mb-5">
-        <div class="has-text-centered" style="padding-top: 60px;">
-            <h1 class="display-3 font-weight-bold text-white" style="font-size: 40px; text-align:center;"> 공지사항 상세보기</h1>
+    <div class="container-fluid mb-5">
+        <div class="has-text-centered">
+            <h1 class="display-3 font-weight-bold text-white" style="font-size: 40px; text-align:center;"> 공지사항 상세보기 </h1>
             <div class="d-inline-flex text-white" style="display: flex !important; justify-content: center;">
                 <p class="m-0"><a class="text-white" href="${path}">Home</a></p>
                 <p class="m-0 px-2">/</p>
@@ -35,6 +35,7 @@
 <!--Banner End-->
 
 <!--NoticeDetail Start -->
+<section style="padding-top: 0;">
 <div style="display: flex; justify-content: center; margin-top: 100px;">
     <div class="card" style="width: 90%;">
         <div class="card-body" >
@@ -50,51 +51,12 @@
             <div class="card-text mt-4">
                 <p>${notice.content }</p>
             </div>
-
-            <div class="mt-3 pt-2"><button class="btn btn-dark btn-lg w-100">Go to vote</button></div>
         </div>
     </div>
 </div>
-<section class="section">
-    <div class="container">
-        <div class="columns is-desktop is-justify-content-center">
-            <div class="column is-10-desktop">
-                <div class="content" id="content" style="margin-top: 100px;">
-                    <div class="row column text-center">
-                        <div class="container">
-                            <table id="table">
-                                <tbody>
-                                <tr style="border-top: solid grey 1px;">
-                                    <td style="font-weight: bold; font-size: 30px;">${notice.title }</td>
-                                    <td style="min-width:10%; max-width: 15%; text-align: right; padding-top:30px;">
-                                        작성자 | ${notice.author }
-                                    </td>
-                                    <td style="width: 170px; padding-right: 0px; padding-top:30px;">
-                                        작성일 | <fmt:parseDate value="${notice.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
-                                        <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
-                                    </td>
-                                    <td style="width: 110px; padding-top:30px;">
-                                        조회수 | ${notice.cnt}
-                                    </td>
-                                </tr>
-                                <tr style="border-bottom: solid grey 1px;">
-                                    <td style="padding-top: 50px; padding-bottom: 50px;"><p>${notice.content }</p></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="button-group" style="margin-top: 30px; float: right; margin-bottom: 100px;">
-                                <c:if test='${sid eq "admin"}'>
-                                    <a class="btn btn-sm btn-outline-primary ml-4" href="${path }/notice/delete.do?no=${notice.no}" style="text-decoration:none;">글 삭제</a>
-                                    <a class="btn btn-sm btn-primary ml-4" href="${path }/notice/edit.do?no=${notice.no}" style="color:#fff; text-decoration:none;">글 수정</a>
-                                </c:if>
-                                <a class="btn btn-sm btn-outline-primary ml-4" href="${path }/notice/list.do" style="float:right; text-decoration:none;">글 목록</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div style="width: 95%; margin-top: 30px;">
+    <button class="btn btn-dark btn-lg" style="width:200px; float: right;">Go to vote</button>
+</div>
 </section>
 <!--NoticeDetail End -->
 
