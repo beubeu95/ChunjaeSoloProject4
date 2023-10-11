@@ -6,737 +6,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="Free HTML Templates" name="keywords" />
-    <meta content="Free HTML Templates" name="description" />
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Haebeop</title>
     <jsp:include page="setting/head.jsp" />
 </head>
-<body>
-<!-- Header Start -->
-<jsp:include page="setting/header.jsp" />
-<!-- Header End -->
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+<!--    Main Content-->
+<main class="main" id="top">
+    <!-- header begin -->
+    <jsp:include page="setting/header.jsp" />
+    <!-- header end -->
 
-<!-- main1(banner) Start -->
-<jsp:include page="main/main1.jsp" />
-<!-- main1(banner) End -->
+    <!-- <section> begin-->
+    <section class="pt-8 py-lg-0" id="hero">
+        <div class="container-xxl">
+            <div class="row align-items-center min-vh-lg-100">
+                <div class="col-lg order-lg-1 text-center"><img class="img-fluid" src="${path}/resources/img/illustrations/hero.png" alt="" /></div>
+                <div class="col-lg mt-5 mt-lg-0">
+                    <h1 class="lh-sm font-cursive fw-medium fs-6 fs-sm-8 fs-md-11 fs-lg-9 fs-xl-11 fs-xxl-12">A new model for <br class="d.none d-xl-block" /> open collaboration</h1>
+                    <p class="mt-4 fs-2 fs-md-4 lh-sm">Run an organization where members get rewarded for their contributions with fractional ownership.</p><button class="btn btn-success mt-4">Request early access</button>
+                </div>
+            </div>
+        </div><!-- end of .container-->
+    </section>
+    <!-- <section> close-->
 
-<!-- Facilities Start -->
-<div class="container-fluid pt-5">
-    <div class="container pb-3">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div
-                        class="d-flex bg-light shadow-sm border-top rounded mb-4"
-                        style="padding: 30px"
-                >
-                    <i
-                            class="flaticon-050-fence h1 font-weight-normal text-primary mb-3"
-                    ></i>
-                    <div class="pl-4">
-                        <h4>Play Ground</h4>
-                        <p class="m-0">
-                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                            lorem amet elitr vero...
-                        </p>
+    <!-- <section> begin-->
+    <section class="pt-xxl-0" id="features">
+        <div class="container-xxl">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10 col-xl-8">
+                    <h1 class="display-6 font-cursive">Reimagining what it means to work</h1>
+                    <p class="fs-md-1 mt-4">Teams and communities using Open Enterprise fundamentally unlock a reality of work that reimagines how people engage in economic opportunity, meeting the demands and expectations of a modern organization.</p>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-xl-3 g-4 mt-3 text-center">
+                <div class="col-12 col-md-6">
+                    <div class="card py-md-6 px-md-4 mt-3 h-100 box-shadow-all border-0">
+                        <div class="card-body"><img src="${path}/resources/img/icons/icon1.png" alt="" />
+                            <h3 class="py-3">Modern workforce</h3>
+                            <p class="lead mb-0">Multistakeholder governance aligns employees with the organization’s wider community.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card py-md-6 px-md-4 mt-3 h-100 box-shadow-all border-0">
+                        <div class="card-body"><img src=""${path}/resources/img/icons/icon2.png" alt="" />
+                            <h3 class="py-3">Meritocratic by design</h3>
+                            <p class="lead mb-0">Tokenized ownership aligns deeply committed individuals with the organization’s success.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card py-md-6 px-md-4 mt-3 h-100 box-shadow-all border-0">
+                        <div class="card-body"><img src="${path}/resources/img/icons/icon3.png" alt="" />
+                            <h3 class="py-3">Engineered for resilience</h3>
+                            <p class="lead mb-0">Open Enterprise supports best practices in sociocratic management.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div
-                        class="d-flex bg-light shadow-sm border-top rounded mb-4"
-                        style="padding: 30px"
-                >
-                    <i
-                            class="flaticon-022-drum h1 font-weight-normal text-primary mb-3"
-                    ></i>
-                    <div class="pl-4">
-                        <h4>Music and Dance</h4>
-                        <p class="m-0">
-                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                            lorem amet elitr vero...
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div
-                        class="d-flex bg-light shadow-sm border-top rounded mb-4"
-                        style="padding: 30px"
-                >
-                    <i
-                            class="flaticon-030-crayons h1 font-weight-normal text-primary mb-3"
-                    ></i>
-                    <div class="pl-4">
-                        <h4>Arts and Crafts</h4>
-                        <p class="m-0">
-                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                            lorem amet elitr vero...
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div
-                        class="d-flex bg-light shadow-sm border-top rounded mb-4"
-                        style="padding: 30px"
-                >
-                    <i
-                            class="flaticon-017-toy-car h1 font-weight-normal text-primary mb-3"
-                    ></i>
-                    <div class="pl-4">
-                        <h4>Safe Transportation</h4>
-                        <p class="m-0">
-                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                            lorem amet elitr vero...
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div
-                        class="d-flex bg-light shadow-sm border-top rounded mb-4"
-                        style="padding: 30px"
-                >
-                    <i
-                            class="flaticon-025-sandwich h1 font-weight-normal text-primary mb-3"
-                    ></i>
-                    <div class="pl-4">
-                        <h4>Healthy food</h4>
-                        <p class="m-0">
-                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                            lorem amet elitr vero...
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pb-1">
-                <div
-                        class="d-flex bg-light shadow-sm border-top rounded mb-4"
-                        style="padding: 30px"
-                >
-                    <i
-                            class="flaticon-047-backpack h1 font-weight-normal text-primary mb-3"
-                    ></i>
-                    <div class="pl-4">
-                        <h4>Educational Tour</h4>
-                        <p class="m-0">
-                            Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                            lorem amet elitr vero...
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Facilities Start -->
+        </div><!-- end of .container-->
+    </section>
+    <!-- <section> close-->
 
-<!-- About Start -->
-<div class="container-fluid py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5">
-                <img
-                        class="img-fluid rounded mb-5 mb-lg-0"
-                        src="${path}/resources/img/about-1.jpg"
-                        alt=""
-                />
-            </div>
-            <div class="col-lg-7">
-                <p class="section-title pr-5">
-                    <span class="pr-2">Learn About Us</span>
-                </p>
-                <h1 class="mb-4">Best School For Your Kids</h1>
-                <p>
-                    Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo
-                    dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo.
-                    Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est
-                    dolor
-                </p>
-                <div class="row pt-2 pb-4">
-                    <div class="col-6 col-md-4">
-                        <img class="img-fluid rounded" src="${path}/resources/img/about-2.jpg" alt="" />
-                    </div>
-                    <div class="col-6 col-md-8">
-                        <ul class="list-inline m-0">
-                            <li class="py-2 border-top border-bottom">
-                                <i class="fa fa-check text-primary mr-3"></i>Labore eos amet
-                                dolor amet diam
-                            </li>
-                            <li class="py-2 border-bottom">
-                                <i class="fa fa-check text-primary mr-3"></i>Etsea et sit
-                                dolor amet ipsum
-                            </li>
-                            <li class="py-2 border-bottom">
-                                <i class="fa fa-check text-primary mr-3"></i>Diam dolor diam
-                                elitripsum vero.
-                            </li>
-                        </ul>
+    <!-- <section> begin-->
+    <section id="contribute">
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <div class="col-md-6"><img src="${path}/resources/img/icons/icon1.png" alt="" />
+                    <h1 class="display-5 lh-sm my-4 font-cursive">Kickstart an organization with your co-founders</h1>
+                    <p class="fs-1">It’s the early days, you just had a long conversation with two friends about a meaningful challenge that you’re all passionate about and have a potential solution for. You’re ready to embark the startup journey.</p>
+                </div>
+                <div class="col-md-6 col-xl-4 offset-xl-1">
+                    <div class="card box-shadow-rb my-4">
+                        <div class="card-body my-3 mx-4">
+                            <h1 class="mb-4 pb-2">Members</h1>
+                            <div class="d-flex align-items-center mt-3"><img class="rounded-circle" src="${path}/resources/img/gallery/user1.png" alt="" height="70" />
+                                <div class="ms-3">
+                                    <h3>Dillon Kydd</h3>
+                                    <p class="mb-0">100 SHARES</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mt-3"><img class="rounded-circle" src="${path}/resources/img/gallery/user2.png" alt="" height="70" />
+                                <div class="ms-3">
+                                    <h3>Anna Olsen</h3>
+                                    <p class="mb-0">100 SHARES</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mt-3"><img class="rounded-circle" src="${path}/resources/img/gallery/user3.png" alt="" height="70" />
+                                <div class="ms-3">
+                                    <h3>Kas Moss</h3>
+                                    <p class="mb-0">100 SHARES</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <a href="" class="btn btn-primary mt-2 py-2 px-4">Learn More</a>
             </div>
-        </div>
-    </div>
-</div>
-<!-- About End -->
+        </div><!-- end of .container-->
+    </section>
+    <!-- <section> close -->
 
-<!-- Class Start -->
-<div class="container-fluid pt-5">
-    <div class="container">
-        <div class="text-center pb-2">
-            <p class="section-title px-5">
-                <span class="px-2">Popular Classes</span>
-            </p>
-            <h1 class="mb-4">Classes for Your Kids</h1>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2">
-                    <img class="card-img-top mb-2" src="${path}/resources/img/class-1.jpg" alt="" />
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Drawing Class</h4>
-                        <p class="card-text">
-                            Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                            ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                        </p>
-                    </div>
-                    <div class="card-footer bg-transparent py-4 px-5">
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Age of Kids</strong>
+    <!-- <section> begin -->
+    <section>
+        <div class="container-xxl">
+            <div class="row flex-between-center">
+                <div class="col-md-6 order-md-1"><img src="${path}/resources/img/icons/icon2.png" alt="" />
+                    <h1 class="display-5 lh-sm my-4 font-cursive">Onboard users, investors and advisors as you grow</h1>
+                    <p class="fs-1">You’ve bootstrapped and delivered an MVP, and some investors and advisors are interested in having a chat with you. As an Open Enterprise, you can onboard them seamlessly into your digital organization and align them with your success.</p>
+                </div>
+                <div class="col-md-6 col-xl-5">
+                    <div class="card my-4">
+                        <div class="card-body p-0 p-lg-3 my-3 mx-4">
+                            <div class="card-title">
+                                <div class="d-flex align-items-center mt-3"><img class="rounded-circle" src="${path}/resources/img/gallery/user4.png" alt="" height="70" />
+                                    <div class="ms-3">
+                                        <h3>Jassir Jonis</h3>
+                                        <p class="mb-0">Pre-seed angel investor</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-6 py-1">3 - 6 Years</div>
-                        </div>
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Total Seats</strong>
+                            <div class="card-text mt-4">
+                                <p>Hey guys, love what you’re doing and I’m convinced that together we’ll achieve amazing things.</p>
                             </div>
-                            <div class="col-6 py-1">40 Seats</div>
-                        </div>
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Class Time</strong>
+                            <div class="card-text mt-4">
+                                <div class="row gx-4">
+                                    <div class="col">
+                                        <p class="mb-1">COMMIT</p>
+                                        <h3>10,000 DAI</h3>
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-1">SHARES</p>
+                                        <h3>20</h3>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-6 py-1">08:00 - 10:00</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Tution Fee</strong>
-                            </div>
-                            <div class="col-6 py-1">$290 / Month</div>
+                            <div class="mt-3 pt-2"><button class="btn btn-dark btn-lg w-100">Go to vote</button></div>
                         </div>
                     </div>
-                    <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
                 </div>
             </div>
-            <div class="col-lg-4 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2">
-                    <img class="card-img-top mb-2" src="${path}/resources/img/class-2.jpg" alt="" />
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Language Learning</h4>
-                        <p class="card-text">
-                            Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                            ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                        </p>
-                    </div>
-                    <div class="card-footer bg-transparent py-4 px-5">
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Age of Kids</strong>
-                            </div>
-                            <div class="col-6 py-1">3 - 6 Years</div>
-                        </div>
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Total Seats</strong>
-                            </div>
-                            <div class="col-6 py-1">40 Seats</div>
-                        </div>
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Class Time</strong>
-                            </div>
-                            <div class="col-6 py-1">08:00 - 10:00</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Tution Fee</strong>
-                            </div>
-                            <div class="col-6 py-1">$290 / Month</div>
-                        </div>
-                    </div>
-                    <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-5">
-                <div class="card border-0 bg-light shadow-sm pb-2">
-                    <img class="card-img-top mb-2" src="${path}/resources/img/class-3.jpg" alt="" />
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Basic Science</h4>
-                        <p class="card-text">
-                            Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                            ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                        </p>
-                    </div>
-                    <div class="card-footer bg-transparent py-4 px-5">
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Age of Kids</strong>
-                            </div>
-                            <div class="col-6 py-1">3 - 6 Years</div>
-                        </div>
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Total Seats</strong>
-                            </div>
-                            <div class="col-6 py-1">40 Seats</div>
-                        </div>
-                        <div class="row border-bottom">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Class Time</strong>
-                            </div>
-                            <div class="col-6 py-1">08:00 - 10:00</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 py-1 text-right border-right">
-                                <strong>Tution Fee</strong>
-                            </div>
-                            <div class="col-6 py-1">$290 / Month</div>
-                        </div>
-                    </div>
-                    <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Class End -->
+        </div><!-- end of .container-->
+    </section>
+    <!-- <section> close-->
 
-<!-- Registration Start -->
-<div class="container-fluid py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-7 mb-5 mb-lg-0">
-                <p class="section-title pr-5">
-                    <span class="pr-2">Book A Seat</span>
-                </p>
-                <h1 class="mb-4">Book A Seat For Your Kid</h1>
-                <p>
-                    Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo
-                    dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo.
-                    Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est
-                    dolor
-                </p>
-                <ul class="list-inline m-0">
-                    <li class="py-2">
-                        <i class="fa fa-check text-success mr-3"></i>Labore eos amet
-                        dolor amet diam
-                    </li>
-                    <li class="py-2">
-                        <i class="fa fa-check text-success mr-3"></i>Etsea et sit dolor
-                        amet ipsum
-                    </li>
-                    <li class="py-2">
-                        <i class="fa fa-check text-success mr-3"></i>Diam dolor diam
-                        elitripsum vero.
-                    </li>
-                </ul>
-                <a href="" class="btn btn-primary mt-4 py-2 px-4">Book Now</a>
-            </div>
-            <div class="col-lg-5">
-                <div class="card border-0">
-                    <div class="card-header bg-secondary text-center p-4">
-                        <h1 class="text-white m-0">Book A Seat</h1>
-                    </div>
-                    <div class="card-body rounded-bottom bg-primary p-5">
-                        <form>
-                            <div class="form-group">
-                                <input
-                                        type="text"
-                                        class="form-control border-0 p-4"
-                                        placeholder="Your Name"
-                                        required="required"
-                                />
+    <!-- <section> begin -->
+    <section>
+        <div class="container-xxl">
+            <div class="row align-items-center gx-1">
+                <div class="col-xl-6"><img src="${path}/resources/img/icons/icon3.png" alt="" />
+                    <h1 class="display-5 lh-sm my-4 font-cursive">Engage highly committed contributors</h1>
+                    <p class="fs-1">You need talented people on-demand across various tasks that your full-time workforce can’t prioritize at the moment. As an Open Enterprise, you can easily fund tasks and have people apply to work on them in return for funds or shares.</p>
+                </div>
+                <div class="col-xl-6">
+                    <div class="row justify-content-center gx-4">
+                        <div class="col-md-10">
+                            <div class="card box-shadow-b p-2 p-md-3">
+                                <div class="card-body flex-between-center pb-0">
+                                    <h5 class="mb-0">Write a how-to on Open Enterprise</h5><span class="badge rounded-pill bg-success p-2 fs-0">1 SHARE</span>
+                                </div>
+                                <div class="card-body">
+                                    <p class="mb-0">Looking for an amazing copywriter using Open Enterprise to help us write an article on how to get started.</p>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input
-                                        type="email"
-                                        class="form-control border-0 p-4"
-                                        placeholder="Your Email"
-                                        required="required"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <select
-                                        class="custom-select border-0 px-4"
-                                        style="height: 47px"
-                                >
-                                    <option selected>Select A Class</option>
-                                    <option value="1">Class 1</option>
-                                    <option value="2">Class 1</option>
-                                    <option value="3">Class 1</option>
-                                </select>
-                            </div>
-                            <div>
-                                <button
-                                        class="btn btn-secondary btn-block border-0 py-3"
-                                        type="submit"
-                                >
-                                    Book Now
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Registration End -->
-
-<!-- Team Start -->
-<div class="container-fluid pt-5">
-    <div class="container">
-        <div class="text-center pb-2">
-            <p class="section-title px-5">
-                <span class="px-2">Our Teachers</span>
-            </p>
-            <h1 class="mb-4">Meet Our Teachers</h1>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-3 text-center team mb-5">
-                <div
-                        class="position-relative overflow-hidden mb-4"
-                        style="border-radius: 100%"
-                >
-                    <img class="img-fluid w-100" src="${path}/resources/img/team-1.jpg" alt="" />
-                    <div
-                            class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-                    >
-                        <a
-                                class="btn btn-outline-light text-center mr-2 px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-twitter"></i
-                        ></a>
-                        <a
-                                class="btn btn-outline-light text-center mr-2 px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-facebook-f"></i
-                        ></a>
-                        <a
-                                class="btn btn-outline-light text-center px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-linkedin-in"></i
-                        ></a>
-                    </div>
-                </div>
-                <h4>Julia Smith</h4>
-                <i>Music Teacher</i>
-            </div>
-            <div class="col-md-6 col-lg-3 text-center team mb-5">
-                <div
-                        class="position-relative overflow-hidden mb-4"
-                        style="border-radius: 100%"
-                >
-                    <img class="img-fluid w-100" src="${path}/resources/img/team-2.jpg" alt="" />
-                    <div
-                            class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-                    >
-                        <a
-                                class="btn btn-outline-light text-center mr-2 px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-twitter"></i
-                        ></a>
-                        <a
-                                class="btn btn-outline-light text-center mr-2 px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-facebook-f"></i
-                        ></a>
-                        <a
-                                class="btn btn-outline-light text-center px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-linkedin-in"></i
-                        ></a>
-                    </div>
-                </div>
-                <h4>Jhon Doe</h4>
-                <i>Language Teacher</i>
-            </div>
-            <div class="col-md-6 col-lg-3 text-center team mb-5">
-                <div
-                        class="position-relative overflow-hidden mb-4"
-                        style="border-radius: 100%"
-                >
-                    <img class="img-fluid w-100" src="${path}/resources/img/team-3.jpg" alt="" />
-                    <div
-                            class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-                    >
-                        <a
-                                class="btn btn-outline-light text-center mr-2 px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-twitter"></i
-                        ></a>
-                        <a
-                                class="btn btn-outline-light text-center mr-2 px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-facebook-f"></i
-                        ></a>
-                        <a
-                                class="btn btn-outline-light text-center px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-linkedin-in"></i
-                        ></a>
-                    </div>
-                </div>
-                <h4>Mollie Ross</h4>
-                <i>Dance Teacher</i>
-            </div>
-            <div class="col-md-6 col-lg-3 text-center team mb-5">
-                <div
-                        class="position-relative overflow-hidden mb-4"
-                        style="border-radius: 100%"
-                >
-                    <img class="img-fluid w-100" src="${path}/resources/img/team-4.jpg" alt="" />
-                    <div
-                            class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-                    >
-                        <a
-                                class="btn btn-outline-light text-center mr-2 px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-twitter"></i
-                        ></a>
-                        <a
-                                class="btn btn-outline-light text-center mr-2 px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-facebook-f"></i
-                        ></a>
-                        <a
-                                class="btn btn-outline-light text-center px-0"
-                                style="width: 38px; height: 38px"
-                                href="#"
-                        ><i class="fab fa-linkedin-in"></i
-                        ></a>
-                    </div>
-                </div>
-                <h4>Donald John</h4>
-                <i>Art Teacher</i>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Team End -->
-
-<!-- Testimonial Start -->
-<div class="container-fluid py-5">
-    <div class="container p-0">
-        <div class="text-center pb-2">
-            <p class="section-title px-5">
-                <span class="px-2">Testimonial</span>
-            </p>
-            <h1 class="mb-4">What Parents Say!</h1>
-        </div>
-        <div class="owl-carousel testimonial-carousel">
-            <div class="testimonial-item px-3">
-                <div class="bg-light shadow-sm rounded mb-4 p-4">
-                    <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                    eirmod clita lorem. Dolor tempor ipsum clita
-                </div>
-                <div class="d-flex align-items-center">
-                    <img
-                            class="rounded-circle"
-                            src="${path}/resources/img/testimonial-1.jpg"
-                            style="width: 70px; height: 70px"
-                            alt="Image"
-                    />
-                    <div class="pl-3">
-                        <h5>Parent Name</h5>
-                        <i>Profession</i>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item px-3">
-                <div class="bg-light shadow-sm rounded mb-4 p-4">
-                    <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                    eirmod clita lorem. Dolor tempor ipsum clita
-                </div>
-                <div class="d-flex align-items-center">
-                    <img
-                            class="rounded-circle"
-                            src="${path}/resources/img/testimonial-2.jpg"
-                            style="width: 70px; height: 70px"
-                            alt="Image"
-                    />
-                    <div class="pl-3">
-                        <h5>Parent Name</h5>
-                        <i>Profession</i>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item px-3">
-                <div class="bg-light shadow-sm rounded mb-4 p-4">
-                    <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                    eirmod clita lorem. Dolor tempor ipsum clita
-                </div>
-                <div class="d-flex align-items-center">
-                    <img
-                            class="rounded-circle"
-                            src="${path}/resources/img/testimonial-3.jpg"
-                            style="width: 70px; height: 70px"
-                            alt="Image"
-                    />
-                    <div class="pl-3">
-                        <h5>Parent Name</h5>
-                        <i>Profession</i>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item px-3">
-                <div class="bg-light shadow-sm rounded mb-4 p-4">
-                    <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                    Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                    eirmod clita lorem. Dolor tempor ipsum clita
-                </div>
-                <div class="d-flex align-items-center">
-                    <img
-                            class="rounded-circle"
-                            src="${path}/resources/img/testimonial-4.jpg"
-                            style="width: 70px; height: 70px"
-                            alt="Image"
-                    />
-                    <div class="pl-3">
-                        <h5>Parent Name</h5>
-                        <i>Profession</i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Testimonial End -->
-
-<!-- Blog Start -->
-<div class="container-fluid pt-5">
-    <div class="container">
-        <div class="text-center pb-2">
-            <p class="section-title px-5">
-                <span class="px-2">Latest Blog</span>
-            </p>
-            <h1 class="mb-4">Latest Articles From Blog</h1>
-        </div>
-        <div class="row pb-3">
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2" src="${path}/resources/img/blog-1.jpg" alt="" />
-                    <div class="card-body bg-light text-center p-4">
-                        <h4 class="">Diam amet eos at no eos</h4>
-                        <div class="d-flex justify-content-center mb-3">
-                            <small class="mr-3"
-                            ><i class="fa fa-user text-primary"></i> Admin</small
-                            >
-                            <small class="mr-3"
-                            ><i class="fa fa-folder text-primary"></i> Web Design</small
-                            >
-                            <small class="mr-3"
-                            ><i class="fa fa-comments text-primary"></i> 15</small
-                            >
                         </div>
-                        <p>
-                            Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                            eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                            lorem. Tempor ipsum justo amet stet...
-                        </p>
-                        <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                        >Read More</a
-                        >
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2" src="${path}/resources/img/blog-2.jpg" alt="" />
-                    <div class="card-body bg-light text-center p-4">
-                        <h4 class="">Diam amet eos at no eos</h4>
-                        <div class="d-flex justify-content-center mb-3">
-                            <small class="mr-3"
-                            ><i class="fa fa-user text-primary"></i> Admin</small
-                            >
-                            <small class="mr-3"
-                            ><i class="fa fa-folder text-primary"></i> Web Design</small
-                            >
-                            <small class="mr-3"
-                            ><i class="fa fa-comments text-primary"></i> 15</small
-                            >
+                        <div class="col-sm-12 col-md-6 mt-4">
+                            <div class="card px-3 py-4 bg-warning">
+                                <div class="card-body">
+                                    <h2>3 applicants</h2>
+                                    <div class="applicant d-flex justify-content-between text-1000">
+                                        <div class="d-flex align-items-center"><img class="rounded-circle my-2 me-2 me-md-3" src="${path}/resources/img/gallery/user5.png" alt="" height="40" />
+                                            <p class="fs-1 fs-md-2 mb-0 fw-semi-bold">Jason Kwon</p>
+                                        </div>
+                                        <div class="d-flex align-items-center"><img class="star" src="${path}/resources/img/icons/star.svg" alt="" />
+                                            <p class="mb-0 mx-2 fw-medium">4.8</p>
+                                        </div>
+                                    </div>
+                                    <div class="applicant d-flex justify-content-between text-1000">
+                                        <div class="d-flex align-items-center"><img class="rounded-circle my-2 me-2 me-md-3" src="${path}/resources/img/gallery/user6.png" alt="" height="40" />
+                                            <p class="fs-1 fs-md-2 mb-0 fw-semi-bold">Alex Rose</p>
+                                        </div>
+                                        <div class="d-flex align-items-center"><img class="star" src="${path}/resources/img/icons/star.svg" alt="" />
+                                            <p class="mb-0 mx-2 fw-medium">4.8</p>
+                                        </div>
+                                    </div>
+                                    <div class="applicant d-flex justify-content-between text-1000">
+                                        <div class="d-flex align-items-center"><img class="rounded-circle my-2 me-2 me-md-3" src="${path}/resources/img/gallery/user7.png" alt="" height="40" />
+                                            <p class="fs-1 fs-md-2 mb-0 fw-semi-bold">Lizzie Ulrich</p>
+                                        </div>
+                                        <div class="d-flex align-items-center"><img class="star" src="${path}/resources/img/icons/star.svg" alt="" />
+                                            <p class="mb-0 mx-2 fw-medium">4.8</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p>
-                            Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                            eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                            lorem. Tempor ipsum justo amet stet...
-                        </p>
-                        <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                        >Read More</a
-                        >
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2" src="${path}/resources/img/blog-3.jpg" alt="" />
-                    <div class="card-body bg-light text-center p-4">
-                        <h4 class="">Diam amet eos at no eos</h4>
-                        <div class="d-flex justify-content-center mb-3">
-                            <small class="mr-3"
-                            ><i class="fa fa-user text-primary"></i> Admin</small
-                            >
-                            <small class="mr-3"
-                            ><i class="fa fa-folder text-primary"></i> Web Design</small
-                            >
-                            <small class="mr-3"
-                            ><i class="fa fa-comments text-primary"></i> 15</small
-                            >
+                        <div class="col-sm-12 col-md-5">
+                            <div class="card p-2 mt-4 mt-md-5 border-success">
+                                <div class="card-body">
+                                    <div class="card-text text-center"><img class="rounded-circle" src="${path}/resources/img/gallery/axel.png" alt="" height="70" />
+                                        <h4 class="mt-2 mb-1">Axel Rose </h4>
+                                        <p class="text-secondary">UX Designer</p>
+                                    </div>
+                                    <div class="d-flex text-1000">
+                                        <p class="mb-0 flex-1">4 COMMITS</p>
+                                        <div class="d-flex align-items-center"><img class="star" src="${path}/resources/img/icons/star.svg" alt="" />
+                                            <p class="mb-0 mx-2 fw-medium">4.8</p>
+                                        </div>
+                                    </div><button class="btn btn-lg btn-dark w-100 mt-3">View Profile</button>
+                                </div>
+                            </div>
                         </div>
-                        <p>
-                            Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                            eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                            lorem. Tempor ipsum justo amet stet...
-                        </p>
-                        <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                        >Read More</a
-                        >
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<!-- Blog End -->
+        </div><!-- end of .container-->
+    </section>
+    <!-- <section> close -->
 
-<!-- Footer Start -->
-<jsp:include page="setting/footer.jsp" />
-<!-- Footer End -->
+    <!-- <section> begin-->
+    <section>
+        <div class="container-xxl">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10 col-xl-8">
+                    <h1 class="display-6 font-cursive">Help us improve Open Enterprise</h1>
+                    <p class="fs-md-1 mt-4">As an Open Enterprise ourselves, we are actively looking for new talent to join our mission of improving and delivering the Open Enterprise model to the world. Apply for open tasks and earn a stake in our success.</p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <div class="swiper-container pb-4" data-pagination-target="pagination1">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide h-auto">
+                            <div class="card py-3 px-4 mt-3 h-100 box-shadow-all border-0">
+                                <div class="card-body">
+                                    <h5 class="font-base lh-base">Ideate a list of features based on the Sociocracy model</h5>
+                                    <p class="mb-0">We’re looking for someone interested in business theory and research that’ll help us bridge the gap between our s...</p>
+                                </div>
+                                <div class="card-footer d-flex flex-between-center border-0 bg-transparent pt-0"><span class="badge rounded-pill bg-success p-2 fs-0">5 AUT</span>
+                                    <p class="mb-0 fw-bold text-1000">Apply by May 15</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide h-auto">
+                            <div class="card py-3 px-4 mt-3 h-100 box-shadow-all border-0">
+                                <div class="card-body">
+                                    <h5 class="font-base lh-base">Update documentation with FAQs</h5>
+                                    <p class="mb-0">Review our community chat for the most frequently asked questions and document answers for our product docs.</p>
+                                </div>
+                                <div class="card-footer d-flex flex-between-center border-0 bg-transparent pt-0"><span class="badge rounded-pill bg-success p-2 fs-0">5 AUT</span>
+                                    <p class="mb-0 fw-bold text-1000">Apply by May 15</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide h-auto">
+                            <div class="card py-3 px-4 mt-3 h-100 box-shadow-all border-0">
+                                <div class="card-body">
+                                    <h5 class="font-base lh-base">Tutorial video series</h5>
+                                    <p class="mb-0">Create a series of video tutorials that cover everything from start to finish on using Open Enterprise.</p>
+                                </div>
+                                <div class="card-footer d-flex flex-between-center border-0 bg-transparent pt-0"><span class="badge rounded-pill bg-success p-2 fs-0">5 AUT</span>
+                                    <p class="mb-0 fw-bold text-1000">Apply by May 15</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide h-auto">
+                            <div class="card py-3 px-4 mt-3 h-100 box-shadow-all border-0">
+                                <div class="card-body">
+                                    <h5 class="font-base lh-base">Ideate a list of features based on the Sociocracy model</h5>
+                                    <p class="mb-0">We’re looking for someone interested in business theory and research that’ll help us bridge the gap between our s...</p>
+                                </div>
+                                <div class="card-footer d-flex flex-between-center border-0 bg-transparent pt-0"><span class="badge rounded-pill bg-success p-2 fs-0">5 AUT</span>
+                                    <p class="mb-0 fw-bold text-1000">Apply by May 15</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide h-auto">
+                            <div class="card py-3 px-4 mt-3 h-100 box-shadow-all border-0">
+                                <div class="card-body">
+                                    <h5 class="font-base lh-base">Update documentation with FAQs</h5>
+                                    <p class="mb-0">Review our community chat for the most frequently asked questions and document answers for our product docs.</p>
+                                </div>
+                                <div class="card-footer d-flex flex-between-center border-0 bg-transparent pt-0"><span class="badge rounded-pill bg-success p-2 fs-0">5 AUT</span>
+                                    <p class="mb-0 fw-bold text-1000">Apply by May 15</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide h-auto">
+                            <div class="card py-3 px-4 mt-3 h-100 box-shadow-all border-0">
+                                <div class="card-body">
+                                    <h5 class="font-base lh-base">Tutorial video series</h5>
+                                    <p class="mb-0">Create a series of video tutorials that cover everything from start to finish on using Open Enterprise.</p>
+                                </div>
+                                <div class="card-footer d-flex flex-between-center border-0 bg-transparent pt-0"><span class="badge rounded-pill bg-success p-2 fs-0">5 AUT</span>
+                                    <p class="mb-0 fw-bold text-1000">Apply by May 15</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination" id="pagination1"></div>
+            </div>
+        </div><!-- end of .container-->
+    </section>
+    <!-- <section> close-->
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-primary p-3 back-to-top"
-><i class="fa fa-angle-double-up"></i
-></a>
+    <!-- <section> begin -->
+    <section id="rea">
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <div class="col-lg order-lg-1 text-center"><img class="img-fluid" src="${path}/resources/img/illustrations/hero2.png" alt="" /></div>
+                <div class="col-lg mt-5 mt-lg-0">
+                    <h1 class="lh-sm font-cursive fw-medium display-5">Start an Open Enterprise</h1>
+                    <p class="mt-4 fs-1">If you can’t wait to run a new or existing organization on Open Enterprise and are willing to explore and navigate the beta, we’d love to get you started.</p><button class="btn btn-success mt-4">Request early access</button>
+                </div>
+            </div>
+        </div><!-- end of .container-->
+    </section>
+    <!-- <section> close -->
 
+    <!-- footer begin -->
+    <jsp:include page="setting/footer.jsp" />
+    <!-- footer end -->
 
+</main>
 </body>
 </html>

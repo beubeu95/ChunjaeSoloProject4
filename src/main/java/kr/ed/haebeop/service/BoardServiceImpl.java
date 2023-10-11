@@ -27,8 +27,8 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<Category> categeryList() throws Exception {
-        return boardMapper.categeryList();
+    public List<Category> categoryList() throws Exception {
+        return boardMapper.categoryList();
     }
 
     @Override

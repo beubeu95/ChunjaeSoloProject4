@@ -3,32 +3,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path1" value="${pageContext.request.contextPath }" />
-<!-- Favicon -->
-<link href="${path1}/resources/img/favicon.ico" rel="icon" />
-<!-- Google Web Fonts -->
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet" />
-<!-- Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
-<!-- Flaticon Font -->
-<link href="${path1}/resources/lib/flaticon/font/flaticon.css" rel="stylesheet" />
-<!-- Libraries Stylesheet -->
-<link href="${path1}/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-<link href="${path1}/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
-<!-- Customized Bootstrap Stylesheet -->
-<link href="${path1}/resources/css/style.css" rel="stylesheet" />
 
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="${path1}/resources/lib/easing/easing.min.js"></script>
-<script src="${path1}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="${path1}/resources/lib/isotope/isotope.pkgd.min.js"></script>
-<script src="${path1}/resources/lib/lightbox/js/lightbox.min.js"></script>
+<!-- favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="${path1}/resources/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="${path1}/resources/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${path1}/resources/img/favicons/favicon-16x16.png">
+<link rel="shortcut icon" type="image/x-icon" href="${path1}/resources/img/favicons/favicon.ico">
+<link rel="manifest" href="${path1}/resources/img/favicons/manifest.json">
+<meta name="msapplication-TileImage" content="${path1}/resources/img/favicons/mstile-150x150.png">
+<meta name="theme-color" content="#ffffff">
 
-<!-- Contact Javascript File -->
-<script src="${path1}/resources/mail/jqBootstrapValidation.min.js"></script>
-<script src="${path1}/resources/mail/contact.js"></script>
+<!-- Stylesheets -->
+<link href="${path1}/resources/css/theme.min.css" rel="stylesheet" />
+<link href="${path1}/resources/vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
+<style> .nav-link { background-color: #FFFFFF; } </style>
 
-<!-- Template Javascript -->
-<script src="${path1}/resources/js/main.js"></script>
+<!-- javascript -->
+<script src="${path1}/resources/vendors/@popperjs/popper.min.js"></script>
+<script src="${path1}/resources/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="${path1}/resources/vendors/is/is.min.js"></script>
+<script src="${path1}/resources/vendors/swiper/swiper-bundle.min.js"> </script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="${path1}/resources/js/theme.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&amp;family=Roboto:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">

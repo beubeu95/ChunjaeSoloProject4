@@ -21,8 +21,8 @@
 
 <!--Banner Start-->
 <section class="page-title background-primary is-relative"  style="background-image: url('${path}/resources/img/bannerPage.jpg'); background-position: center; background-size: cover; height: 200px;">
-    <div class="container-fluid bg-primary mb-5">
-        <div class="has-text-centered" style="padding-top: 60px;">
+    <div class="container-fluid mb-5">
+        <div class="has-text-centered">
             <h1 class="display-3 font-weight-bold text-white" style="font-size: 40px; text-align:center;"> 공지사항 </h1>
             <div class="d-inline-flex text-white" style="display: flex !important; justify-content: center;">
                 <p class="m-0"><a class="text-white" href="${path}">Home</a></p>
@@ -34,15 +34,10 @@
 </section>
 <!--Banner End-->
 
+
 <!-- Notice Start-->
 <div class="container-fluid pt-5 pb-3">
     <div class="container">
-        <div class="text-center pb-2">
-            <p class="section-title px-5">
-                <span class="px-2">공지사항</span>
-            </p>
-            <h1 class="mb-4">공지사항 목록</h1>
-        </div>
         <div class="row portfolio-container">
                 <table class="table">
                     <thead>

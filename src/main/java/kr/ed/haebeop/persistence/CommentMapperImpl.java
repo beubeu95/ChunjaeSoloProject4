@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CommentMapperImpl {
+public class CommentMapperImpl implements CommentMapper{
+
     @Autowired
     private SqlSession sqlSession;
 

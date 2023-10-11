@@ -35,6 +35,26 @@
 <!--Banner End-->
 
 <!--NoticeDetail Start -->
+<div style="display: flex; justify-content: center; margin-top: 100px;">
+    <div class="card" style="width: 90%;">
+        <div class="card-body" >
+            <div class="card-title">
+                <div class="d-flex align-items-center mt-3">
+                    <div class="ms-3">
+                        <h3>Jassir Jonis</h3>
+                        <p class="mb-0">작성자 | ${notice.author } 작성일 | <fmt:parseDate value="${notice.regdate }" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                            <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" /> 조회수 | ${notice.cnt}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-text mt-4">
+                <p>${notice.content }</p>
+            </div>
+
+            <div class="mt-3 pt-2"><button class="btn btn-dark btn-lg w-100">Go to vote</button></div>
+        </div>
+    </div>
+</div>
 <section class="section">
     <div class="container">
         <div class="columns is-desktop is-justify-content-center">

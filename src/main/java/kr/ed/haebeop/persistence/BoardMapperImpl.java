@@ -28,7 +28,7 @@ public class BoardMapperImpl implements BoardMapper{
     }
 
     @Override
-    public List<Category> categeryList() throws Exception {
+    public List<Category> categoryList() throws Exception {
         return sqlSession.selectList("board.cateList");
     }
 
