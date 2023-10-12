@@ -36,8 +36,13 @@
 
 <!-- fileboardList Start -->
 <div class="container-fluid pt-5 pb-3">
-    <div class="container">
+    <div class="container" style="margin-top: 30px; width: 80%;">
         <div class="row portfolio-container">
+            <c:if test='${sid eq "admin"}'>
+                <div class="button-group" style="display: flex;margin-bottom: 20px; justify-content: right; padding-right: 0;">
+                    <a class="btn btn-primary px-4" href="${path}/fileboard/insert.do" class="button is-primary" style="width: 90px; font-size: 13px; font-weight: bold; background-color: #71A894; border:none;">글쓰기</a>
+                </div>
+            </c:if>
             <table class="table">
                 <thead>
                 <tr>

@@ -38,43 +38,36 @@
 <section class="section">
     <div class="container">
         <div class="columns is-desktop is-justify-content-center">
-            <div class="column is-8-desktop">
-                <div class="p-6 bg-white shadow rounded content">
-                    <form action="${path }/fileboard/edit.do" id="writeform" method="post" enctype="multipart/form-data">
-                        <div class="columns is-multiline">
-                            <div class="form-group column is-12">
-                                <label for="title"> 제목 </label>
-                                <input type="hidden" id="articleno" name="articleno" value="${dto.articleno}">
-                                <input type="text" class="input" id="title" name="title" placeholder="제목을 입력해주세요" autocomplete="off" value="${dto.title}" autofocus required>
-                            </div>
-                            <!-- 내용 입력 부분 -->
-                            <div class="form-group column is-12">
-                                <label for="content"> 내용 </label>
-                                <textarea name="content" id="content" class="textarea has-fixed-size" cols="30" rows="20" placeholder="내용을 입력해주세요" required>${dto.content}</textarea>
-                            </div>
-                            <!-- 파일 선택 부분 -->
-                            <div class="form-group column is-8">
-                                <div class="file has-name">
-                                    <label class="file-label">
-                                        <input class="file-input" type="file" name="upfile" multiple="multiple">
-                                        <span class="file-cta">
-                                            <span class="file-icon mb-0">
-                                                <i class="fas fa-upload mb-0"></i>
-                                            </span>
-                                            <span class="file-label mb-0">
-                                                파일 선택
-                                            </span>
-                                        </span>
-                                        <span class="file-name">선택된 파일이 없습니다.</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="column is-4 has-text-right">
-                                <button type="reset" class="button"> 초기화 </button>
-                                <button type="submit" class="button is-primary"> 작성하기 </button>
-                            </div>
+            <div class="column is-10-desktop">
+                <div class="content" style="margin-top: 60px;">
+                    <div>
+                        <div class="container">
+                            <form action="${path}/fileboard/edit.do" id="writeform" method="post" enctype="multipart/form-data">
+                                <div>
+                                    <div class="container">
+                                        <div class="mb-3">
+                                            <label for="title" class="form-label" style="font-weight: bold !important; font-size: 20px;">제목</label>
+                                            <input type="hidden" id="articleno" name="articleno" value="${dto.articleno}">
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력해주세요" autocomplete="off" value="${dto.title}" autofocus required>
+                                        </div></div>
+                                        <div class="mb-3" style="width: 92%; margin: 0 auto;">
+                                            <label for="content" class="form-label" style="font-weight: bold !important; font-size: 20px;">내용</label>
+                                            <textarea name="content" id="content" class="form-control" rows="5" placeholder="내용을 입력해주세요" required>${dto.content}</textarea>
+                                        </div>
+                                        <div class="form-group col-8" style="margin-left: 41px;">
+                                            <div class="custom-file">
+                                                <input type="file" class="form-control" id="upfile" name="upfile" multiple="multiple">
+                                                <label class="file-label" for="upfile"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 30px; float: right; margin-right: 40px;">
+                                        <button type="reset" class="btn btn-secondary">초기화</button>
+                                        <button type="submit" class="btn btn-primary" style="background-color: #71a894;">수정</button>
+                                    </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,5 +78,18 @@
 <!-- Footer Start -->
 <jsp:include page="../setting/footer.jsp" />
 <!-- Footer End -->
+
+<script>
+    $(".file-input").on("change", () => {
+        let fileName = '';
+        let fileLength = $(".file-input")[0].files.length;
+        if(fileLength > 1) {
+            fileName = fileLength + "개의 파일";
+        } else {
+            fileName = $(".file-input").val().split("\\").pop();
+        }
+        $(".file-name").text("\t 선택한 파일 : " + fileName);
+    });
+</script>
 </body>
 </html>

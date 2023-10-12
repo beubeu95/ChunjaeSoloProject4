@@ -39,6 +39,11 @@
     <div class="container">
         <div class="container">
             <div>
+                <c:if test="${sid ne null}">
+                    <div class="button-group" style="float:right; margin-bottom: 20px;">
+                        <a class="btn btn-primary px-4" href="${path}/board/insert.do" class="button is-primary" style="width: 90px; font-size: 13px; font-weight: bold; background-color: #71A894; border:none;">글쓰기</a>
+                    </div>
+                </c:if>
                 <div class="btn-group btn-group-toggle mb-5" data-toggle="buttons" style="display: flex;width: 70%; justify-content: center; margin: 50px auto;">
                     <c:if test="${empty curCategory}">
                     <label class="btn btn-primary active" style=" background-color: #71A894; border: none; font-weight: bold;">

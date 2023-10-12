@@ -20,39 +20,57 @@
 <jsp:include page="../setting/header.jsp" />
 <!--Header End-->
 
+
+<!--Banner Start-->
+<section class="page-title background-primary is-relative"  style="background-image: url('${path}/resources/img/bannerPage.jpg'); background-position: center; background-size: cover; height: 200px;">
+    <div class="container-fluid mb-5">
+        <div class="has-text-centered">
+            <h1 class="display-3 font-weight-bold text-white" style="font-size: 40px; text-align:center;"> 게시판 추가하기 </h1>
+            <div class="d-inline-flex text-white" style="display: flex !important; justify-content: center;">
+                <p class="m-0"><a class="text-white" href="${path}">Home</a></p>
+                <p class="m-0 px-2">/</p>
+                <p class="m-0">게시판 추가하기</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Banner End-->
+
+
 <!-- boardInsert Start -->
 <section class="section">
     <form action="${path}/board/insert.do" method="post" class="container">
-        <div class="columns">
-            <div class="column is-one-quarter">
-                <label for="cate"> 카테고리 </label>
-                <select name="cate" id="cate" class="input">
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label for="cate" class="form-label">카테고리</label>
+                <select name="cate" id="cate" class="form-select">
                     <c:forEach var="category" items="${categories}">
                         <option value="${category.cate}">${category.cateName}</option>
                     </c:forEach>
                 </select>
             </div>
-            <div class="column">
-                <label for="title"> 제목 </label>
-                <input type="text" id="title" name="title" class="input">
+            <div class="col">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" id="title" name="title" class="form-control">
             </div>
         </div>
-        <div class="columns">
-            <div class="column">
-                <label for="content"> 내용 </label>
-                <textarea name="content" id="content" class="textarea" placeholder="내용 입력" rows="8" cols="100" maxlength="1400" required></textarea>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="content" class="form-label">내용</label>
+                <textarea name="content" id="content" class="form-control" placeholder="내용 입력" rows="8" maxlength="1400" required></textarea>
                 <script>
-                    CKEDITOR.replace('content',	{filebrowserUploadUrl:'${path}/baord/imageUpload.do'});
+                    CKEDITOR.replace('content', { filebrowserUploadUrl: '${path}/board/imageUpload.do' });
                 </script>
             </div>
         </div>
-        <div class="columns">
-            <div class="column">
-                <input type="submit" class="button is-fullwidth is-link" value="등록하기"/>
+        <div class="row">
+            <div class="col d-flex justify-content-end mt-3">
+                <button type="submit" class="btn btn-link" style="background-color: #71A894; color:#ffffff;">등록하기</button>
             </div>
         </div>
     </form>
 </section>
+
 <!-- boardInsert End -->
 
 <!-- Footer Start -->

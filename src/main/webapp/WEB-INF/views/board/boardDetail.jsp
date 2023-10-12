@@ -38,7 +38,7 @@
 <section style="padding-top: 0;">
     <div style="width: 95%; display: inline-block; margin-top: 100px;">
         <button class="btn btn-light btn-lg" style="width:200px; float: right; background-color: #71a894; font-weight: bold; color: #fff;"><a href="${path}/board/list.do?page=${curPage}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty keyword}">&type=${type}&keyword=${keyword}</c:if>" style="color: #fff;">목록</a></button>
-        <c:if test="${!empty sid}">
+        <c:if test="${(sid eq 'admin') or (sid eq detail.author)}">
             <button class="btn btn-light btn-lg" style="width:200px; float: right; border-color: #000000; font-weight: bold; margin-left: 10px; margin-right: 10px; "><a href="${path}/board/delete.do?bno=${detail.bno}" >삭제</a></button>
             <button class="btn btn-dark btn-lg" style="width:200px; float: right; background-color: #4f5665; font-weight: bold; "><a class="button" href="${path}/board/edit.do?bno=${detail.bno}" style="color: #fff;">수정</a></button>
         </c:if>
@@ -89,20 +89,20 @@
                     </form>
                 </c:if>
             </div>
-            <div class="card-body my-3 mx-4" style="width: 85%;">
+            <div class="card-body my-3 mx-4" style="width: 80%;">
                 <c:forEach var="comment" items="${commentList}">
                     <div class="row">
-                            <span style="width: 20%;" > ${comment.author} </span>
-                            <h6 class="text-right" style="float: right; margin-right: 70px; width: 20%">
+                            <h6 style="width: 75%;" > ${comment.author} </h6>
+                            <h6 class="text-right" style="margin-top: 3px; padding: 0; width: 10%;">
                                 <fmt:parseDate value="${comment.resdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
                                 <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
                             </h6>
                         <c:if test="${(sid eq 'admin') or (sid eq comment.author)}">
-                            <a style="width: 100px;" href="${path}/comment/delete.do?comNo=${comment.comNo}&bno=${detail.bno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty keyword}">&type=${type}&keyword=${keyword}</c:if>" class="btn btn-sm btn-danger">Delete</a>
+                            <a style="width: 10%; margin-bottom: 10px;" href="${path}/comment/delete.do?comNo=${comment.comNo}&bno=${detail.bno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty keyword}">&type=${type}&keyword=${keyword}</c:if>" class="btn btn-sm btn-danger">Delete</a>
                         </c:if>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style=" margin-bottom: 30px;">
                             <textarea class="form-control" style="background-color: lightgray;" readonly>${comment.content}</textarea>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                             <li class="page-item">
                                 <c:choose>
                                     <c:when test="${i == commentPage}">
-                                        <a href="${path}/board/getBoard.do?bno=${detail.bno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link active" aria-current="page">${i}</a>
+                                        <a href="${path}/board/getBoard.do?bno=${detail.bno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link active" style="background-color: #71A894; color:#FFFFFF;" aria-current="page">${i}</a>
                                     </c:when>
                                     <c:otherwise>
                                         <a href="${path}/board/getBoard.do?bno=${detail.bno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link">${i}</a>

@@ -138,9 +138,8 @@ CREATE TABLE COMMENT(
 	FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE
 ); 
 ​
-SELECT * FROM comment;
 
-
+SELECT * FROM COMMENT;
 ​
 -- 자료실 자료 데이터 테이블 생성
 CREATE TABLE fileInfo(

@@ -35,52 +35,43 @@
 <!--Banner End-->
 
 <!-- fileboardInsert Start -->
-<div class="content" id="content" style="margin-top: 100px;">
-    <div class="row column text-center">
-        <div class="container">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th class="item2">제목</th>
-                    <th class="item3">작성자</th>
-                    <th class="item4">작성일</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="item2">${fileboard.title}</td>
-                    <td class="item3">${fileboard.id}</td>
-                    <td class="item4">${fileboard.regdate}</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div style="display: block; min-height: 300px">
-                            ${fileboard.content}
+<section style="padding-top: 0;">
+    <div style="display: flex; justify-content: center; margin-top: 100px;">
+        <div class="card" style="width: 90%;">
+            <div class="card-body" >
+                <div class="card-title" style="padding-bottom: 20px; border-bottom: 1px solid;">
+                    <div class="d-flex align-items-center mt-3">
+                        <div class="ms-3">
+                            <h3>${fileboard.title}</h3>
+                            <p class="mb-0">작성자 | ${fileboard.id} 작성일 | <fmt:parseDate value="${fileboard.regdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" /> </p>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="item2" colspan="3">학습자료(클릭하여 다운로드)</th>
-                </tr>
-                <tr>
-                    <td colspan="3">
+                    </div>
+                </div>
+                <div class="card-text mt-4">
+                    <div class="ms-3">
+                        <p style="padding-top: 30px; padding-bottom: 100px;}">${fileboard.content}</p>
+                    </div>
+                </div>
+                <div class="card-text mt-4" style="border-top: 1px solid;">
+                    <div class="ms-3">
+                        <p style="padding-top: 15px;">학습자료(클릭하여 다운로드)</p>
                         <c:forEach var="item" items="${fileboard2}">
                             <a href="${pageContext.request.contextPath}/resources/upload/${item.saveFolder}/${item.saveFile}" download="${item.originFile }" style="margin-right: 20px"><i class="fa-solid fa-file"></i> ${item.originFile } </a>
                         </c:forEach>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="buttons is-right mb-100">
-                <a class="button" href="${path }/fileboard/list.do">목록</a>
-                <c:if test='${sid eq "admin"}'>
-                    <a class="button" href="${path }/fileboard/edit.do?articleno=${fileboard.articleno}">수정</a>
-                    <a class="button" href="${path }/fileboard/delete.do?articleno=${fileboard.articleno}">삭제</a>
-                </c:if>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div style="width: 95%; margin-top: 30px;">
+        <button class="btn btn-light btn-lg" style="width:200px; float: right; background-color: #71a894; font-weight: bold; color: #fff;"><a href="${path }/fileboard/list.do" style="color: #fff;">목록</a></button>
+        <c:if test='${sid eq "admin"}'>
+            <button class="btn btn-light btn-lg" style="width:200px; float: right; border-color: #000000; font-weight: bold; margin-left: 10px; margin-right: 10px; "><a href="${path }/fileboard/delete.do?articleno=${fileboard.articleno}" >삭제</a></button>
+            <button class="btn btn-dark btn-lg" style="width:200px; float: right; background-color: #4f5665; font-weight: bold; "><a class="button" href="${path }/fileboard/edit.do?articleno=${fileboard.articleno}" style="color: #fff;">수정</a></button>
+        </c:if>
+    </div>
+</section>
 <!-- fileboardInsert End -->
 
 <!-- Footer Start -->

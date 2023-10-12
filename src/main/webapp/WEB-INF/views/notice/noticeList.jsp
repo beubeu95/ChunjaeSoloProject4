@@ -107,7 +107,7 @@
                                 <li class="page-item">
                                     <a href="${path}/notice/list.do?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
                                        class="page-link active" aria-label="Page ${i}"
-                                       aria-current="page" style="background-color: #71A894; color:#FFFFFF";>${i}</a>
+                                       aria-current="page" style="background-color: #71A894; color:#FFFFFF;">${i}</a>
                                 </li>
                             </c:when>
                             <c:otherwise>
