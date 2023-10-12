@@ -15,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-@RequestMapping("/notice/")
+@RequestMapping("/notice/*")
 public class NoticeController {
 
     @Autowired
     private NoticeService noticeService;
 
     @GetMapping("list.do")
-    public String getnoticeList(HttpServletRequest request, Model model) throws Exception{
+    private String NoticeList(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
@@ -37,28 +37,29 @@ public class NoticeController {
         page.makePostStart(curPage, total);
 
         List<Notice> noticeList = noticeService.noticeList(page);
-        model.addAttribute("noticeList", noticeList);
+
+        model.addAttribute("noticeList", noticeList);          // 공지사항 목록
+        model.addAttribute("curPage", curPage);             // 현재 페이지
+        model.addAttribute("page", page);                   // 페이징 데이터
 
         return "/notice/noticeList";
     }
 
     @GetMapping("detail.do")
-    public String getNotice (HttpServletRequest request, Model model) throws Exception{
+    public String getNoticeDetail(HttpServletRequest request, Model model) throws Exception {
         int no = Integer.parseInt(request.getParameter("no"));
-
         Notice notice = noticeService.noticeDetail(no);
         model.addAttribute("notice", notice);
-
         return "/notice/noticeDetail";
     }
 
     @GetMapping("insert.do")
-    public String insertForm (HttpServletRequest request, Model model) {
+    public String insertForm(HttpServletRequest request, Model model) throws Exception {
         return "/notice/noticeInsert";
     }
 
     @PostMapping("insert.do")
-    public String noticeInsert (HttpServletRequest request, Model model){
+    public String noticeInsert(HttpServletRequest request, Model model) throws Exception {
         Notice notice = new Notice();
         notice.setTitle(request.getParameter("title"));
         notice.setContent(request.getParameter("content"));
@@ -91,5 +92,4 @@ public class NoticeController {
         noticeService.noticeEdit(notice);
         return "redirect:list.do";
     }
-
 }

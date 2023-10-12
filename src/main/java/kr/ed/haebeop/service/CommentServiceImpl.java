@@ -20,8 +20,8 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public int getCount(int cno) throws Exception {
-        return commentMapper.getCount(cno);
+    public int getCount(int bno) throws Exception {
+        return commentMapper.getCount(bno);
     }
 
     @Override

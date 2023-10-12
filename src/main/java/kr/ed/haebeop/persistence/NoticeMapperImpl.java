@@ -10,37 +10,44 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class NoticeMapperImpl {
+public class NoticeMapperImpl implements NoticeMapper {
 
     @Autowired
     private SqlSession sqlSession;
 
-
-    public List<Notice> noticeList(Page page) {
+    @Override
+    public List<Notice> noticeList(Page page) throws Exception {
         return sqlSession.selectList("notice.noticeList", page);
     }
 
-
-    public int getCount(Page page) {
-        return sqlSession.selectOne("notice.getCount", page);
+    @Override
+    public List<Notice> noticeListLimit() throws Exception {
+        return sqlSession.selectList("notice.noticeListLimit");
     }
 
+    @Override
+    public int getCount(Page page) throws Exception {
+        return sqlSession.selectOne("notice.getCount", page);
+    }
     @Transactional
-    public Notice noticeDetail(int no) {
+    @Override
+    public Notice noticeDetail(int no) throws Exception {
         sqlSession.update("notice.countUp", no);
         return sqlSession.selectOne("notice.noticeDetail", no);
     }
 
-    public void noticeInsert(Notice notice) {
+    @Override
+    public void noticeInsert(Notice notice) throws Exception {
         sqlSession.insert("notice.noticeInsert", notice);
     }
 
-    public void noticeDelete(int no) {
+    @Override
+    public void noticeDelete(int no) throws Exception {
         sqlSession.delete("notice.noticeDelete", no);
     }
 
-    public void noticeEdit(Notice notice) {
+    @Override
+    public void noticeEdit(Notice notice) throws Exception {
         sqlSession.update("notice.noticeEdit", notice);
     }
-
 }

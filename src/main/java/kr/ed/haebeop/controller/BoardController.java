@@ -78,7 +78,7 @@ public class BoardController {
         CommentPage page = new CommentPage();
         // 페이징에 필요한 데이터 저장
         int total = commentService.getCount(board.getBno());
-        page.setCno(board.getBno());
+        page.setBno(board.getBno());
         page.makeBlock(commentPage, total);
         page.makeLastPageNum(total);
         page.makePostStart(commentPage, total);
@@ -122,7 +122,7 @@ public class BoardController {
         List<Category> categories = boardService.categoryList();
         model.addAttribute("detail", comm);
         model.addAttribute("categories", categories);
-        return "/board/boardUpdate";
+        return "/board/boardEdit";
     }
 
     @PostMapping("edit.do")
@@ -181,7 +181,7 @@ public class BoardController {
 
             String callback = request.getParameter("CKEditorFuncNum");
             printWriter = response.getWriter();
-            String fileUrl = request.getContextPath() + "/community/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
+            String fileUrl = request.getContextPath() + "/board/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
 
             // 업로드시 메시지 출력
             printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");

@@ -25,5 +25,6 @@
 <script src="${path1}/resources/vendors/swiper/swiper-bundle.min.js"> </script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
 <script src="${path1}/resources/js/theme.js"></script>
+<script src="${path1}/resources/js/jquery.min.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&amp;family=Roboto:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">

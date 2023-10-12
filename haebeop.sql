@@ -88,19 +88,59 @@ INSERT INTO board(cate, title, content, author)
 VALUES ('D', '게시판 더미데이터8', '여기는 게시판 더미데이터8입니다', 'admin');
 ​
 SELECT * FROM board;
+
+-- faq 테이블 생성
+CREATE TABLE faq(
+	fno INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(100) NOT NULL,
+	content VARCHAR(300) NOT NULL,
+	regdate DATETIME DEFAULT CURRENT_TIMESTAMP()
+);
+
+INSERT INTO faq VALUES (DEFAULT, '제목1', 'faq 더미데이터1 입니다.', DEFAULT);
+INSERT INTO faq VALUES (DEFAULT, '제목2', 'faq 더미데이터2 입니다.', DEFAULT);
+INSERT INTO faq VALUES (DEFAULT, '제목3', 'faq 더미데이터3 입니다.', DEFAULT);
+INSERT INTO faq VALUES (DEFAULT, '제목4', 'faq 더미데이터4 입니다.', DEFAULT);
+INSERT INTO faq VALUES (DEFAULT, '제목5', 'faq 더미데이터5 입니다.', DEFAULT);
+INSERT INTO faq VALUES (DEFAULT, '제목6', 'faq 더미데이터6 입니다.', DEFAULT);
+INSERT INTO faq VALUES (DEFAULT, '제목7', 'faq 더미데이터7 입니다.', DEFAULT);
+INSERT INTO faq VALUES (DEFAULT, '제목8', 'faq 더미데이터8 입니다.', DEFAULT);
+
+-- qna 테이블 생성
+CREATE TABLE qna(
+  qno int PRIMARY KEY AUTO_INCREMENT,   		
+  title VARCHAR(100) NOT NULL,   			
+  content VARCHAR(1000) NOT NULL,   			
+  author VARCHAR(16),   								
+  resdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+  lev INT DEFAULT 0, 									
+  par INT DEFAULT 0,												
+  FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE);
+ 
+SELECT * FROM qna;
+  
+INSERT INTO	qna VALUES(DEFAULT, '가입하고 싶어요','웹사이트에 어떻게 가입하나요?','kimhkk',DEFAULT, DEFAULT, 1);
+INSERT INTO	qna VALUES(DEFAULT, '[답변] 가입하고 싶어요',' 회원 가입 페이지에서 필요한 정보를 입력하여 가입할 수 있습니다.','admin',DEFAULT, 1, 1);
+INSERT INTO	qna VALUES(DEFAULT, '개인 정보 업데이트하고 싶어요','회원 정보를 어떻게 수정하거나 업데이트하나요?','kimhkk',DEFAULT, DEFAULT, 3);
+INSERT INTO	qna VALUES(DEFAULT, '[답변] 개인 정보 업데이트하고 싶어요',' 로그인 후, 마이페이지에서 회원 정보를 수정하고 업데이트할 수 있습니다.','admin',DEFAULT, 1, 3);
+INSERT INTO	qna VALUES(DEFAULT, '커뮤니티 어떻게 사용해요?','게시물을 작성하는 방법을 알려주세요.','kimhkk',DEFAULT, DEFAULT, 5);
+INSERT INTO	qna VALUES(DEFAULT, '[답변] 커뮤니티 어떻게 사용해요?',' 커뮤니티 페이지에서 카테고리를 설정한 후 글을 작성해주세요. 글의 하단에는 댓글을 추가할 수 있는 공간도 있습니다. 글과 댓글을 작성하면서 정보를 공유하세요','admin',DEFAULT, 1, 5);
+
 ​
 -- 댓글 테이블 생성
 CREATE TABLE COMMENT(
 	comNo INT PRIMARY KEY AUTO_INCREMENT,
-	cno INT NOT NULL,
+	bno INT NOT NULL,
 	author VARCHAR(20) NOT NULL,
 	resdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
 	content VARCHAR(1000) NOT NULL,
-	FOREIGN KEY(cno) REFERENCES board(bno) ON DELETE CASCADE,
+	FOREIGN KEY(bno) REFERENCES board(bno) ON DELETE CASCADE,
 	FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE
 ); 
 ​
 SELECT * FROM comment;
+
+
 ​
 -- 자료실 자료 데이터 테이블 생성
 CREATE TABLE fileInfo(

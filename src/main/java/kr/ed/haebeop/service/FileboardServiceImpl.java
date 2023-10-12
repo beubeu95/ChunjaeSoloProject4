@@ -1,9 +1,12 @@
 package kr.ed.haebeop.service;
 
+import kr.ed.haebeop.domain.FileInfo;
 import kr.ed.haebeop.domain.Fileboard;
+import kr.ed.haebeop.persistence.FileInfoMapper;
 import kr.ed.haebeop.persistence.FileboardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,9 +16,17 @@ public class FileboardServiceImpl implements FileboardService{
     @Autowired
     private FileboardMapper fileboardMapper;
 
+    @Autowired
+    private FileInfoMapper fileInfoMapper;
+
+    @Transactional
     @Override
     public void writeArticle(Fileboard fileboardDto) throws Exception {
+        if(fileboardDto.getTitle() == null || fileboardDto.getContent() == null){
+            throw new Exception();
+        }
         fileboardMapper.writeArticle(fileboardDto);
+        fileboardMapper.fileRegister(fileboardDto);
     }
 
     @Override
@@ -41,5 +52,9 @@ public class FileboardServiceImpl implements FileboardService{
     @Override
     public void fileboardEdit(Fileboard dto) throws Exception {
         fileboardMapper.fileboardEdit(dto);
+        if(dto.getFileInfos().get(0).getSaveFolder() != null){
+            fileInfoMapper.fileInfoDelete(dto.getArticleno());
+            fileInfoMapper.fileInfoInsert(dto);
+        }
     }
 }

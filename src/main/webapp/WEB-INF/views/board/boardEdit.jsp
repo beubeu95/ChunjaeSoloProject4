@@ -52,7 +52,7 @@
         </div>
         <div class="columns">
             <div class="column">
-                <input type="hidden" name="cno" id="bno" value="${detail.bno}">
+                <input type="hidden" name="bno" id="bno" value="${detail.bno}">
                 <input type="submit" class="button is-fullwidth is-link" value="등록하기"/>
             </div>
         </div>

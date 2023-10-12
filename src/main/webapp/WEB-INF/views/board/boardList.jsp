@@ -19,110 +19,123 @@
 <jsp:include page="../setting/header.jsp" />
 <!--Header End-->
 
-<!-- BoardList Start -->
-<section class="section">
-    <div class="container">
-        <div class="buttons has-addons is-centered mb-5">
-            <c:if test="${empty curCategory}">
-                <label class="button is-primary is-active">
-            </c:if>
-            <c:if test="${!empty curCategory}">
-                <label class="button is-primary">
-            </c:if>
-                    <input type="radio" checked="checked" onclick="javascript:location.href='${path}/board/list.do'"/> 전체
-                </label>
-            <c:forEach var="cate" items="${categories}">
-                <c:if test="${cate.cate eq curCategory}">
-                    <label class="button is-primary is-active">
-                </c:if>
-                <c:if test="${cate.cate ne curCategory}">
-                    <label class="button is-primary">
-                </c:if>
-                        <input type="radio" checked="checked" onclick="javascript:location.href='${path}/board/list.do?cate=${cate.cate}'"/> ${cate.cateName}
-                    </label>
-            </c:forEach>
-        </div>
-
-        <div class="container">
-            <form action="${path}/board/list.do" method="get" class="field has-addons has-addons-right">
-                <p class="control">
-                <span class="select">
-                    <select id="type" name="type">
-                        <option value="T"> 제목 </option>
-                        <option value="C"> 내용 </option>
-                        <option value="W"> 작성자 </option>
-                    </select>
-                </span>
-                </p>
-                <p class="control">
-                    <c:if test="${!empty curCategory}">
-                        <input type="hidden" id="cate" name="cate" value="${curCategory}">
-                    </c:if>
-                    <input class="input" type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" autocomplete="off" value="${page.keyword}">
-                </p>
-                <p class="control">
-                    <input type="submit" class="button is-primary" value="검색" />
-                </p>
-            </form>
-
-            <table class="table is-hoverable is-fullwidth">
-                <thead>
-                <tr>
-                    <th class="has-text-centered" width="100"> # </th>
-                    <th class="has-text-centered" width="130"> 카테고리 </th>
-                    <th class="has-text-centered"> 제목 </th>
-                    <th class="has-text-centered" width="150"> 작성자 </th>
-                    <th class="has-text-centered" width="150"> 작성일 </th>
-                    <th class="has-text-centered" width="80"> 조회수 </th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="item" items="${list}">
-                    <tr onclick="location.href='${path}/board/getBoard.do?bno=${item.bno}&page=${curPage}<c:if test="${!empty curCategory}">&cate=${curCategory}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>'" style="cursor: pointer">
-                        <th class="has-text-centered">${item.bno}</th>
-                        <td class="has-text-centered">${item.cateName}</td>
-                        <td width="300">${item.title}</td>
-                        <td class="has-text-centered">${item.author}</td>
-                        <td class="has-text-centered">${item.resdate}</td>
-                        <td class="has-text-centered" width="80">${item.cnt}</td>
-                    </tr>
-                </c:forEach>
-                <c:if test="${empty list}">
-                    <tr>
-                        <td colspan="6" class="has-text-centered"> 게시글이 없습니다. </td>
-                    </tr>
-                </c:if>
-                </tbody>
-            </table>
-
-            <nav class="Page navigation example" role="navigation" aria-label="pagination">
-                <c:if test="${curPage > 5}">
-                    <a href="${path}/board/list.do?page=${page.blockStartNum - 1}" class="page-link " style="background-color: #FF0043;" >Previous</a>
-                </c:if>
-                <c:if test="${page.blockLastNum < page.totalPageCount}">
-                    <a href="${path}/board/list.do?page=${page.blockLastNum + 1}" class="page-link" style="background-color: #FF0043;">Next page</a>
-                </c:if>
-
-                <ul class="pagination justify-content-center">
-                    <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
-                        <c:choose>
-                            <c:when test="${i == curPage}">
-                                <li class="page-item active">
-                                    <a href="${path}/board/list.do?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link" aria-label="Page ${i}" aria-current="page" style="background-color: #FF0043;">${i}</a>
-                                </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li class="page-item">
-                                    <a href="${path}/board/list.do?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link" aria-label="Page ${i}" aria-current="page" style="background-color: #FF0043;">${i}</a>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </ul>
-            </nav>
+<!--Banner Start-->
+<section class="page-title background-primary is-relative"  style="background-image: url('${path}/resources/img/bannerPage.jpg'); background-position: center; background-size: cover; height: 200px;">
+    <div class="container-fluid mb-5">
+        <div class="has-text-centered">
+            <h1 class="display-3 font-weight-bold text-white" style="font-size: 40px; text-align:center;"> 자유게시판 </h1>
+            <div class="d-inline-flex text-white" style="display: flex !important; justify-content: center;">
+                <p class="m-0"><a class="text-white" href="${path}">Home</a></p>
+                <p class="m-0 px-2">/</p>
+                <p class="m-0">자유게시판</p>
+            </div>
         </div>
     </div>
 </section>
+<!--Banner End-->
+
+<!-- BoardList Start -->
+<div class="content" id="content" style="margin-top: 20px;">
+    <div class="container">
+        <div class="container">
+            <div>
+                <div class="btn-group btn-group-toggle mb-5" data-toggle="buttons" style="display: flex;width: 70%; justify-content: center; margin: 50px auto;">
+                    <c:if test="${empty curCategory}">
+                    <label class="btn btn-primary active" style=" background-color: #71A894; border: none; font-weight: bold;">
+                        </c:if>
+                        <c:if test="${!empty curCategory}">
+                        <label class="btn btn-primary" style=" background-color: lightgray; color:#000000;  border: none; font-weight: bold;">
+                            </c:if>
+                            <input type="radio" checked="checked" onclick="javascript:location.href='${path}/board/list.do'" style="opacity: 0;"/> 전체
+                        </label>
+                        <c:forEach var="cate" items="${categories}">
+                        <c:if test="${cate.cate eq curCategory}">
+                        <label class="btn btn-primary active" style=" background-color: #71A894; border: none; font-weight: bold;">
+                            </c:if>
+                            <c:if test="${cate.cate ne curCategory}">
+                            <label class="btn btn-primary" style=" background-color: lightgray; color:#000000; border: none; font-weight: bold;">
+                                </c:if>
+                                <input type="radio" checked="checked" onclick="javascript:location.href='${path}/board/list.do?cate=${cate.cate}'" style="opacity: 0;"/> ${cate.cateName}
+                            </label>
+                            </c:forEach>
+                </div>
+                <!-- 검색 엔진 시작 -->
+                <form action="${path}/board/list.do" method="get" class="field has-addons has-addons-right" style="margin-top: 100px; margin-bottom: 30px;">
+                    <div class="input-group">
+                        <select id="type" name="type" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"/>
+                        <option class="dropdown-item" value="T" style="background-color: #fff;"> 제목 </option>
+                        <option class="dropdown-item" value="C" style="background-color: #fff;"> 내용 </option>
+                        <option class="dropdown-item" value="W" style="background-color: #fff;"> 작성자 </option>
+                        </select>
+                        <input class="form-control" type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" value="${page.keyword}" aria-label="Text input with 2 dropdown buttons" autocomplete="false">
+                        <input type="submit" class="btn btn-outline-secondary" value="검색"/>
+                    </div>
+                </form>
+                <!-- 검색 엔진 끝 -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="has-text-centered" width="100"> # </th>
+                        <th class="has-text-centered" width="130"> 카테고리 </th>
+                        <th class="has-text-centered"> 제목 </th>
+                        <th class="has-text-centered" width="150"> 작성자 </th>
+                        <th class="has-text-centered" width="150"> 작성일 </th>
+                        <th class="has-text-centered" width="80"> 조회수 </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="item" items="${list}">
+                        <tr onclick="location.href='${path}/board/getBoard.do?bno=${item.bno}&page=${curPage}<c:if test="${!empty curCategory}">&cate=${curCategory}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>'" style="cursor: pointer">
+                            <th class="has-text-centered">${item.bno}</th>
+                            <td class="has-text-centered">${item.cateName}</td>
+                            <td width="300">${item.title}</td>
+                            <td class="has-text-centered">${item.author}</td>
+                            <td class="has-text-centered"><fmt:parseDate value="${item.resdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" /></td>
+                            <td class="has-text-centered" width="80">${item.cnt}</td>
+                        </tr>
+                    </c:forEach>
+                    <c:if test="${empty list}">
+                        <tr>
+                            <td colspan="6" class="has-text-centered"> 게시글이 없습니다. </td>
+                        </tr>
+                    </c:if>
+                    </tbody>
+                </table>
+                <!-- pagnation -->
+                <nav aria-label="Page navigation example" >
+                    <c:if test="${curPage > 5}">
+                        <a href="${path}/board/list.do?page=${page.blockStartNum - 1}"
+                           class="page-link">Previous</a>
+                    </c:if>
+                    <c:if test="${page.blockLastNum < page.totalPageCount}">
+                        <a href="${path}/board/list.do?page=${page.blockLastNum + 1}" class="page-link">Next page</a>
+                    </c:if>
+
+                    <ul class="pagination justify-content-center">
+                        <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
+                            <c:choose>
+                                <c:when test="${i == curPage}">
+                                    <li class="page-item">
+                                        <a href="${path}/board/list.do?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
+                                           class="page-link active" aria-label="Page ${i}"
+                                           aria-current="page" style="background-color: #71A894; color:#FFFFFF";>${i}</a>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item">
+                                        <a href="${path}/board/list.do?page=${i}<c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>"
+                                           class="page-link" aria-label="Page ${i}" aria-current="page">${i}</a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- BoardList End -->
 
 

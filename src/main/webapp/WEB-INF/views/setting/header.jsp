@@ -58,8 +58,8 @@
                         </button>
                         <ul class="dropdown-menu rounded-0 m-0">
                             <li><a class="dropdown-item" href="${path}/notice/list.do">공지사항</a></li>
-                            <li><a class="dropdown-item" href="#">QNA</a></li>
-                            <li><a class="dropdown-item" href="#">FAQ</a></li>
+                            <li><a class="dropdown-item" href="${path}/qna/list.do">QNA</a></li>
+                            <li><a class="dropdown-item" href="${path}/faq/list.do">FAQ</a></li>
                         </ul>
                     </li>
                 </ul>

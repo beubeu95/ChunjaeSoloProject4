@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CommentPage extends Page {
-    private int cno;
+    private int bno;
 }
