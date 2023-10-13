@@ -2,6 +2,7 @@ package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.LectureService;
+import kr.ed.haebeop.service.ReviewService;
 import kr.ed.haebeop.util.BoardPage;
 import kr.ed.haebeop.util.CommentPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class LectureController {
 
     @Autowired
     private LectureService lectureService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("list.do")
     public String getLectureList (HttpServletRequest request,Model model) throws Exception{
@@ -52,13 +56,14 @@ public class LectureController {
 
     @GetMapping("getLecture.do")
     public String getLecture(HttpServletRequest request, Model model) throws Exception {
-        LectureVO lecture = lectureService.getLecture(Integer.parseInt(request.getParameter("lno")));
-
+        int lno =Integer.parseInt(request.getParameter("lno"));
+        LectureVO lecture = lectureService.getLecture(lno);
+        List<Review> review =reviewService.reviewList(lno);
 
         // 게시판 목록에서 사용자가 선택한 게시물이 속해있는 페이지
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-
+        model.addAttribute("review", review);
         model.addAttribute("lecture", lecture);
         model.addAttribute("curPage", curPage);
         model.addAttribute("cate", request.getParameter("cate"));

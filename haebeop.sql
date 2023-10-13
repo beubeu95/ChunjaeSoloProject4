@@ -164,7 +164,30 @@ CREATE TABLE fileboard (
 );
 ​
 SELECT * FROM fileboard;
-​
+
+CREATE TABLE review (
+		rno INT PRIMARY KEY AUTO_INCREMENT,
+      lno INT,
+      id VARCHAR(16),
+      regdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      content VARCHAR(200),
+      star INT DEFAULT 5,
+      FOREIGN KEY(lno) REFERENCES lecture(lno) ON DELETE CASCADE
+);
+
+SELECT * FROM review;
+
+insert INTO review(lno, id, content, star) VALUES(1, 'admin', '댓글 기능 더미데이터1', 5);
+INSERT INTO review(lno, id, content, star) VALUES(2, 'admin', '댓글 기능 더미데이터2', 5);
+INSERT INTO review(lno, id, content, star) VALUES(3, 'shin', '댓글 기능 더미데이터3', 5);
+INSERT INTO review(lno, id, content, star) VALUES(4, 'park', '댓글 기능 더미데이터3', 5);
+INSERT INTO review(lno, id, content, star) VALUES(5, 'kim', '댓글 기능 더미데이터3', 2);
+INSERT INTO review(lno, id, content, star) VALUES(6, 'shin', '댓글 기능 더미데이터3', 3);
+INSERT INTO review(lno, id, content, star) VALUES(7, 'park', '댓글 기능 더미데이터3', 3);
+INSERT INTO review(lno, id, content, star) VALUES(9, 'kim', '댓글 기능 더미데이터3', 2);
+INSERT INTO review(lno, id, content, star) VALUES(1, 'shin', '댓글 기능 더미데이터3', 3);
+INSERT INTO review(lno, id, content, star) VALUES(1, 'park', '댓글 기능 더미데이터3', 4);
+
 -- 교재 테이블 생성
 CREATE TABLE book (
 	bcode VARCHAR(20) primary key NOT NULL ,

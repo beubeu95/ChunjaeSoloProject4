@@ -14,6 +14,29 @@
     <title>강의 상세보기</title>
     <jsp:include page="../setting/head.jsp" />
     <script src="${path}/resources/js/vdo.js"></script>
+    <style>
+        .player_btn {
+            border: none;
+            background-color: #ffffff;
+        }
+
+        #progressBar {
+            width: 0px;
+            height: 10px;
+            background-color: #007cf0;
+            transition: 1s;
+            margin-top: -10px;
+        }
+
+        #btn-right {
+            display: inline-block;
+            float: right;
+        }
+
+        h4 {
+            font-family: 'Roboto', 'sans-serif';
+        }
+    </style>
 </head>
 <body>
 <!--Header Start-->
@@ -90,9 +113,82 @@
     </div>
     <div style="margin: 100px auto; width: 90%;">
         <div class="card box-shadow-rb my-4">
+            <div class="columns is-multiline mb-40">
+                <div class="column">
+                    <article class="card shadow">
+                        <figure class="image is-4by3" style="padding-top: 0;">
+                            <div class="player" style="width:800px; margin: 0 auto;">
+                                <div class="vdo_fr">
+                                    <video id="video" style="width: 100%">
+                                        <source src="${path}/resources/img/lecture_video03.mp4" type="video/mp4"/>
+                                    </video>
+                                </div>
+                                <div id="progress">
+                                    <div id="progressBar" class="mb-2"></div>
+                                </div>
+                                <div id="buttonbar" >
+                                    <button id="play" class="player_btn"> <i class="fas fa-play"></i> </button>
+                                    <button id="pause" style="display: none" class="player_btn"> <i class="fas fa-pause"></i> </button>
+                                    <button id="stop" class="player_btn"> <i class="fas fa-stop"></i> </button>
+                                    <span id="currentTime"> 00:00 / 02:11 </span>
+                                    <div id="btn-right">
+                                        <input id="vol" type="range" value="500" min="0" max="1000">
+                                        <button id="volTxt" class="player_btn">50%</button>
+                                        <button id="full" class="player_btn"><i class="fa-solid fa-expand"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+                        <div class="card-content has-text-centered" style="margin: 0 auto; width: 800px;">
+                            <h4 class="mb-10" style="font-family:'sans-serif'; font-weight: bold;margin-bottom: 20px!important;">${lecture.title} </h4>
+                            <p class="mb-10" style="font-family:'sans-serif'; font-weight: bold;">${lecture.content} </p>
+                        </div>
+                    </article>
+                </div>
+                <c:forEach var="review" items="${review}">
+                <div class="name"><strong>회원 ID: </strong>${review.id}&nbsp;&nbsp;&nbsp;&nbsp;<strong>작성일시: </strong>${review.regdate}</div>
+                </c:forEach>
 
-            ${lecture.title}
-            ${lecture.content}
+                <div class="tab-pane" id="tabs-3" role="tabpanel">
+                    <div class="product__details__tab__desc">
+                        <h5 style="margin-bottom: 20px"><strong>후기</strong></h5>
+                        <div>
+                            <c:forEach var="review" items="${review}">
+                                <div class="name"><strong>회원 ID: </strong>${review.id}&nbsp;&nbsp;&nbsp;&nbsp;<strong>작성일시: </strong>${review.regdate}</div>
+                                <div class="star"><strong>별점: </strong>
+                                    <c:if test="${review.star eq 5}">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </c:if>
+                                    <c:if test="${review.star eq 4}">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </c:if>
+                                    <c:if test="${review.star eq 3}">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </c:if>
+                                    <c:if test="${review.star eq 2}">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </c:if>
+                                    <c:if test="${review.star eq 1}">
+                                        <i class="fa fa-star"></i>
+                                    </c:if>
+                                </div>
+                                <div class="content">${review.content}</div>
+                                <hr>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
