@@ -69,7 +69,8 @@ CREATE TABLE board (
     FOREIGN KEY(cate) REFERENCES category(cate) ON DELETE CASCADE,
     FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE
 );
-​
+
+
 INSERT INTO board(cate, title, content, author)
 VALUES ('A', '게시판 더미데이터1', '여기는 게시판 더미데이터1입니다', 'admin');
 INSERT INTO board(cate, title, content, author)
@@ -164,44 +165,68 @@ CREATE TABLE fileboard (
 ​
 SELECT * FROM fileboard;
 ​
--- 과목  테잉블 생성
-CREATE TABLE subject(
-	scode VARCHAR(20) PRIMARY KEY NOT NULL,
-	name VARCHAR(100) NOT NULL,
-	price INT(11) NOT NULL,
-)
-​
 -- 교재 테이블 생성
 CREATE TABLE book (
 	bcode VARCHAR(20) primary key NOT NULL ,
-	name VARCHAR(100) NOT NULL,
+	bname VARCHAR(100) NOT NULL,
 	content VARCHAR(1000) NOT NULL,
 	author VARCHAR(1000) NOT NULL,
 	price INT(11) NOT NULL
 );
+
+INSERT INTO book VALUES ('A-1','빠삭중학국어', '중학국어입니다.', '김이름', 12000);
+INSERT INTO book VALUES ('B-1','빠삭중학수학', '중학수학입니다.', '김이름', 12000);
+INSERT INTO book VALUES ('C-1','빠삭중학영어', '중학영어입니다.', '김이름', 12000);
+INSERT INTO book VALUES ('D-1','빠삭중학과학', '중학과학입니다.', '김이름', 12000);
+INSERT INTO book VALUES ('E-1','빠삭중학사회', '중학사회입니다.', '김이름', 12000);
+SELECT * FROM book;
 ​
 --강사 테이블 생성
 CREATE TABLE teacher (
 	tcode VARCHAR(20) primary key NOT NULL,
-	name VARCHAR(20) NOT NULL,
+	tname VARCHAR(20) NOT NULL,
 	tel VARCHAR(100),
-	email VARCHAR(100),
+	email VARCHAR(100)
 );
 ​
+INSERT INTO teacher VALUES ('A-1', '김선생', '010-1111-2222', 'kim@edu.com');
+INSERT INTO teacher VALUES ('B-1', '이선생', '010-1111-2223', 'lee@edu.com');
+INSERT INTO teacher VALUES ('C-1', '박선생', '010-1111-2224', 'park@edu.com');
+INSERT INTO teacher VALUES ('D-1', '최선생', '010-1111-2225', 'choi@edu.com');
+INSERT INTO teacher VALUES ('E-1', '채선생', '010-1111-2226', 'chae@edu.com');
+INSERT INTO teacher VALUES ('A-2', '우선생', '010-1111-2227', 'woo@edu.com');
+INSERT INTO teacher VALUES ('A-3', '한선생', '010-1111-2228', 'han@edu.com');
 -- 강의 테이블 생성
 CREATE TABLE lecture(
-	lcode VARCHAR(20) NOT NULL,
-	lname VARCHAR(100) NOT NULL,
-	lfile VARCHAR(400),
-	scode VARCHAR(20) NOT NULL,
-	bcode VARCHAR(20) NULL DEFAULT,
+	lno INT PRIMARY KEY AUTO_INCREMENT,
+	cate VARCHAR(5) NOT NULL,
+	title VARCHAR(100) NOT NULL,
+	content VARCHAR(1000),
+	img VARCHAR(5000) DEFAULT 'class-1.jpg',
+	video varchar(256) default 'sample1.mp4',
+	price INT DEFAULT 0,
+	STATUS VARCHAR(5) CHECK(status IN(0, 1)),
+   sdate DATE,
+   edate DATE,
+	tdate INT(11) NOT null,
+	bcode VARCHAR(20) NOT NULL,
 	tcode VARCHAR(20) NOT NULL,
-	amt INT(11),
-   FOREIGN KEY (bcode) REFERENCES book(bcode) ON DELETE CASCADE,
-	FOREIGN KEY (tcode) REFERENCES teacher(tcode) ON DELETE CASCADE,
-	FOREIGN KEY (scode) REFERENCES subject(scode) ON DELETE CASCADE
+	amt INT DEFAULT 0,
+	FOREIGN KEY(cate) REFERENCES category(cate) ON DELETE CASCADE,
+   FOREIGN KEY(bcode) REFERENCES book(bcode) ON DELETE CASCADE,
+	FOREIGN KEY(tcode) REFERENCES teacher(tcode) ON DELETE CASCADE
 );
-​
+
+SELECT * FROM lecture;
+
+INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭중학국어', '중학생국어수업입니다.', 0, 90, 'A-1','A-1', 30); 
+INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'B', '빠삭중학수학', '중학생국어수업입니다.', 0, 90, 'B-1','B-1', 30);
+INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'C', '빠삭중학과학', '중학생국어수업입니다.', 0, 90, 'C-1','C-1', 30);
+INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'D',  '빠삭중학과학', '중학생국어수업입니다.',0,90,'D-1','D-1', 30);
+INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'E', '빠삭중학사회', '중학생국어수업입니다.', 0, 90, 'E-1','E-1', 30);
+INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭고등국어', '고등학생국어수업입니다.', 0, 90,'A-1','A-2', 30);
+INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭초등국어', '초등학생국어수업입니다.', 0, 90,'A-1','A-3', 30);
+
 --수강 테이블 생성
 CREATE TABLE student (
 	sdcode VARCHAR(20) primary key NOT NULL,

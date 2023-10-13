@@ -29,4 +29,10 @@ public class ApplicationConfig {
     @Bean
     public BoardService boardService() { return new BoardServiceImpl(); }
 
+    @Bean
+    public LectureMapper lectureMapper() { return new LectureMapperImpl(); }
+
+    @Bean
+    public LectureService lectureService() { return new LectureServiceImpl(); }
+
 }

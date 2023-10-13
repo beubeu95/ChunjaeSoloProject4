@@ -17,6 +17,7 @@
 <link href="${path1}/resources/css/theme.min.css" rel="stylesheet" />
 <link href="${path1}/resources/vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
 <style> .nav-link { background-color: #FFFFFF; } </style>
+<script src="https://kit.fontawesome.com/b22cfe0297.js" crossorigin="anonymous"></script>
 
 <!-- javascript -->
 <script src="${path1}/resources/vendors/@popperjs/popper.min.js"></script>

@@ -66,75 +66,7 @@
     </div>
     <div style="margin: 100px auto; width: 90%;">
         <div class="card box-shadow-rb my-4">
-            <div class="card-body my-3 mx-4">
-                <c:if test="${sid ne null}">
-                    <form action="${path}/comment/insert.do" method="post" >
-                    <div style="display: flex;">
-                       <div class="form-group" style="width: 90%">
-                            <textarea name="content" id="content" class="form-control" maxlength="990" rows="2" placeholder="댓글을 달아주세요 :)"></textarea>
-                        </div>
-                        <div class="col" style="margin-left: 50px;">
-                            <input type="hidden" id="bno" name="bno" value="${detail.bno}">
-                            <input type="hidden" id="page" name="page" value="${curPage}">
-                            <c:if test="${!empty cate}">
-                                <input type="hidden" id="cate" name="cate" value="${cate}">
-                            </c:if>
-                            <c:if test="${!empty keyword}">
-                                <input type="hidden" id="type" name="type" value="${type}">
-                                <input type="hidden" id="keyword" name="keyword" value="${keyword}">
-                            </c:if>
-                                <input type="submit" class="btn btn-secondary btn-block border-0 py-3" style="height:72px; width: 150px;" value="전송">
-                            </div>
-                        </div>`
-                    </form>
-                </c:if>
-            </div>
-            <div class="card-body my-3 mx-4" style="width: 80%;">
-                <c:forEach var="comment" items="${commentList}">
-                    <div class="row">
-                            <h6 style="width: 75%;" > ${comment.author} </h6>
-                            <h6 class="text-right" style="margin-top: 3px; padding: 0; width: 10%;">
-                                <fmt:parseDate value="${comment.resdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
-                                <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
-                            </h6>
-                        <c:if test="${(sid eq 'admin') or (sid eq comment.author)}">
-                            <a style="width: 10%; margin-bottom: 10px;" href="${path}/comment/delete.do?comNo=${comment.comNo}&bno=${detail.bno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty keyword}">&type=${type}&keyword=${keyword}</c:if>" class="btn btn-sm btn-danger">Delete</a>
-                        </c:if>
-                    </div>
-                    <div class="row">
-                        <div class="col" style=" margin-bottom: 30px;">
-                            <textarea class="form-control" style="background-color: lightgray;" readonly>${comment.content}</textarea>
-                        </div>
-                    </div>
-                </c:forEach>
-                <!-- Pagination -->
-                <nav class="mt-5 mb-6">
-                    <ul class="pagination justify-content-center">
-                        <c:if test="${commentPage > 5}">
-                            <li class="page-item">
-                                <a href="${path}/board/getBoard.do?bno=${detail.bno}&page=${curPage}&commentPage=${page.blockStartNum - 1}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link">Previous</a>
-                            </li>
-                        </c:if>
-                        <c:if test="${page.blockLastNum < page.totalPageCount}">
-                            <li class="page-item">
-                                <a href="${path}/board/getBoard.do?bno=${detail.bno}&page=${curPage}&commentPage=${page.blockLastNum + 1}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link">Next page</a>
-                            </li>
-                        </c:if>
-                        <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
-                            <li class="page-item">
-                                <c:choose>
-                                    <c:when test="${i == commentPage}">
-                                        <a href="${path}/board/getBoard.do?bno=${detail.bno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link active" style="background-color: #71A894; color:#FFFFFF;" aria-current="page">${i}</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="${path}/board/getBoard.do?bno=${detail.bno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link">${i}</a>
-                                    </c:otherwise>
-                                </c:choose>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </nav>
-            </div>
+
         </div>
     </div>
 </section>
