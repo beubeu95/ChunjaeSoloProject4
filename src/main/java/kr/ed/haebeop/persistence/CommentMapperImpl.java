@@ -1,6 +1,7 @@
 package kr.ed.haebeop.persistence;
 
 import kr.ed.haebeop.domain.Comment;
+import kr.ed.haebeop.util.CommentLecPage;
 import kr.ed.haebeop.util.CommentPage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
@@ -21,8 +22,18 @@ public class CommentMapperImpl implements CommentMapper{
     }
 
     @Override
-    public int getCount(int cno) throws Exception {
-        return sqlSession.selectOne("comment.getCount", cno);
+    public List<Comment> lecCommentList(CommentLecPage page) throws Exception {
+        return sqlSession.selectList("comment.lecCommentList", page);
+    }
+
+    @Override
+    public int getCount(int bno) throws Exception {
+        return sqlSession.selectOne("comment.getCount", bno);
+    }
+
+    @Override
+    public int getLecCount(int lno) throws Exception {
+        return sqlSession.selectOne("comment.getLecCount", lno);
     }
 
     @Override
@@ -31,7 +42,13 @@ public class CommentMapperImpl implements CommentMapper{
     }
 
     @Override
+    public void LecCommentInsert(Comment comment) throws Exception {
+        sqlSession.insert("comment.lecCommentInsert", comment);
+    }
+
+    @Override
     public void communityDelete(int comNo) throws Exception {
         sqlSession.delete("comment.commentDelete", comNo);
     }
+
 }

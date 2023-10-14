@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LectureVO {
-    private String lno;
+    private int lno;
     private String cate;
     private String cateName;
     private String title;
@@ -20,6 +20,7 @@ public class LectureVO {
     private String edate;
     private String tdate;
     private String tname;
+    private String bcode;
     private String bname;
     private int amt;
 }

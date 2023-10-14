@@ -12,12 +12,6 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
 
     @Bean
-    public TestMapper testMapper() {return new TestMapperImpl(); }
-
-    @Bean
-    public TestService testService() { return new TestServiceImpl(); }
-
-    @Bean
     public FileboardMapper fileboardMapper() {return new FileboardMapperImpl(); }
 
     @Bean
@@ -34,5 +28,17 @@ public class ApplicationConfig {
 
     @Bean
     public LectureService lectureService() { return new LectureServiceImpl(); }
+
+    @Bean
+    public PaymentMapper paymentMapper() { return  new PaymentMapperImpl(); }
+
+    @Bean
+    public PaymentService paymentService() { return new PaymentServiceImpl(); }
+
+    @Bean
+    public CommentMapper commentMapper() { return new CommentMapperImpl(); }
+
+    @Bean
+    public CommentService commentService() { return new CommentServiceImpl(); }
 
 }

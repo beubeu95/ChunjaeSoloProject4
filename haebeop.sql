@@ -69,8 +69,8 @@ CREATE TABLE board (
     FOREIGN KEY(cate) REFERENCES category(cate) ON DELETE CASCADE,
     FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE
 );
-
-
+​
+​
 INSERT INTO board(cate, title, content, author)
 VALUES ('A', '게시판 더미데이터1', '여기는 게시판 더미데이터1입니다', 'admin');
 INSERT INTO board(cate, title, content, author)
@@ -89,7 +89,7 @@ INSERT INTO board(cate, title, content, author)
 VALUES ('D', '게시판 더미데이터8', '여기는 게시판 더미데이터8입니다', 'admin');
 ​
 SELECT * FROM board;
-
+​
 -- faq 테이블 생성
 CREATE TABLE faq(
 	fno INT PRIMARY KEY AUTO_INCREMENT,
@@ -97,7 +97,7 @@ CREATE TABLE faq(
 	content VARCHAR(300) NOT NULL,
 	regdate DATETIME DEFAULT CURRENT_TIMESTAMP()
 );
-
+​
 INSERT INTO faq VALUES (DEFAULT, '제목1', 'faq 더미데이터1 입니다.', DEFAULT);
 INSERT INTO faq VALUES (DEFAULT, '제목2', 'faq 더미데이터2 입니다.', DEFAULT);
 INSERT INTO faq VALUES (DEFAULT, '제목3', 'faq 더미데이터3 입니다.', DEFAULT);
@@ -106,7 +106,7 @@ INSERT INTO faq VALUES (DEFAULT, '제목5', 'faq 더미데이터5 입니다.', D
 INSERT INTO faq VALUES (DEFAULT, '제목6', 'faq 더미데이터6 입니다.', DEFAULT);
 INSERT INTO faq VALUES (DEFAULT, '제목7', 'faq 더미데이터7 입니다.', DEFAULT);
 INSERT INTO faq VALUES (DEFAULT, '제목8', 'faq 더미데이터8 입니다.', DEFAULT);
-
+​
 -- qna 테이블 생성
 CREATE TABLE qna(
   qno int PRIMARY KEY AUTO_INCREMENT,   		
@@ -126,20 +126,21 @@ INSERT INTO	qna VALUES(DEFAULT, '개인 정보 업데이트하고 싶어요','�
 INSERT INTO	qna VALUES(DEFAULT, '[답변] 개인 정보 업데이트하고 싶어요',' 로그인 후, 마이페이지에서 회원 정보를 수정하고 업데이트할 수 있습니다.','admin',DEFAULT, 1, 3);
 INSERT INTO	qna VALUES(DEFAULT, '커뮤니티 어떻게 사용해요?','게시물을 작성하는 방법을 알려주세요.','kimhkk',DEFAULT, DEFAULT, 5);
 INSERT INTO	qna VALUES(DEFAULT, '[답변] 커뮤니티 어떻게 사용해요?',' 커뮤니티 페이지에서 카테고리를 설정한 후 글을 작성해주세요. 글의 하단에는 댓글을 추가할 수 있는 공간도 있습니다. 글과 댓글을 작성하면서 정보를 공유하세요','admin',DEFAULT, 1, 5);
-
+​
 ​
 -- 댓글 테이블 생성
 CREATE TABLE COMMENT(
 	comNo INT PRIMARY KEY AUTO_INCREMENT,
-	bno INT NOT NULL,
+	bno INT,
+	lno INT,
 	author VARCHAR(20) NOT NULL,
 	resdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
 	content VARCHAR(1000) NOT NULL,
 	FOREIGN KEY(bno) REFERENCES board(bno) ON DELETE CASCADE,
+	FOREIGN KEY(lno) REFERENCES lecture(lno) ON DELETE CASCADE,
 	FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE
 ); 
 ​
-
 SELECT * FROM COMMENT;
 ​
 -- 자료실 자료 데이터 테이블 생성
@@ -164,30 +165,7 @@ CREATE TABLE fileboard (
 );
 ​
 SELECT * FROM fileboard;
-
-CREATE TABLE review (
-		rno INT PRIMARY KEY AUTO_INCREMENT,
-      lno INT,
-      id VARCHAR(16),
-      regdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      content VARCHAR(200),
-      star INT DEFAULT 5,
-      FOREIGN KEY(lno) REFERENCES lecture(lno) ON DELETE CASCADE
-);
-
-SELECT * FROM review;
-
-insert INTO review(lno, id, content, star) VALUES(1, 'admin', '댓글 기능 더미데이터1', 5);
-INSERT INTO review(lno, id, content, star) VALUES(2, 'admin', '댓글 기능 더미데이터2', 5);
-INSERT INTO review(lno, id, content, star) VALUES(3, 'shin', '댓글 기능 더미데이터3', 5);
-INSERT INTO review(lno, id, content, star) VALUES(4, 'park', '댓글 기능 더미데이터3', 5);
-INSERT INTO review(lno, id, content, star) VALUES(5, 'kim', '댓글 기능 더미데이터3', 2);
-INSERT INTO review(lno, id, content, star) VALUES(6, 'shin', '댓글 기능 더미데이터3', 3);
-INSERT INTO review(lno, id, content, star) VALUES(7, 'park', '댓글 기능 더미데이터3', 3);
-INSERT INTO review(lno, id, content, star) VALUES(9, 'kim', '댓글 기능 더미데이터3', 2);
-INSERT INTO review(lno, id, content, star) VALUES(1, 'shin', '댓글 기능 더미데이터3', 3);
-INSERT INTO review(lno, id, content, star) VALUES(1, 'park', '댓글 기능 더미데이터3', 4);
-
+​
 -- 교재 테이블 생성
 CREATE TABLE book (
 	bcode VARCHAR(20) primary key NOT NULL ,
@@ -197,6 +175,8 @@ CREATE TABLE book (
 	price INT(11) NOT NULL
 );
 
+SELECT * FROM book;
+​
 INSERT INTO book VALUES ('A-1','빠삭중학국어', '중학국어입니다.', '김이름', 12000);
 INSERT INTO book VALUES ('B-1','빠삭중학수학', '중학수학입니다.', '김이름', 12000);
 INSERT INTO book VALUES ('C-1','빠삭중학영어', '중학영어입니다.', '김이름', 12000);
@@ -239,9 +219,9 @@ CREATE TABLE lecture(
    FOREIGN KEY(bcode) REFERENCES book(bcode) ON DELETE CASCADE,
 	FOREIGN KEY(tcode) REFERENCES teacher(tcode) ON DELETE CASCADE
 );
-
+​
 SELECT * FROM lecture;
-
+​
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭중학국어', '중학생국어수업입니다.', 0, 90, 'A-1','A-1', 30); 
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'B', '빠삭중학수학', '중학생국어수업입니다.', 0, 90, 'B-1','B-1', 30);
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'C', '빠삭중학과학', '중학생국어수업입니다.', 0, 90, 'C-1','C-1', 30);
@@ -249,21 +229,55 @@ INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUE
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'E', '빠삭중학사회', '중학생국어수업입니다.', 0, 90, 'E-1','E-1', 30);
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭고등국어', '고등학생국어수업입니다.', 0, 90,'A-1','A-2', 30);
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭초등국어', '초등학생국어수업입니다.', 0, 90,'A-1','A-3', 30);
-
---수강 테이블 생성
-CREATE TABLE student (
-	sdcode VARCHAR(20) primary key NOT NULL,
-	lcode VARCHAR(20) NOT NULL,
-	id VARCHAR(20) NOT NULL,
-	totaltime INT(11),
-	status VARCHAR(5) CHECK (status in (0,1)),
-	FOREIGN KEY (lcode) REFERENCES lecture (lcode) ON DELETE CASCADE,
-	FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE,
-);
 ​
+
+-- 결제 테이블 생성
+create table payment(
+	   pno INT primary KEY AUTO_INCREMENT,
+		lno INT NOT NULL,		
+		bcode VARCHAR(20) NOT NULL,
+	   id varchar(20) not null,	
+	   method varchar(100),		
+	   com varchar(100),			
+	   price int default 1000,
+		dno INT NOT NULL,	
+	   account varchar(100) NOT NULL,
+	   resdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	   FOREIGN KEY (lno) REFERENCES lecture (lno) ON DELETE CASCADE,
+	   FOREIGN KEY (bcode) REFERENCES book (bcode) ON DELETE CASCADE,
+		FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
+);
+
+-- 배송 테이블 생성
+create table delivery(
+       dno int primary KEY AUTO_INCREMENT,
+       pno int not null, 					
+       id varchar(20) not null,				
+       addr VARCHAR(200),	
+       tel varchar(13) not null,				
+       dcom varchar(100),					
+       dtel varchar(13),			
+       dstatus int default 0,				
+       ddate timestamp default current_timestamp,
+       edate varchar(13),						
+       dcode varchar(30),
+       FOREIGN KEY (pno) REFERENCES payment (pno) ON DELETE CASCADE,
+	    FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE					
+);
+
+-- 출고 테이블 생성
+create table serve(
+    sno int primary KEY AUTO_INCREMENT,							
+    bcode VARCHAR(20) NOT NULL,		              
+    sprice int default 1000,					 
+    amount int default 1,				         	
+    resdate timestamp default CURRENT_TIMESTAMP,
+	 FOREIGN KEY (bcode) REFERENCES book (bcode) ON DELETE CASCADE    
+);
+
 COMMIT;
 ​
--- 메인기능 : 공지사항 , 자료실, 자유게시판,강의별 댓글, 교재와 시범강의
+-- 메인기능 : 공지사항 , 자료실, 자유게시판, 강의별 댓글, 교재와 시범강의
 -- 부가 기능 : 파일업로드, 채팅, 타계정 또는 sns 로그인
 -- 가입시 축하 이메일 보내기, 비밀번호 변경시 이메일 보내기, 온라인 평가,
 -- 진도관리, 학습 스케줄러, 나의 강의실 등

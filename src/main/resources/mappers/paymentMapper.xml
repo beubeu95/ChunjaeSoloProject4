@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="payment">
+    <select id="lectureDetail" resultType="kr.ed.haebeop.domain.Lecture">
+        select * from lecture where lno=#{lno}
+    </select>
+    <select id="bookDetail" resultType="kr.ed.haebeop.domain.Book">
+        select * from book where bcode=#{bcode}
+    </select>
+    <select id="paymentDetail" resultType="kr.ed.haebeop.domain.Payment">
+        select * from payment where id=#{id} and lno=#{lno}
+    </select>
+    <select id="getCount" resultType="integer">
+        select count(*) from payment where lno=#{lno}
+    </select>
+    <insert id="paymentInsert">
+        insert into payment values (DEFAULT, #{lno}, #{bcode}, #{id}, #{method}, #{com}, #{price}, #{account}, default)
+    </insert>
+    <select id="paymentNo" resultType="kr.ed.haebeop.domain.Payment">
+        select pno from payment order by pno desc limit 1
+    </select>
+    <insert id="deliveryInsert">
+        insert into delivery values (default, #{pno}, #{id}, #{addr}, #{tel},'','',default,default,'','')
+    </insert>
+    <select id="deliveryNo" resultType="kr.ed.haebeop.domain.Delivery">
+        select dno from delivery order by dno desc limit 1
+    </select>
+
+    <insert id="serveInsert">
+        insert into serve values (default, #{bcode}, #{sprice}, #{amount}, default)
+    </insert>
+
+</mapper>

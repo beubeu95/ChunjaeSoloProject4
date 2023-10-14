@@ -33,7 +33,7 @@
         <level value="info" />
     </logger>
 
-    <logger name="kr.ed.haebeop.test">
+    <logger name="kr.ed.haebeop.transaction">
         <level value="info" />
     </logger>
 

@@ -124,7 +124,7 @@ public class UserController {
             user.setPw(pwd);
         }
         userService.userEdit(user);
-        return "redirect:/";
+        return "redirect:/user/mypageIndex";
     }
 
     @RequestMapping(value="delete.do", method = RequestMethod.GET)

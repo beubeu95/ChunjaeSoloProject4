@@ -39,6 +39,21 @@ public class CommentController {
         return mav;
     }
 
+    @RequestMapping(value="insertLec.do", method= RequestMethod.POST)
+    public ModelAndView commentInsertLec(Comment comment, HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        comment.setAuthor((String) session.getAttribute("sid"));
+        commentService.LecCommentInsert(comment);
+
+        model.addAttribute("lno", request.getParameter("lno"));
+        model.addAttribute("page", request.getParameter("page"));
+        model.addAttribute("cate", request.getParameter("cate"));
+
+        ModelAndView mav = new ModelAndView();
+        mav.setView(new RedirectView(request.getContextPath() + "/lecture/getLecture.do"));
+        return mav;
+    }
+
     @GetMapping("delete.do")
     public ModelAndView commentDelete(HttpServletRequest request, Model model) throws Exception {
         int comNo = Integer.parseInt(request.getParameter("comNo"));
@@ -52,7 +67,21 @@ public class CommentController {
 
         // 다른 컨트롤러(CommunityController)의 페이지로 redirect하기
         ModelAndView mav = new ModelAndView();
-        mav.setView(new RedirectView(request.getContextPath() + "/community/getCommunity.do"));
+        mav.setView(new RedirectView(request.getContextPath() + "/board/getBoard.do"));
+        return mav;
+    }
+
+    @GetMapping("deleteLec.do")
+    public ModelAndView commentDeleteLec(HttpServletRequest request, Model model) throws Exception {
+        int comNo = Integer.parseInt(request.getParameter("comNo"));
+        commentService.communityDelete(comNo);
+
+        model.addAttribute("lno", request.getParameter("lno"));
+        model.addAttribute("page", request.getParameter("page"));
+        model.addAttribute("cate", request.getParameter("cate"));
+
+        ModelAndView mav = new ModelAndView();
+        mav.setView(new RedirectView(request.getContextPath() + "/lecture/getLecture.do"));
         return mav;
     }
 }
