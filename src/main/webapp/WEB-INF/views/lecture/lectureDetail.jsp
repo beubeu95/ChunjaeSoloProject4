@@ -107,11 +107,58 @@
                     </div>
                 </div>
                 <div style="float: right; margin-right: 50px;">
+                    <input type="hidden" name="id" id="id" value="${sid}">
+                    <input type="hidden" id="lno" name="lno" value="${lecture.lno}">
+                    <input type="hidden" id="bcode" name="bcode" value="${lecture.bcode}">
                 <button type="button" id="ck_btn" class="btn btn-primary mt-2 py-2 px-4" onclick="payCheck()" style="margin-top: 30px!important; background-color: #71A894; border: none; font-weight: bold;">수강신청</button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function payCheck() {
+            let id = $("#id").val();
+            let lno = $("#lno").val();
+            let bcode = $("#bcode").val()
+            let amt = $("#amt").val();
+
+            if (id) {
+                // 수강생을 모집중인 강의만 신청 받도록 구현
+                let status = ${lecture.status};
+
+                if (status === 1) {
+                    let params = { id: id, lno: lno };
+                    $.ajax({
+                        url: "${path}/payment/payCheck.do",
+                        type: "post",
+                        dataType: "json",
+                        data: params,
+                        success: function (data) {
+                            console.log("HI");
+                            let appPass = data.result;
+                            let curApp = data.curApp;
+                            if (curApp >= amt) {
+                                alert("이미 마감되었습니다.");
+                            } else if (!appPass) {
+                                alert("이미 수강신청한 회원입니다.");
+                            } else {
+                                window.location.href = "${path}/payment/payment.do?lno=" + lno + "&bcode=" + bcode;
+                            }
+                        },
+                        error: function (res) {
+                            alert("잠시 후 다시 시도해주세요.");
+                            console.log(res.responseText);
+                        }
+                    });
+                } else {
+                    alert("해당 강의는 수강신청 기간이 아닙니다.");
+                }
+            } else {
+                alert("로그인이 필요한 서비스입니다. 로그인 후 다시 시도해주세요.");
+                window.location.href = "${path}/user/login.do";
+            }
+        }
+    </script>
     <div style="margin: 100px auto; width: 90%;">
         <div class="card box-shadow-rb my-4">
             <div class="columns is-multiline mb-40">
@@ -144,126 +191,76 @@
                             <h4 class="mb-10" style="font-family:'sans-serif'; font-weight: bold;margin-bottom: 20px!important;">${lecture.title} </h4>
                             <p class="mb-10" style="font-family:'sans-serif'; font-weight: bold;">${lecture.content} </p>
                         </div>
+                        <div class="card-body my-3 mx-4">
+                            <c:if test="${sid ne null}">
+                                <form action="${path}/comment/insertLec.do" method="post" >
+                                    <div style="display: flex;">
+                                        <div class="form-group" style="width: 90%">
+                                            <textarea name="content" id="content" class="form-control" maxlength="990" rows="2" placeholder="댓글을 달아주세요 :)"></textarea>
+                                        </div>
+                                        <div class="col" style="margin-left: 50px;">
+                                            <input type="hidden" id="amt" name="amt" value="${lecture.amt}">
+                                            <input type="hidden" id="page" name="page" value="${curPage}">
+                                            <c:if test="${!empty cate}">
+                                                <input type="hidden" id="cate" name="cate" value="${cate}">
+                                            </c:if>
+                                            <input type="submit" class="btn btn-secondary btn-block border-0 py-3" style="height:72px; width: 150px;" value="전송">
+                                        </div>
+                                    </div>`
+                                </form>
+                            </c:if>
+
+                            <c:forEach var="comment" items="${commentList}">
+                                <div class="row">
+                                    <h6 style="width: 75%;" > ${comment.author} </h6>
+                                    <h6 class="text-right" style="margin-top: 3px; padding: 0; width: 10%;">
+                                        <fmt:parseDate value="${comment.resdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
+                                    </h6>
+                                    <c:if test="${(sid eq 'admin') or (sid eq comment.author)}">
+                                        <a style="width: 10%; margin-bottom: 10px;" href="${path}/comment/deleteLec.do?comNo=${comment.comNo}&bno=${lecture.lno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="btn btn-sm btn-danger">Delete</a>
+                                    </c:if>
+                                </div>
+                                <div class="row">
+                                    <div class="col" style=" margin-bottom: 30px;">
+                                        <textarea class="form-control" style="background-color: lightgray;" readonly>${comment.content}</textarea>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            <!-- Pagination -->
+                            <nav class="mt-5 mb-6">
+                                <ul class="pagination justify-content-center">
+                                    <c:if test="${commentPage > 5}">
+                                        <li class="page-item">
+                                            <a href="${path}/lecture/getLecture.do?lno=${lecture.lno}&page=${curPage}&commentPage=${page.blockStartNum - 1}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="page-link">Previous</a>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${page.blockLastNum < page.totalPageCount}">
+                                        <li class="page-item">
+                                            <a href="${path}/lecture/getLecture.do?lno=${lecture.lno}&page=${curPage}&commentPage=${page.blockLastNum + 1}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link">Next page</a>
+                                        </li>
+                                    </c:if>
+                                    <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
+                                        <li class="page-item">
+                                            <c:choose>
+                                                <c:when test="${i == commentPage}">
+                                                    <a href="${path}/lecture/getLecture.do?lno=${lecture.lno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="page-link active" style="background-color: #71A894; color:#FFFFFF;" aria-current="page">${i}</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="${path}/lecture/getLecture.do?lno=${lecture.lno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="page-link">${i}</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </nav>
+                        </div>
                     </article>
                 </div>
             </div>
         </div>
     </div>
-    <div style="margin: 100px auto; width: 90%;">
-        <div class="card box-shadow-rb my-4">
-            <div class="card-body my-3 mx-4">
-                <c:if test="${sid ne null}">
-                    <form action="${path}/comment/insertLec.do" method="post" >
-                        <div style="display: flex;">
-                            <div class="form-group" style="width: 90%">
-                                <textarea name="content" id="content" class="form-control" maxlength="990" rows="2" placeholder="댓글을 달아주세요 :)"></textarea>
-                            </div>
-                            <div class="col" style="margin-left: 50px;">
-                                <input type="hidden" id="id" name="id" value="${sid}">
-                                <input type="hidden" id="amt" name="amt" value="${lecture.amt}">
-                                <input type="hidden" id="lno" name="lno" value="${lecture.lno}">
-                                <input type="hidden" id="page" name="page" value="${curPage}">
-                                <c:if test="${!empty cate}">
-                                    <input type="hidden" id="cate" name="cate" value="${cate}">
-                                </c:if>
-                                <input type="submit" class="btn btn-secondary btn-block border-0 py-3" style="height:72px; width: 150px;" value="전송">
-                            </div>
-                        </div>`
-                    </form>
-                </c:if>
-            </div>
-            <div class="card-body my-3 mx-4" style="width: 80%;">
-                <c:forEach var="comment" items="${commentList}">
-                    <div class="row">
-                        <h6 style="width: 75%;" > ${comment.author} </h6>
-                        <h6 class="text-right" style="margin-top: 3px; padding: 0; width: 10%;">
-                            <fmt:parseDate value="${comment.resdate}" var="resdate" pattern="yyyy-MM-dd HH:mm:ss" />
-                            <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
-                        </h6>
-                        <c:if test="${(sid eq 'admin') or (sid eq comment.author)}">
-                            <a style="width: 10%; margin-bottom: 10px;" href="${path}/comment/deleteLec.do?comNo=${comment.comNo}&bno=${lecture.lno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="btn btn-sm btn-danger">Delete</a>
-                        </c:if>
-                    </div>
-                    <div class="row">
-                        <div class="col" style=" margin-bottom: 30px;">
-                            <textarea class="form-control" style="background-color: lightgray;" readonly>${comment.content}</textarea>
-                        </div>
-                    </div>
-                </c:forEach>
-                <!-- Pagination -->
-                <nav class="mt-5 mb-6">
-                    <ul class="pagination justify-content-center">
-                        <c:if test="${commentPage > 5}">
-                            <li class="page-item">
-                                <a href="${path}/lecture/getLecture.do?lno=${lecture.lno}&page=${curPage}&commentPage=${page.blockStartNum - 1}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="page-link">Previous</a>
-                            </li>
-                        </c:if>
-                        <c:if test="${page.blockLastNum < page.totalPageCount}">
-                            <li class="page-item">
-                                <a href="${path}/lecture/getLecture.do?lno=${lecture.lno}&page=${curPage}&commentPage=${page.blockLastNum + 1}<c:if test="${!empty cate}">&cate=${cate}</c:if><c:if test="${!empty page.keyword}">&type=${page.type}&keyword=${page.keyword}</c:if>" class="page-link">Next page</a>
-                            </li>
-                        </c:if>
-                        <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
-                            <li class="page-item">
-                                <c:choose>
-                                    <c:when test="${i == commentPage}">
-                                        <a href="${path}/lecture/getLecture.do?lno=${lecture.lno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="page-link active" style="background-color: #71A894; color:#FFFFFF;" aria-current="page">${i}</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="${path}/lecture/getLecture.do?lno=${lecture.lno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="page-link">${i}</a>
-                                    </c:otherwise>
-                                </c:choose>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
 </section>
-<script>
-    function payCheck() {
-        let id = $("#id").val();
-        let lno = $("#lno").val();
-        let amt = $("#amt").val();
-
-        if (id) {
-            // 수강생을 모집중인 강의만 신청 받도록 구현
-            let status = ${lecture.status};
-
-            if (status === 1) {
-                let params = { id: id, lno: lno };
-                $.ajax({
-                    url: "${path}/payment/payCheck.do",
-                    type: "post",
-                    dataType: "json",
-                    data: params,
-                    success: function (data) {
-                        console.log("HI");
-                        let appPass = data.result;
-                        let curApp = data.curApp;
-                        if (curApp >= amt) {
-                            alert("이미 마감되었습니다.");
-                        } else if (!appPass) {
-                            alert("이미 수강신청한 회원입니다.");
-                        } else {
-                            window.location.href = "${path}/payment/payment.do?lno=" + lno + "&id=" + id;
-                        }
-                    },
-                    error: function (res) {
-                        alert("잠시 후 다시 시도해주세요.");
-                        console.log(res.responseText);
-                    }
-                });
-            } else {
-                alert("해당 강의는 수강 신청기간이 아닙니다.");
-            }
-        } else {
-            alert("로그인이 필요한 서비스입니다. 로그인 후 다시 시도해주세요.");
-            window.location.href = "${path}/user/login.do";
-        }
-    }
-</script>
 <!-- lectureDetail End-->
 
 <!-- Footer Start -->

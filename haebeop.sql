@@ -248,6 +248,8 @@ create table payment(
 		FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
 );
 
+        select count(*) from payment where lno=1;
+
 -- 배송 테이블 생성
 create table delivery(
        dno int primary KEY AUTO_INCREMENT,

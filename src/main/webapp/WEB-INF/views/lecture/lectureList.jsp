@@ -91,27 +91,32 @@
                                 <div class="card-footer bg-transparent py-4 px-5">
                                     <div class="row border-bottom">
                                         <div class="col-6 py-1 text-right border-right">
-                                            <strong>강사</strong>
+                                            <strong style="text-align: center;">강사</strong>
                                         </div>
-                                        <div class="col-6 py-1">${item.tname}</div>
+                                        <div class="col-6 py-1" style="text-align: center;">${item.tname}</div>
                                     </div>
                                     <div class="row border-bottom">
                                         <div class="col-6 py-1 text-right border-right">
-                                            <strong>수강기간</strong>
+                                            <strong style="text-align: center;">수강기간</strong>
                                         </div>
                                         <div class="col-6 py-1"  style="font-size: 14px; padding:0px;">${item.sdate} ~ ${item.edate}</div>
                                     </div>
                                     <div class="row border-bottom">
                                         <div class="col-6 py-1 text-right border-right">
-                                            <strong>수강료</strong>
+                                            <strong style="text-align: center;">수강인원</strong>
                                         </div>
-                                        <div class="col-6 py-1">${item.price}</div>
+                                        <div class="col-6 py-1" style="text-align: center;">${item.amt}</div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 py-1 text-right border-right">
-                                            <strong>수강인원</strong>
+                                            <strong style="text-align: center;">현황</strong>
                                         </div>
-                                        <div class="col-6 py-1">${item.amt}</div>
+                                        <c:if test='${item.status eq "1"}'>
+                                            <div class="col-6 py-1" style="background-color: #0f74a885; width: 150px; padding: 0; text-align: center; color:#ffffff;">모집중</div>
+                                        </c:if>
+                                        <c:if test='${item.status eq "0"}'>
+                                            &nbsp;<div class="col-6 py-1" style="background-color: #8b000080; width: 150px; padding: 0; text-align: center; color:#ffffff;">모집종료</div>
+                                        </c:if>
                                     </div>
                                 </div>
                                 <a href="${path}/lecture/getLecture.do?lno=${item.lno}&page=${curPage}<c:if test="${!empty curCategory}">&cate=${curCategory}</c:if>" class="btn btn-primary px-4 mx-auto mb-4" style="background-color: #71A894; border:none; ">Join Now</a>

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class paymentVO {
+public class PaymentVO {
     private int pno;
     private int lno;
     private String bcode;
