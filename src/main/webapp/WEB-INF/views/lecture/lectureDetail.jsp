@@ -95,7 +95,8 @@
                                         &nbsp;&nbsp;<strong>현황</strong><span style="color: darkred;">&nbsp;&nbsp;모집중 (오프라인 강좌)</span>
                                 </c:if>
                                 <c:if test='${lecture.status eq "0"}'>
-                                        &nbsp;&nbsp;<strong>현황</strong><span style="color: darkgray;">&nbsp;&nbsp; (오프라인 강좌)</span>
+                                    <i class="fa-solid fa-check-to-slot text-primary mr-3"></i>
+                                        &nbsp;&nbsp;<strong>현황</strong><span style="color: darkgray;">&nbsp;&nbsp;마감 (오프라인 강좌)</span>
                                 </c:if>
                             </li>
                             <li class="py-2 border-bottom">
@@ -120,7 +121,7 @@
                             <div class="player" style="width:800px; margin: 0 auto;">
                                 <div class="vdo_fr">
                                     <video id="video" style="width: 100%">
-                                        <source src="${path}/resources/img/lecture_video03.mp4" type="video/mp4"/>
+                                        <source src="${path}/resources/img/sample1.mp4" type="video/mp4"/>
                                     </video>
                                 </div>
                                 <div id="progress">
@@ -144,49 +145,6 @@
                             <p class="mb-10" style="font-family:'sans-serif'; font-weight: bold;">${lecture.content} </p>
                         </div>
                     </article>
-                </div>
-                <c:forEach var="review" items="${review}">
-                <div class="name"><strong>회원 ID: </strong>${review.id}&nbsp;&nbsp;&nbsp;&nbsp;<strong>작성일시: </strong>${review.regdate}</div>
-                </c:forEach>
-
-                <div class="tab-pane" id="tabs-3" role="tabpanel">
-                    <div class="product__details__tab__desc">
-                        <h5 style="margin-bottom: 20px"><strong>후기</strong></h5>
-                        <div>
-                            <c:forEach var="review" items="${review}">
-                                <div class="name"><strong>회원 ID: </strong>${review.id}&nbsp;&nbsp;&nbsp;&nbsp;<strong>작성일시: </strong>${review.regdate}</div>
-                                <div class="star"><strong>별점: </strong>
-                                    <c:if test="${review.star eq 5}">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </c:if>
-                                    <c:if test="${review.star eq 4}">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </c:if>
-                                    <c:if test="${review.star eq 3}">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </c:if>
-                                    <c:if test="${review.star eq 2}">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </c:if>
-                                    <c:if test="${review.star eq 1}">
-                                        <i class="fa fa-star"></i>
-                                    </c:if>
-                                </div>
-                                <div class="content">${review.content}</div>
-                                <hr>
-                            </c:forEach>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

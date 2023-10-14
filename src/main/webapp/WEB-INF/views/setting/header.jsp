@@ -69,11 +69,11 @@
                 <a href="${path}/user/login.do" class="btn btn-primary px-4" style="width: 100px; font-size: 15px; height: 40px; margin-top: 20px; padding: 8px; background: #4F5665; border: none; margin-left:10px;">Log in</a>
             </c:if>
             <c:if test="${sid ne null and sid ne 'admin'}">
-                <a href="${path}/user/login2.do" class="btn btn-primary px-4" style="width: 100px; font-size: 15px; height: 40px; margin-top: 20px; padding: 8px; background: #71A894; border: none;">MyPage</a>
+                <a href="${path}/user/mypage.do" class="btn btn-primary px-4" style="width: 100px; font-size: 15px; height: 40px; margin-top: 20px; padding: 8px; background: #71A894; border: none;">MyPage</a>
                 <a href="${path}/user/logout.do" class="btn btn-primary px-4" style="width: 100px; font-size: 15px; height: 40px; margin-top: 20px; padding: 8px; background: #4F5665; border: none; margin-left:10px;">LogOut</a>
             </c:if>
             <c:if test="${sid ne null and sid eq 'admin'}">
-                <a href="${path}/admin/memberlist.do" class="btn btn-primary px-4" style="width: 100px; font-size: 15px; height: 40px; margin-top: 20px; padding: 8px; background: #71A894; border: none;">Admin</a>
+                <a href="${path}/admin/index.do" class="btn btn-primary px-4" style="width: 100px; font-size: 15px; height: 40px; margin-top: 20px; padding: 8px; background: #71A894; border: none;">Admin</a>
                 <a href="${path}/user/logout.do" class="btn btn-primary px-4" style="width: 100px; font-size: 15px; height: 40px; margin-top: 20px; padding: 8px; background: #4F5665; border: none; margin-left:10px;">LogOut</a>
             </c:if>
         </div>

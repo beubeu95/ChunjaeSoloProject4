@@ -97,4 +97,41 @@ public class UserController {
         session.invalidate();
         return "redirect:/";
     }
+
+    @GetMapping("mypage.do")
+    public String mypage(Model model) throws Exception{
+        String id =(String) session.getAttribute("sid");
+        User user=userService.getUser(id);
+
+        model.addAttribute("user", user);
+        return "/user/mypageIndex";
+    }
+
+    @GetMapping("userUpdate.do")
+    public String updateForm(Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        User user = userService.getUser(id);
+
+        model.addAttribute("user", user);
+        return "/user/mypage";
+    }
+
+    @RequestMapping(value="update.do", method=RequestMethod.POST)
+    public String userUpdate(User user, Model model) throws Exception {
+        String pwd = "";
+        if(user.getPw().length()<=16) {
+            pwd = pwEncoder.encode(user.getPw());
+            user.setPw(pwd);
+        }
+        userService.userEdit(user);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value="delete.do", method = RequestMethod.GET)
+    public String memberDelete(@RequestParam String id, Model model, HttpSession session) throws Exception {
+        userService.userDelete(id);
+        session.invalidate();
+        return "redirect:/";
+    }
+
 }
