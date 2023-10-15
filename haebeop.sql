@@ -20,7 +20,7 @@ CREATE TABLE user(
     visited INT DEFAULT 0
 );
 ​
-SELECT * FROM user;
+SELECT * FROM USER;
 ​
 UPDATE user SET pw='$2a$10$WD5g5GdtR3qbpiwV5OVDMuAfKq/IA8LtbHaTVTetRTeq4jsdDLj0C' WHERE id='admin';
 ​
@@ -279,7 +279,8 @@ create table serve(
 );
 
 COMMIT;
-​
+SELECT * FROM payment;
+
 -- 메인기능 : 공지사항 , 자료실, 자유게시판, 강의별 댓글, 교재와 시범강의
 -- 부가 기능 : 파일업로드, 채팅, 타계정 또는 sns 로그인
 -- 가입시 축하 이메일 보내기, 비밀번호 변경시 이메일 보내기, 온라인 평가,

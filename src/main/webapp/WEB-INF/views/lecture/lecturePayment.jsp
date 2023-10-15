@@ -134,18 +134,18 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">배송지 주소</label>
-                                                        <input type="text" name="addr1" id="addr1" placeholder="기본 주소 입력" class="form-control" required /><br>
-                                                        <input type="text" name="addr2" id="addr2" placeholder="상세 주소 입력" class="form-control" required /><br>
+                                                        <input type="text" name="addr1" id="addr1" placeholder="기본 주소 입력" autocomplete="off" readonly class="form-control" required /><br>
+                                                        <input type="text" name="addr2" id="addr2" placeholder="상세 주소 입력" autocomplete="off" required class="form-control" required /><br>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-9">
                                                             <div class="mb-3">
-                                                                <input type="text" class="form-control" placeholder="우편번호" required>
+                                                                <input type="text" id="postcode" name="postcode" class="form-control" placeholder="우편번호" autocomplete="off" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3" style="padding-left: 0;">
                                                             <div class="mb-3">
-                                                                <button type="button" id="post_btn" onclick="findAddr()"  class="btn btn-primary" style="width: 150px; height: 45px; padding-top:10px;background-color: #74A984;">우편번호</button>
+                                                                <button type="button" class="btn btn-primary" style="width: 150px; height: 45px; padding-top:10px;background-color: #74A984;" onclick="findAddr()"> 우편번호 </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -240,14 +240,14 @@
                         </script>
                         <script>
                             //주소 연동 API
-                            function findAddr() {
+                            function findAddr(){
                                 new daum.Postcode({
-                                    oncomplete: function(data) {
+                                    oncomplete:function(data){
                                         console.log(data);
                                         var roadAddr = data.roadAddress;
                                         var jibunAddr = data.jibunAddress;
                                         document.getElementById("postcode").value = data.zonecode;
-                                        if(roadAddr !== '') {
+                                        if(roadAddr !== ''){
                                             document.getElementById("addr1").value = roadAddr;
                                         } else if(jibunAddr !== ''){
                                             document.getElementById("addr1").value = jibunAddr;
