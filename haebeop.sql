@@ -175,7 +175,7 @@ CREATE TABLE book (
 	price INT(11) NOT NULL
 );
 
-SELECT * FROM book;
+SELECT * FROM lecture;
 ​
 INSERT INTO book VALUES ('A-1','빠삭중학국어', '중학국어입니다.', '김이름', 12000);
 INSERT INTO book VALUES ('B-1','빠삭중학수학', '중학수학입니다.', '김이름', 12000);
@@ -248,13 +248,13 @@ create table payment(
 		FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
 );
 
-        select count(*) from payment where lno=1;
+
 
 -- 배송 테이블 생성
 create table delivery(
        dno int primary KEY AUTO_INCREMENT,
-       pno int not null, 					
-       id varchar(20) not null,				
+       pno int, 					
+       id varchar(20) not NULL,				
        addr VARCHAR(200),	
        tel varchar(13) not null,				
        dcom varchar(100),					
@@ -263,9 +263,10 @@ create table delivery(
        ddate timestamp default current_timestamp,
        edate varchar(13),						
        dcode varchar(30),
-       FOREIGN KEY (pno) REFERENCES payment (pno) ON DELETE CASCADE,
 	    FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE					
 );
+
+SELECT * FROM delivery;
 
 -- 출고 테이블 생성
 create table serve(

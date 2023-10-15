@@ -18,7 +18,7 @@
     <insert id="paymentInsert">
         insert into payment values (DEFAULT, #{lno}, #{bcode}, #{id}, #{method}, #{com}, #{price}, #{account}, default)
     </insert>
-    <select id="paymentNo" resultType="kr.ed.haebeop.domain.Payment">
+    <select id="paymentNo" resultType="integer">
         select pno from payment order by pno desc limit 1
     </select>
     <insert id="deliveryInsert">

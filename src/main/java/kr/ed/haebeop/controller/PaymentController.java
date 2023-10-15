@@ -1,19 +1,13 @@
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.Book;
-import kr.ed.haebeop.domain.Lecture;
-import kr.ed.haebeop.domain.Payment;
-import kr.ed.haebeop.domain.User;
+import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.LectureService;
 import kr.ed.haebeop.service.PaymentService;
 import kr.ed.haebeop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -82,6 +76,42 @@ public class PaymentController {
 
     }
 
+    @PostMapping("paymentPro.do")
+    public String paymentPro(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 
 
+            int lno = Integer.parseInt(request.getParameter("lno"));
+            String bcode = (String) request.getParameter("bcode");
+            String id = (String) session.getAttribute("sid");
+
+
+            Payment payment = new Payment();
+            payment.setLno(lno);
+            payment.setBcode(bcode);
+            payment.setId(id);
+            payment.setMethod(request.getParameter("method"));
+            payment.setCom(request.getParameter("com"));
+            payment.setPrice(request.getParameter("price"));
+            payment.setAccount(request.getParameter("account"));
+
+            int pno = paymentService.paymentInsert(payment);
+
+            Delivery delivery = new Delivery();
+            delivery.setPno(pno);  // Use the generated pno
+            delivery.setId(id);
+            delivery.setAddr(request.getParameter("address1") + "<br>" + request.getParameter("address2") + "<br>" + request.getParameter("postcode"));
+            delivery.setTel(request.getParameter("tel"));
+
+
+            Serve serve = new Serve();
+            serve.setBcode(bcode);
+            serve.setSprice(request.getParameter("price"));
+            serve.setAmount(request.getParameter("amount"));
+
+
+            paymentService.addPayment(delivery, serve);
+
+            return "redirect:/lecture/list.do";
+
+    }
 }

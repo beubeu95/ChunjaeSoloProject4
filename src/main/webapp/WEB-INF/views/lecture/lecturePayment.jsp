@@ -64,7 +64,7 @@
                                         <div class="product-item">
                                             <div class="product-info">
                                                 <h4 class="product-title"><a href="#">${lecture.title}</a></h4>
-                                                <input type="hidden" id="lno" name="lno" value="${lecture.lno }">
+
                                             </div>
                                         </div>
                                     </td>
@@ -82,7 +82,7 @@
                                         <div class="product-item">
                                             <div class="product-info">
                                                 <h4 class="product-title" id="bName">${book.bname}</h4>
-                                                <input type="hidden" name="bcode" id="bcode" value="${book.bcode }">
+
                                                 <input type="hidden" name="from" id="from" value="${from }">
 
                                             </div>
@@ -115,6 +115,7 @@
             <div class="columns is-multiline mb-40">
                 <div class="column">
                     <article class="card shadow">
+                        <form action="${path }/payment/paymentPro.do" method="post" onsubmit="return payCheck(this)">
                         <div class="container" style="margin-top:30px;">
                             <h1 class="h3 mb-5" style="padding-left: 40px; font-size: 40px;">Payment</h1>
                             <div class="row">
@@ -182,7 +183,8 @@
                                 </div>
                                 <!-- Right -->
                                 <div class="col-lg-3">
-                                    <form action="${path }/payment/paymentPro.do" method="post" onsubmit="return payCheck(this)">
+                                        <input type="hidden" id="lno" name="lno" value="${lecture.lno }">
+                                        <input type="hidden" name="bcode" id="bcode" value="${book.bcode }">
                                         <div class="card position-sticky top-0">
                                         <div class="p-3 ">
                                             <h6 class="card-title mb-3">Order Summary</h6>
@@ -194,8 +196,8 @@
                                             </div>
                                             <hr>
                                             <div class="d-flex justify-content-between mb-4 small">
-                                                <p><span>SUBTOTAL</span> <strong class="text-dark" id="subprice">${book.price}-${user.pt}</strong></p>
-                                                <p><span>TOTAL</span> <strong class="text-dark" id="totalprice">${book.price}-${user.pt}</strong></p>
+                                                <p><span>SUBTOTAL</span> <strong class="text-dark" id="subprice">${book.price}</strong></p>
+                                                <p><span>TOTAL</span> <strong class="text-dark" id="totalprice">${book.price}</strong></p>
                                             </div>
                                             <input type="button" id="pay" value="PLACE ORDER" class="btn btn-primary w-100 mt-2" style="background-color: #74A984;">
                                             <c:if test="${!empty sid }">
@@ -203,130 +205,120 @@
                                             </c:if>
                                         </div>
                                     </div>
-                                    </form>
-                                    <script>
-                                        $(document).ready(function(){
-                                            var cardArr1 = ["현대카드","농협카드","BC카드","KB카드"];
-                                            var cardArr2 = ["하나카드","농협카드","BC카드","신한카드"];
-                                            var bankArr = ["카카오뱅크","농협은행","신한은행","기업은행","국민은행"];
-                                            $("#method").change(function(){
-                                                var th = $(this).val();
-                                                if(th==="신용카드"){
-                                                    $("#com").children("option:not(:first)").remove();
-                                                    for(var i=0;i<cardArr1.length;i++) {
-                                                        $("#com").append("<option value='" + cardArr1[i] + "'>" + cardArr1[i] + "</option>");
-                                                    }
-                                                } else if(th==="체크카드"){
-                                                    $("#com").children("option:not(:first)").remove();
-                                                    for(var i=0;i<cardArr2.length;i++) {
-                                                        $("#com").append("<option value='"+cardArr2[i]+"'>"+cardArr2[i]+"</option>");
-                                                    }
-                                                } else {
-                                                    $("#com").children("option:not(:first)").remove();
-                                                    for(var i=0;i<bankArr.length;i++) {
-                                                        $("#com").append("<option value='"+bankArr[i]+"'>"+bankArr[i]+"</option>");
-                                                    }
-                                                }
-                                            }).change();
-                                            $("#com").change(function(){
-                                                $("#com2").val($(this).val());
-                                            });
-                                        });
-                                    </script>
-                                    <script>
-                                        //주소 연동 API
-                                        function findAddr() {
-                                            new daum.Postcode({
-                                                oncomplete: function(data) {
-                                                    console.log(data);
-                                                    var roadAddr = data.roadAddress;
-                                                    var jibunAddr = data.jibunAddress;
-                                                    document.getElementById("postcode").value = data.zonecode;
-                                                    if(roadAddr !== '') {
-                                                        document.getElementById("addr1").value = roadAddr;
-                                                    } else if(jibunAddr !== ''){
-                                                        document.getElementById("addr1").value = jibunAddr;
-                                                    }
-                                                    document.getElementById("addr2").focus();
-                                                }
-                                            }).open();
-                                        }
-                                    </script>
-                                    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-                                    <script>
-                                        //결제모듈 API 연동
-                                        $(document).ready(function(){
-                                            var totalPay=0;
-                                            var bName;
-
-                                            $("#pay").click(function(){
-                                                var cname = $("#name").val();
-                                                var email = $("#email").val();
-                                                var tel = $("#tel").val();
-                                                var addr = $("#addr").val();
-                                                var postcode = $("#postcode").val();
-                                                bName = $("#bName").val();
-
-                                                totalPay = parseInt($("#totalprice").val());
-
-                                                alert("결제할 금액 : "+totalPay);
-
-                                                //상품명_현재시간
-                                                var d = new Date();
-                                                var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
-                                                IMP.init('imp11164187'); // 결제 API를 사용하기 위한 코드 입력!
-                                                IMP.request_pay({		//결제 요청
-                                                    merchant_uid : "pgT5102001", //상점 거래 ID
-                                                    name : bName,				// 결제 명
-                                                    amount : totalPay,					// 결제금액
-                                                    buyer_email : email, // 구매자 email
-                                                    buyer_name : cname,				// 구매자 이름
-                                                    buyer_tel : tel,		// 구매자 전화번호
-                                                    buyer_addr : addr,		// 구매자 주소
-                                                    buyer_postcode : postcode			// 구매자 우편번호
-                                                }, function(rsp){
-                                                    if(rsp.success){
-                                                        console.log(rsp);
-                                                        var msg = '결제가 완료 되었습니다.';
-                                                        var r1 = '고유 아이디 : ' +rsp.imp_uid;
-                                                        var r2 = '상점 거래 아이디 : ' +rsp.merchant_uid;
-                                                        var r3 = '결제 금액 : ' +rsp.paid_amount;
-                                                        var r4 = '카드 승인 번호 : '+rsp.apply_num;
-
-                                                        //$("#payCk").val("yes");
-                                                        //$("#payAmount").val(rsp.paid_amount);
-                                                        //$("#pmethod").val(rsp.pay_method);
-                                                        //$("#pcom").val(rsp.pg_provider);
-                                                        //$("#cnum").val(rsp.apply_num);
-                                                        //alert(msg);
-                                                        //$("#paymentResult").html(r1+"<br>"+r2+"<br>"+r3+"<br>"+r4);
-                                                    } else{
-                                                        //$("#paymentResult").html('결제실패<br>'+'에러내용 : ' +rsp.error_msg);
-                                                    }
-
-                                                    //테스트용이므로 실패시에도 그냥 통과시킴
-                                                    $("#payCk").val("yes");
-                                                    $("#payAmount").val(totalPay);
-                                                    $("#method").val("신용카드");
-                                                    $("#com").val("삼성카드");
-                                                    $("#account").val("123-1234-1234-1278");
-                                                });
-                                            });
-                                        });
-                                    </script>
-                                    <script>
-                                        function payCheck(f){
-                                            var payCk = f.payCk.value;
-                                            console.log(payCk);
-                                            if(payCk!="yes"){
-                                                alert("아직 결제 전 입니다.");
-                                                return false;
-                                            }
-                                        }
-                                    </script>
                                 </div>
                             </div>
                         </div>
+                        </form>
+                        <script>
+                            $(document).ready(function(){
+                                var cardArr1 = ["현대카드","농협카드","BC카드","KB카드"];
+                                var cardArr2 = ["하나카드","농협카드","BC카드","신한카드"];
+                                var bankArr = ["카카오뱅크","농협은행","신한은행","기업은행","국민은행"];
+                                $("#method").change(function(){
+                                    var th = $(this).val();
+                                    if(th==="신용카드"){
+                                        $("#com").children("option:not(:first)").remove();
+                                        for(var i=0;i<cardArr1.length;i++) {
+                                            $("#com").append("<option value='" + cardArr1[i] + "'>" + cardArr1[i] + "</option>");
+                                        }
+                                    } else if(th==="체크카드"){
+                                        $("#com").children("option:not(:first)").remove();
+                                        for(var i=0;i<cardArr2.length;i++) {
+                                            $("#com").append("<option value='"+cardArr2[i]+"'>"+cardArr2[i]+"</option>");
+                                        }
+                                    } else {
+                                        $("#com").children("option:not(:first)").remove();
+                                        for(var i=0;i<bankArr.length;i++) {
+                                            $("#com").append("<option value='"+bankArr[i]+"'>"+bankArr[i]+"</option>");
+                                        }
+                                    }
+                                }).change();
+                                $("#com").change(function(){
+                                    $("#com2").val($(this).val());
+                                });
+                            });
+                        </script>
+                        <script>
+                            //주소 연동 API
+                            function findAddr() {
+                                new daum.Postcode({
+                                    oncomplete: function(data) {
+                                        console.log(data);
+                                        var roadAddr = data.roadAddress;
+                                        var jibunAddr = data.jibunAddress;
+                                        document.getElementById("postcode").value = data.zonecode;
+                                        if(roadAddr !== '') {
+                                            document.getElementById("addr1").value = roadAddr;
+                                        } else if(jibunAddr !== ''){
+                                            document.getElementById("addr1").value = jibunAddr;
+                                        }
+                                        document.getElementById("addr2").focus();
+                                    }
+                                }).open();
+                            }
+                        </script>
+                        <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                        <script>
+                            //결제모듈 API 연동
+                            $(document).ready(function(){
+                                var totalPay=0;
+                                var bName;
+
+                                $("#pay").click(function(){
+                                    var cname = $("#name").val();
+                                    var email = $("#email").val();
+                                    var tel = $("#tel").val();
+                                    var addr = $("#addr").val();
+                                    var postcode = $("#postcode").val();
+                                    bName = $("#bName").val();
+
+                                    totalPay = parseInt($("#totalprice").val());
+
+                                    alert("결제할 금액 : "+totalPay);
+
+                                    //상품명_현재시간
+                                    var d = new Date();
+                                    var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+                                    IMP.init('imp11164187'); // 결제 API를 사용하기 위한 코드 입력!
+                                    IMP.request_pay({		//결제 요청
+                                        merchant_uid : "pgT5102001", //상점 거래 ID
+                                        name : bName,				// 결제 명
+                                        amount : totalPay,					// 결제금액
+                                        buyer_email : email, // 구매자 email
+                                        buyer_name : cname,				// 구매자 이름
+                                        buyer_tel : tel,		// 구매자 전화번호
+                                        buyer_addr : addr,		// 구매자 주소
+                                        buyer_postcode : postcode			// 구매자 우편번호
+                                    }, function(rsp){
+                                        if(rsp.success){
+                                            console.log(rsp);
+                                            var msg = '결제가 완료 되었습니다.';
+                                            var r1 = '고유 아이디 : ' +rsp.imp_uid;
+                                            var r2 = '상점 거래 아이디 : ' +rsp.merchant_uid;
+                                            var r3 = '결제 금액 : ' +rsp.paid_amount;
+                                            var r4 = '카드 승인 번호 : '+rsp.apply_num;
+
+                                            //$("#payCk").val("yes");
+                                            //$("#payAmount").val(rsp.paid_amount);
+                                            //$("#pmethod").val(rsp.pay_method);
+                                            //$("#pcom").val(rsp.pg_provider);
+                                            //$("#cnum").val(rsp.apply_num);
+                                            //alert(msg);
+                                            //$("#paymentResult").html(r1+"<br>"+r2+"<br>"+r3+"<br>"+r4);
+                                        } else{
+                                            //$("#paymentResult").html('결제실패<br>'+'에러내용 : ' +rsp.error_msg);
+                                        }
+
+                                        //테스트용이므로 실패시에도 그냥 통과시킴
+                                        $("#payCk").val("yes");
+                                        $("#payAmount").val(totalPay);
+                                        $("#method").val("신용카드");
+                                        $("#com").val("삼성카드");
+                                        $("#account").val("123-1234-1234-1278");
+                                    });
+                                });
+                            });
+                        </script>
                     </article>
                 </div>
             </div>

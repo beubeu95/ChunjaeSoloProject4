@@ -43,7 +43,17 @@ public class PaymentServiceImpl implements PaymentService{
     }
 
     @Override
-    public void paymentInsert(Delivery delivery, Payment payment, Serve serve) throws Exception {
-        paymentMapper.paymentInsert(delivery, payment, serve);
+    public int paymentInsert(Payment payment) throws Exception {
+        paymentMapper.paymentInsert(payment);
+        int pno = paymentMapper.paymentNo();
+        return pno;
+    }
+
+
+
+    @Override
+
+    public void addPayment (Delivery delivery,Serve serve) {
+        paymentMapper.addPayment(delivery, serve);
     }
 }

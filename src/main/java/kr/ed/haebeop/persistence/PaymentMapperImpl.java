@@ -39,14 +39,29 @@ public class PaymentMapperImpl implements PaymentMapper{
         return sqlSession.selectOne("payment.bookDetail", bcode);
     }
 
+    @Override
+    public int paymentNo() throws Exception {
+        return sqlSession.selectOne("payment.paymentNo");
+    }
+
+    @Override
+    public void deliveryInsert(Delivery delivery){
+        sqlSession.insert("payment.deliveryInsert", delivery);
+    }
+    @Override
+    public void paymentInsert(Payment payment){
+        sqlSession.insert("payment.paymentInsert", payment);
+    }
+    @Override
+    public void serveInsert(Serve serve){
+        sqlSession.insert("payment.serveInsert", serve);
+    }
+
     @Transactional
     @Override
-    public void paymentInsert(Delivery delivery, Payment payment, Serve serve) throws Exception {
-        sqlSession.insert("payment.deliveryInsert", delivery);
-        sqlSession.selectOne("payment.deliveryNo");
-        sqlSession.insert("payment.paymentInsert", payment);
-        sqlSession.insert("payment.serveInsert", serve);
-        sqlSession.selectOne("payment.paymentNo");
-
+    public void addPayment (Delivery delivery, Serve serve){
+        deliveryInsert(delivery);
+        serveInsert(serve);
     }
+
 }
