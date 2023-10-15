@@ -1,5 +1,7 @@
 package kr.ed.haebeop.controller;
 
+import kr.ed.haebeop.domain.Payment;
+import kr.ed.haebeop.domain.PaymentVO;
 import kr.ed.haebeop.domain.User;
 import kr.ed.haebeop.service.UserService;
 import org.json.JSONObject;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/")
@@ -132,6 +135,17 @@ public class UserController {
         userService.userDelete(id);
         session.invalidate();
         return "redirect:/";
+    }
+
+    @GetMapping("myLecture.do")
+    public String getmyLectureList(HttpServletRequest request, Model model) throws Exception{
+
+        String id = (String) session.getAttribute("sid");
+        List<Payment> list= userService.mylectureList(id);
+
+
+        model.addAttribute("list", list);
+        return "/user/mylectureList";
     }
 
 }

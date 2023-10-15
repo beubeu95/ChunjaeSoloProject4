@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 public class PaymentVO {
     private int pno;
     private int lno;
+    private int tname;
+    private String sdate;
+    private String edate;
+    private String tdate;
     private String bcode;
     private String id;
     private int pt;

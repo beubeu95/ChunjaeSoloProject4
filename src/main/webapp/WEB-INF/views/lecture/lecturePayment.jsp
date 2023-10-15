@@ -14,7 +14,10 @@
     <title>강의 결제</title>
     <jsp:include page="../setting/head.jsp" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <style>
+        #price {width: 150px; float: right; text-align: center; font-weight: bold;}
+        #subprice {width: 150px; float: right; text-align: center; font-weight: bold;}
+    </style>
 </head>
 <body>
 <!--Header Start-->
@@ -63,7 +66,7 @@
                                     <td>
                                         <div class="product-item">
                                             <div class="product-info">
-                                                <h4 class="product-title"><a href="#">${lecture.title}</a></h4>
+                                                <h4 class="product-title" name="lname" id="lname">${lecture.title}</h4>
 
                                             </div>
                                         </div>
@@ -77,26 +80,25 @@
                                     <td class="text-center text-lg text-medium" style="color:darkred;">${lecture.price}</td>
                                     <td class="text-center text-lg text-medium">0</td>
                                 </tr>
+                                <c:if test="${book.bname ne null}">
                                 <tr>
                                     <td>
                                         <div class="product-item">
                                             <div class="product-info">
                                                 <h4 class="product-title" id="bName">${book.bname}</h4>
-
-                                                <input type="hidden" name="from" id="from" value="${from }">
-
                                             </div>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="count-input">
-                                            <input type="text" value="1" style="text-align: center"  readonly>
+                                            <input type="text" value="1" style="text-align: center;"  readonly>
                                         </div>
                                     </td>
                                     <td class="text-center text-lg text-medium">${book.price}</td>
                                     <td class="text-center text-lg text-medium" style="color:darkred;">0</td>
                                     <td class="text-center text-lg text-medium">${book.price}</td>
                                 </tr>
+                                </c:if>
                                 </tbody>
                             </table>
                         </div>
@@ -116,7 +118,7 @@
                 <div class="column">
                     <article class="card shadow">
                         <form action="${path }/payment/paymentPro.do" method="post" onsubmit="return payCheck(this)">
-                        <div class="container" style="margin-top:30px;">
+                            <div class="container" style="margin-top:30px;">
                             <h1 class="h3 mb-5" style="padding-left: 40px; font-size: 40px;">Payment</h1>
                             <div class="row">
                                 <!-- Left -->
@@ -127,9 +129,6 @@
                                                 <div class="accordion-body">
                                                     <div class="mb-3">
                                                         <label class="form-label">받는 사람 연락처</label>
-                                                        <input type="hidden" name="cid" id="cid" value="${user.id }">
-                                                        <input type="hidden" name="name" id="name" value="${user.name }">
-                                                        <input type="hidden" name="email" id="email" value="${user.email }">
                                                         <input type="tel" name="tel" id="tel" class="form-control" required>
                                                     </div>
                                                     <div class="mb-3">
@@ -183,24 +182,26 @@
                                 </div>
                                 <!-- Right -->
                                 <div class="col-lg-3">
-                                        <input type="hidden" id="lno" name="lno" value="${lecture.lno }">
-                                        <input type="hidden" name="bcode" id="bcode" value="${book.bcode }">
                                         <div class="card position-sticky top-0">
                                         <div class="p-3 ">
                                             <h6 class="card-title mb-3">Order Summary</h6>
                                             <div class="d-flex justify-content-between mb-1 small">
-                                                <span>Subtotal</span> <span>${book.price}</span>
+                                                <span>Subtotal</span><span id="bprice">${book.price}</span>
                                             </div>
                                             <div class="d-flex justify-content-between mb-1 small">
-                                                <span>Point </span> <span class="text-danger">-$10.00</span>
+                                                <span>Point </span> <span class="text-danger" id="point">${user.pt}</span>
                                             </div>
                                             <hr>
-                                            <div class="d-flex justify-content-between mb-4 small">
-                                                <p><span>SUBTOTAL</span> <strong class="text-dark" id="subprice">${book.price}</strong></p>
-                                                <p><span>TOTAL</span> <strong class="text-dark" id="totalprice">${book.price}</strong></p>
+                                            <div>
+                                                <p><span>SUBTOTAL</span> <strong class="text-dark" class="total" id="subprice" style="font-size: 15px;"></strong></p>
+                                                <p><span>TOTAL</span> <strong class="text-dark" id="totalprice" name="totalprice" style="font-size: 15px;"></strong></p>
                                             </div>
                                             <input type="button" id="pay" value="PLACE ORDER" class="btn btn-primary w-100 mt-2" style="background-color: #74A984;">
                                             <c:if test="${!empty sid }">
+                                                <input type="hidden" id="lno" name="lno" value="${lecture.lno }">
+                                                <input type="hidden" name="bcode" id="bcode" value="${book.bcode }">
+                                                <input type="hidden" id="sprice" name="sprice" value="${book.price}">
+                                                <input type="hidden" id="amount" name="amount" value="1">
                                                 <input type="submit" class="btn btn-primary w-100 mt-2" value="구매" style="background-color: #4f5665;">
                                             </c:if>
                                         </div>
@@ -262,7 +263,15 @@
                             //결제모듈 API 연동
                             $(document).ready(function(){
                                 var totalPay=0;
-                                var bName;
+                                var lname;
+
+                                totalPay = totalPay + parseInt($("#bprice").text());
+                                totalPay = totalPay -parseInt($("#point").text());
+
+                                //합계를 출력
+                                $("#subprice").html("<input type='text' readonly id='subprice' value='"+totalPay+"'>");
+                                $("#totalprice").html("<input type='text' readonly id='price' name='price' value='"+totalPay+"'>");
+
 
                                 $("#pay").click(function(){
                                     var cname = $("#name").val();
@@ -270,9 +279,7 @@
                                     var tel = $("#tel").val();
                                     var addr = $("#addr").val();
                                     var postcode = $("#postcode").val();
-                                    bName = $("#bName").val();
-
-                                    totalPay = parseInt($("#totalprice").val());
+                                    lname = $("#lname").val();
 
                                     alert("결제할 금액 : "+totalPay);
 
@@ -282,7 +289,7 @@
                                     IMP.init('imp11164187'); // 결제 API를 사용하기 위한 코드 입력!
                                     IMP.request_pay({		//결제 요청
                                         merchant_uid : "pgT5102001", //상점 거래 ID
-                                        name : bName,				// 결제 명
+                                        name : lname,				// 결제 명
                                         amount : totalPay,					// 결제금액
                                         buyer_email : email, // 구매자 email
                                         buyer_name : cname,				// 구매자 이름

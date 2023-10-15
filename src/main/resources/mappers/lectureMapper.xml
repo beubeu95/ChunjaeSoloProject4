@@ -5,8 +5,8 @@
 <mapper namespace="lecture">
     <select id="lectureList" resultType="kr.ed.haebeop.domain.LectureVO">
         <![CDATA[
-            SELECT lno, cate, title, content as content, img, price as price, status, sdate, edate, tdate, tname, amt
-            FROM lecture a JOIN teacher b ON a.tcode = b.tcode
+            SELECT lno, a.cate as cate,cateName, title, a.content as content, img, a.price as price, status, sdate, edate, tdate, tname, amt
+            FROM lecture a JOIN teacher b ON a.tcode = b.tcode JOIN category c ON a.cate=c.cate
         ]]>
         <where>
             <if test="category != null">

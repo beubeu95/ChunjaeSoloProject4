@@ -16,34 +16,15 @@ public class PaymentMapperImpl implements PaymentMapper{
     private SqlSession sqlSession;
 
     @Override
-    public Payment getPayment(String id, int lno) throws Exception {
-        Map<String, Object> payment = new HashMap<>();
-        payment.put("id", id);
-        payment.put("lno", lno);
-
-        return sqlSession.selectOne("payment.paymentDetail", payment);
-    }
-
+    public int getCount(int lno) throws Exception { return sqlSession.selectOne("payment.getCount", lno); }
     @Override
-    public int getCount(int lno) throws Exception {
-        return sqlSession.selectOne("payment.getCount", lno);
-    }
-
+    public Lecture getLecture(int lno) throws Exception { return sqlSession.selectOne("payment.lectureDetail", lno); }
     @Override
-    public Lecture getLecture(int lno) throws Exception {
-        return sqlSession.selectOne("payment.lectureDetail", lno);
-    }
-
+    public Book getBook(String bcode) throws Exception { return sqlSession.selectOne("payment.bookDetail", bcode); }
     @Override
-    public Book getBook(String bcode) throws Exception {
-        return sqlSession.selectOne("payment.bookDetail", bcode);
-    }
-
+    public int paymentNo() throws Exception { return sqlSession.selectOne("payment.paymentNo"); }
     @Override
-    public int paymentNo() throws Exception {
-        return sqlSession.selectOne("payment.paymentNo");
-    }
-
+    public void pointUpdate(String id) throws Exception { sqlSession.update("payment.pointUpdate", id); }
     @Override
     public void deliveryInsert(Delivery delivery){
         sqlSession.insert("payment.deliveryInsert", delivery);
@@ -57,11 +38,21 @@ public class PaymentMapperImpl implements PaymentMapper{
         sqlSession.insert("payment.serveInsert", serve);
     }
 
+    @Override
+    public Payment getPayment(String id, int lno) throws Exception {
+        Map<String, Object> payment = new HashMap<>();
+        payment.put("id", id);
+        payment.put("lno", lno);
+
+        return sqlSession.selectOne("payment.paymentDetail", payment);
+    }
+
     @Transactional
     @Override
-    public void addPayment (Delivery delivery, Serve serve){
+    public void addPayment (Delivery delivery, Serve serve, String id) throws Exception {
         deliveryInsert(delivery);
         serveInsert(serve);
+        pointUpdate(id);
     }
 
 }

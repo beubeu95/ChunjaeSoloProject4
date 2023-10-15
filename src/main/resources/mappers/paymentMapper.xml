@@ -16,7 +16,7 @@
         select count(*) from payment where lno=#{lno}
     </select>
     <insert id="paymentInsert">
-        insert into payment values (DEFAULT, #{lno}, #{bcode}, #{id}, #{method}, #{com}, #{price}, #{account}, default)
+        insert into payment (pno, lno, bcode,id, method,com, price,account,resdate) values (DEFAULT, #{lno}, #{bcode}, #{id}, #{method}, #{com}, #{price}, #{account}, default)
     </insert>
     <select id="paymentNo" resultType="integer">
         select pno from payment order by pno desc limit 1
@@ -32,4 +32,7 @@
         insert into serve values (default, #{bcode}, #{sprice}, #{amount}, default)
     </insert>
 
+    <update id="pointUpdate">
+        UPDATE user SET pt = 0 WHERE id = #{id}
+    </update>
 </mapper>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ed.haebeop.persistence.UserMapper">
+    <!-- 회원 목록 -->
+    <select id="userList" resultType="kr.ed.haebeop.domain.User">
+        select * from user WHERE NOT id IN ('admin') order by regdate desc
+    </select>
 
     <!-- 회원정보 조회 -->
     <select id="getUser" resultType="kr.ed.haebeop.domain.User">
@@ -32,9 +36,25 @@
         update user set visited=visited+1 where id=#{id}
     </update>
 
-    <!-- 포인트 획득! -->
+    <!-- 포인트 획득 -->
     <update id="updatePt">
         update user set pt=pt+#{pt} where id=#{id}
     </update>
+
+    <!-- 내 수강신청 -->
+    <select id="mylectureList" resultType="kr.ed.haebeop.domain.PaymentVO">
+        select pno, tname, sdate, edate, tdate, title
+        from payment a join lecture b on (a.bcode = b.bcode) join teacher c on (a.tcode = c.tcode)
+        where id=#{id}
+    </select>
+
+    <!-- 강사 목록 -->
+    <select id="teacherList" resultType="kr.ed.haebeop.domain.Teacher">
+        select * from teacher
+    </select>
+    <!-- 강사 강퇴 -->
+    <delete id="teacherDelete">
+        delete from teacher where tcode= #{tcode}
+    </delete>
 
 </mapper>

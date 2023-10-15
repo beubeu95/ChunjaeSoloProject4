@@ -1,7 +1,6 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
-import kr.ed.haebeop.service.LectureService;
 import kr.ed.haebeop.service.PaymentService;
 import kr.ed.haebeop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +80,7 @@ public class PaymentController {
 
 
             int lno = Integer.parseInt(request.getParameter("lno"));
-            String bcode = (String) request.getParameter("bcode");
+            String bcode = request.getParameter("bcode");
             String id = (String) session.getAttribute("sid");
 
 
@@ -97,21 +96,20 @@ public class PaymentController {
             int pno = paymentService.paymentInsert(payment);
 
             Delivery delivery = new Delivery();
-            delivery.setPno(pno);  // Use the generated pno
+            delivery.setPno(pno);
             delivery.setId(id);
-            delivery.setAddr(request.getParameter("address1") + "<br>" + request.getParameter("address2") + "<br>" + request.getParameter("postcode"));
+            delivery.setAddr(request.getParameter("addr1") + "<br>" + request.getParameter("addr2") + "<br>" + request.getParameter("postcode"));
             delivery.setTel(request.getParameter("tel"));
 
 
             Serve serve = new Serve();
             serve.setBcode(bcode);
-            serve.setSprice(request.getParameter("price"));
+            serve.setSprice(request.getParameter("sprice"));
             serve.setAmount(request.getParameter("amount"));
 
 
-            paymentService.addPayment(delivery, serve);
+            paymentService.addPayment(delivery, serve, id);
 
-            return "redirect:/lecture/list.do";
-
+            return "redirect:/user/mylectureList";
     }
 }

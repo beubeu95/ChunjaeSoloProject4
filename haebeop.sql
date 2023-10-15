@@ -236,6 +236,7 @@ create table payment(
 	   pno INT primary KEY AUTO_INCREMENT,
 		lno INT NOT NULL,		
 		bcode VARCHAR(20) NOT NULL,
+		tcode VARCHAR(20),
 	   id varchar(20) not null,	
 	   method varchar(100),		
 	   com varchar(100),			
@@ -245,9 +246,9 @@ create table payment(
 	   resdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	   FOREIGN KEY (lno) REFERENCES lecture (lno) ON DELETE CASCADE,
 	   FOREIGN KEY (bcode) REFERENCES book (bcode) ON DELETE CASCADE,
+	   FOREIGN KEY (tcode) REFERENCES teacher (tcode) ON DELETE CASCADE,
 		FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
 );
-
 
 
 -- 배송 테이블 생성
@@ -279,7 +280,8 @@ create table serve(
 );
 
 COMMIT;
-SELECT * FROM payment;
+
+SELECT * FROM payment WHERE id ='kimhkk';
 
 -- 메인기능 : 공지사항 , 자료실, 자유게시판, 강의별 댓글, 교재와 시범강의
 -- 부가 기능 : 파일업로드, 채팅, 타계정 또는 sns 로그인

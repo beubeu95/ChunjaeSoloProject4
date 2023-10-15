@@ -49,11 +49,8 @@ public class PaymentServiceImpl implements PaymentService{
         return pno;
     }
 
-
-
     @Override
-
-    public void addPayment (Delivery delivery,Serve serve) {
-        paymentMapper.addPayment(delivery, serve);
+    public void addPayment (Delivery delivery,Serve serve, String id) throws Exception {
+        paymentMapper.addPayment(delivery, serve, id);
     }
 }

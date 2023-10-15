@@ -73,7 +73,7 @@
                                                             <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
                                                             <div class="media-body">
                                                                 <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
-                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/mypage.do" style="color: #4F5665 !important;">나의 정보 수정</a></h2>
+                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/admin/list.do" style="color: #4F5665 !important;">회원관리</a></h2>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -86,7 +86,7 @@
                                                             <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
                                                             <div class="media-body">
                                                                 <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
-                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/mypage.do" style="color: #4F5665 !important;">나의 정보 수정</a></h2>
+                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/admin/lecList.do" style="color: #4F5665 !important;">강의목록</a></h2>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -101,35 +101,7 @@
                                                             <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
                                                             <div class="media-body">
                                                                 <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
-                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/mypage.do" style="color: #4F5665 !important;">나의 정보 수정</a></h2>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="bg-white card addresses-item mb-4 border ">
-                                                    <div class="gold-members p-4">
-                                                        <div class="media">
-                                                            <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
-                                                            <div class="media-body">
-                                                                <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
-                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/mypage.do" style="color: #4F5665 !important;">나의 정보 수정</a></h2>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="bg-white card addresses-item mb-4 border ">
-                                                    <div class="gold-members p-4">
-                                                        <div class="media">
-                                                            <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
-                                                            <div class="media-body">
-                                                                <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
-                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/mypage.do" style="color: #4F5665 !important;">나의 정보 수정</a></h2>
+                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/admin/insert.do" style="color: #4F5665 !important;">강의등록</a></h2>
                                                             </div>
                                                         </div>
                                                     </div>
