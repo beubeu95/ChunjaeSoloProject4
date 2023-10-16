@@ -38,13 +38,17 @@
     <select id="deliveryNo" resultType="kr.ed.haebeop.domain.Delivery">
         select dno from delivery order by dno desc limit 1
     </select>
+    
+    <update id="dnoUpdate">
+        UPDATE payment SET dno = pno WHERE dno IS NULL
+    </update>
 
     <insert id="serveInsert">
         insert into serve values (default, #{bcode}, #{sprice}, #{amount}, default)
     </insert>
 
     <update id="pointUpdate">
-        UPDATE user SET pt = 0 WHERE id = #{id}
+        UPDATE user SET pt = #{pt} WHERE id = #{id}
     </update>
 
     <delete id="paymentDelete">
@@ -52,7 +56,7 @@
     </delete>
 
     <delete id="deliveryDelete">
-        delete from delivery where dno=#{dno}
+        delete from delivery where pno=#{pno}
     </delete>
 
     <delete id="serveDelete">

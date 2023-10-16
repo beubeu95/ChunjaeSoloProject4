@@ -257,6 +257,9 @@ create table payment(
 );
 
 SELECT * FROM payment;
+
+--남은 인원
+SELECT (SELECT amt FROM lecture WHERE lno = 5) - (SELECT COUNT(*) FROM payment WHERE lno =5);
         
 -- 배송 테이블 생성
 create table delivery(

@@ -16,6 +16,8 @@ public interface PaymentService {
     public int getCount(int lno) throws Exception;
     public Lecture getLecture(int lno) throws Exception;
     public Book getBook(String bcode) throws Exception;
-    public void addPayment (Delivery delivery,Serve serve, String id) throws Exception;
+    public void addPayment (Delivery delivery,Serve serve,int pt, String id) throws Exception;
     public List<Delivery> deliveryList() throws Exception;
+    public void deletePayment (int pno, int sno) throws Exception;
+    public void pointUpdate(int pt, String id) throws Exception;
 }

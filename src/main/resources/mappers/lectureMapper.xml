@@ -5,7 +5,7 @@
 <mapper namespace="lecture">
     <select id="lectureList" resultType="kr.ed.haebeop.domain.LectureVO">
         <![CDATA[
-            SELECT lno, a.cate as cate,cateName, title, a.content as content,img, a.price as price, status, sdate, edate, tdate, tname, amt
+            SELECT lno, a.cate as cate,cateName, a.title as title, a.content as content,img, a.price as price, status, sdate, edate, tdate, tname, amt
             FROM lecture a JOIN teacher b ON a.tcode = b.tcode JOIN category c ON a.cate=c.cate
         ]]>
         <where>
@@ -33,7 +33,7 @@
     </select>
 
     <select id="canApply" resultType="integer">
-        select amt from lecture EXCEPT select pno from payment WHERE lno=#{lno};
+        SELECT (SELECT amt FROM lecture WHERE lno = #{lno}) - (SELECT COUNT(*) FROM payment WHERE lno = #{lno});
     </select>
     <insert id="lectureInsert">
         insert into lecture (cate, title, content, price, bcode,tcode, status, sdate,edate, tdate,amt)

@@ -69,12 +69,19 @@
                         <td>${pay.title }</td>
                         <td>${pay.id }</td>
                         <td>${pay.resdate }</td>
-                        <td>${pay.dstatus}</td>
                         <td>
-                            <div class="button-group" style="align-items: center">
-                                <a class="button is-danger"
-                                   href="${path}/admin/delUpdate.do?dno=${del.dno }">수정</a>
-                            </div>
+                            <c:if test="${pay.dstatus eq '0'}">
+                                배송전
+                            </c:if>
+                            <c:if test="${pay.dstatus eq '1'}">
+                                배송중
+                            </c:if>
+                            <c:if test="${pay.dstatus eq '2'}">
+                                배송완료
+                            </c:if>
+                        </td>
+                        <td>
+                            <a href="${path}/admin/delUpdate.do?dno=${pay.dno }">수정</a>
                         </td>
                     </tr>
                 </c:forEach>

@@ -52,8 +52,9 @@ public class PaymentServiceImpl implements PaymentService{
     }
 
     @Override
-    public void addPayment (Delivery delivery,Serve serve, String id) throws Exception {
-        paymentMapper.addPayment(delivery, serve, id);
+    public void addPayment (Delivery delivery,Serve serve,int pt, String id) throws Exception {
+        paymentMapper.dnoUpdate();
+        paymentMapper.addPayment(delivery, serve, pt, id);
     }
 
     @Override
@@ -61,4 +62,13 @@ public class PaymentServiceImpl implements PaymentService{
         return paymentMapper.deliveryList();
     }
 
+    @Override
+    public void deletePayment(int pno, int sno) throws Exception {
+        paymentMapper.deletePayment(pno, sno);
+    }
+
+    @Override
+    public void pointUpdate(int pt, String id) throws Exception {
+        paymentMapper.pointUpdate(pt, id);
+    }
 }

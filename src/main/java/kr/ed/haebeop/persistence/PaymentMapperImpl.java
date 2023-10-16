@@ -48,12 +48,47 @@ public class PaymentMapperImpl implements PaymentMapper{
         return sqlSession.selectOne("payment.paymentDetail", payment);
     }
 
-    @Transactional
     @Override
-    public void addPayment (Delivery delivery, Serve serve, String id) throws Exception {
-        deliveryInsert(delivery);
-        serveInsert(serve);
-        pointUpdate(id);
+    public void dnoUpdate() throws Exception {
+        sqlSession.update("payment.dnoUpdate");
     }
 
+    @Override
+    public void paymentDelete(int pno) {
+        sqlSession.delete("payment.paymentDelete", pno);
+    }
+
+    @Override
+    public void deliveryDelete(int pno) {
+        sqlSession.delete("payment.deliveryDelete", pno);
+    }
+
+    @Override
+    public void serveDelete(int sno) {
+        sqlSession.delete("payment.serveDelete", sno);
+    }
+
+    @Transactional
+    @Override
+    public void addPayment(Delivery delivery, Serve serve, int pt, String id) throws Exception {
+        deliveryInsert(delivery);
+        serveInsert(serve);
+        pointUpdate(pt, id);
+    }
+
+    @Transactional
+    @Override
+    public void deletePayment(int pno, int sno) throws Exception {
+        paymentDelete(pno);
+        deliveryDelete(pno);
+        serveDelete(sno);
+    }
+
+    @Override
+    public void pointUpdate(int pt, String id) throws Exception {
+        Map<String, Object> pnt = new HashMap<>();
+        pnt.put("pt", pt);
+        pnt.put("id", id);
+        sqlSession.update("pointUpdate", pnt);
+    }
 }

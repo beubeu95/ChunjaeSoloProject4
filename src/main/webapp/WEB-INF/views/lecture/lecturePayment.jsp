@@ -193,7 +193,8 @@
                                                 <span>Subtotal</span><span id="bprice">${book.price}</span>
                                             </div>
                                             <div class="d-flex justify-content-between mb-1 small">
-                                                <span>Point </span> <span class="text-danger" id="point">${user.pt}</span>
+                                                <span>Point </span> <input type="text" name="point" id="point" max="${user.pt}" min="1" >
+                                                <input type="hidden" name="pt" id="pt" value="" >
                                             </div>
                                             <hr>
                                             <div>
@@ -216,6 +217,17 @@
                             </div>
                         </div>
                         </form>
+                        <script>
+                            const userPt = ${user.pt};
+                            const pointInput = document.getElementById('point');
+                            const ptInput = document.getElementById('pt');
+
+                            pointInput.addEventListener('input', () => {
+                                const getPoint = parseFloat(pointInput.value) || 0;
+                                const newPoint = userPt - getPoint;
+                                ptInput.value = newPoint;
+                            });
+                        </script>
                         <script>
                             $(document).ready(function(){
                                 var cardArr1 = ["현대카드","농협카드","BC카드","KB카드"];

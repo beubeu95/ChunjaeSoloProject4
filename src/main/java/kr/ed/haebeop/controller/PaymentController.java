@@ -82,6 +82,7 @@ public class PaymentController {
             int lno = Integer.parseInt(request.getParameter("lno"));
             String bcode = request.getParameter("bcode");
             String id = (String) session.getAttribute("sid");
+            int pt = Integer.parseInt(request.getParameter("pt"));
 
 
             Payment payment = new Payment();
@@ -110,7 +111,7 @@ public class PaymentController {
             serve.setAmount(request.getParameter("amount"));
 
 
-            paymentService.addPayment(delivery, serve, id);
+            paymentService.addPayment(delivery, serve, pt, id);
 
             return "redirect:/user/myLecture.do";
     }

@@ -5,9 +5,9 @@
 <mapper namespace="delivery">
 
     <select id="deliveryList" resultType="kr.ed.haebeop.domain.DeliveryVO">
-        select pno, title, id, resdate, dstatus
+        select a.pno as pno, b.title as title, a.id as id, b.resdate as resdate, a.dstatus as dstatus, a.dno as dno
         from delivery a join payment b on (a.pno = b.pno)
-        order by dno desc
+        order by a.dno desc
     </select>
 
     <select id="deliveryDetail" resultType="kr.ed.haebeop.domain.DeliveryVO">
