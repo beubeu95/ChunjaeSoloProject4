@@ -13,12 +13,7 @@
 
     <title>강의등록</title>
     <jsp:include page="../setting/head.jsp" />
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
 
 </head>
 <body>
@@ -48,19 +43,29 @@
         <div class="col-md-8">
             <form action="${path }/admin/insert.do" method="post">
                 <div class="form-group">
+                    <label for="cate" class="form-label">카테고리</label>
+                    <select name="cate" id="cate" class="form-select">
+                        <c:forEach var="category" items="${categories}">
+                            <option value="${category.cate}">${category.cateName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="title">제목</label>
                     <input type="text" name="title" id="title" class="form-control" placeholder="제목 입력" maxlength="98" required>
                 </div>
 
                 <div class="form-group">
                     <label>수강신청 상태</label>
-                    <div class="form-check">
-                        <input type="radio" name="status" id="now" value="1" class="form-check-input" checked>
-                        <label class="form-check-label" for="now">모집중</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" name="status" id="end" value="0" class="form-check-input">
-                        <label class="form-check-label" for="end">마감</label>
+                    <div style="display:flex;">
+                        <div class="form-check">
+                            <input type="radio" name="status" id="now" value="1" class="form-check-input" checked>
+                            <label class="form-check-label" for="now">모집중</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" name="status" id="end" value="0" class="form-check-input">
+                            <label class="form-check-label" for="end">마감</label>
+                        </div>
                     </div>
                 </div>
 
@@ -77,11 +82,27 @@
                 <div class="form-group">
                     <label for="content">내용</label>
                     <textarea name="content" id="content" class="form-control" placeholder="내용 입력" rows="8" maxlength="1400" required></textarea>
+                    <script>
+                        CKEDITOR.replace('content', { filebrowserUploadUrl: '${path}/lecture/imageUpload.do' });
+                    </script>
                 </div>
 
-                <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">글 등록</button>
-                    <a href="${path }/lecture/list.do" class="btn btn-secondary" style="color: #000000; text-decoration: none">글 목록</a>
+                <div class="form-group column is-8">
+                    <div class="file has-name" style="margin-top: 30px;">
+                        <label class="file-label" style="width: 100%;">
+                            <input class="form-control" type="file" name="upfile" multiple="multiple" id="video" name="video">
+                            <span class="file-cta">
+                                                <span class="file-icon mb-0"></span>
+                                                <span class="file-label mb-0"></span>
+                                                </span>
+                            <span class="file-name"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <input type="hidden" id="price" name="price" value="0">
+                    <button type="submit" class="btn btn-primary" style="float:right; background-color: #74A984;">글 등록</button>
                 </div>
             </form>
 

@@ -5,8 +5,6 @@ import kr.ed.haebeop.domain.Fileboard;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
-@Mapper
 public interface FileInfoMapper {
     public List<FileInfo> fileInfoDetail(int articleno) throws Exception;
     public void fileInfoEdit(FileInfo dto) throws Exception;

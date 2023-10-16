@@ -19,6 +19,7 @@ public class LectureVO {
     private String sdate;
     private String edate;
     private String tdate;
+    private String tcode;
     private String tname;
     private String bcode;
     private String bname;

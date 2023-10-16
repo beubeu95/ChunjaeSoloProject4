@@ -14,6 +14,8 @@
     <title>강의 결제</title>
     <jsp:include page="../setting/head.jsp" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <style>
         #price {width: 150px; float: right; text-align: center; font-weight: bold;}
         #subprice {width: 150px; float: right; text-align: center; font-weight: bold;}
@@ -130,6 +132,8 @@
                                                     <div class="mb-3">
                                                         <label class="form-label">받는 사람 연락처</label>
                                                         <input type="tel" name="tel" id="tel" class="form-control" required>
+                                                        <input type="hidden" name="name" id="name" value="${user.name }">
+                                                        <input type="hidden" name="email" id="email" value="${user.email }">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">배송지 주소</label>
@@ -199,7 +203,9 @@
                                             <input type="button" id="pay" value="PLACE ORDER" class="btn btn-primary w-100 mt-2" style="background-color: #74A984;">
                                             <c:if test="${!empty sid }">
                                                 <input type="hidden" id="lno" name="lno" value="${lecture.lno }">
+                                                <input type="hidden" id="title" name="title" value="${lecture.title}">
                                                 <input type="hidden" name="bcode" id="bcode" value="${book.bcode }">
+                                                <input type="hidden" name="tcode" id="tcode" value="${lecture.tcode}">
                                                 <input type="hidden" id="sprice" name="sprice" value="${book.price}">
                                                 <input type="hidden" id="amount" name="amount" value="1">
                                                 <input type="submit" class="btn btn-primary w-100 mt-2" value="구매" style="background-color: #4f5665;">
@@ -272,24 +278,30 @@
                                 $("#subprice").html("<input type='text' readonly id='subprice' value='"+totalPay+"'>");
                                 $("#totalprice").html("<input type='text' readonly id='price' name='price' value='"+totalPay+"'>");
 
-
                                 $("#pay").click(function(){
-                                    var cname = $("#name").val();
                                     var email = $("#email").val();
+                                    var cname = $("#name").val();
                                     var tel = $("#tel").val();
                                     var addr = $("#addr").val();
                                     var postcode = $("#postcode").val();
-                                    lname = $("#lname").val();
-
+                                    lName = $("#lName").val();
+                                    if($("#price").val()!="") {
+                                        totalPay;
+                                    } else {
+                                        alert("구매할 수량을 입력하지 않으셨습니다.");
+                                        $("#totalprice").focus();
+                                        return;
+                                    }
                                     alert("결제할 금액 : "+totalPay);
-
                                     //상품명_현재시간
                                     var d = new Date();
                                     var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
+                                    var IMP = window.IMP; // 생략가능
                                     IMP.init('imp11164187'); // 결제 API를 사용하기 위한 코드 입력!
                                     IMP.request_pay({		//결제 요청
-                                        merchant_uid : "pgT5102001", //상점 거래 ID
-                                        name : lname,				// 결제 명
+                                        pg: "T5102001",
+                                        merchant_uid : '상품명_' + date, //상점 거래 ID
+                                        name :lName,				// 결제 명
                                         amount : totalPay,					// 결제금액
                                         buyer_email : email, // 구매자 email
                                         buyer_name : cname,				// 구매자 이름
@@ -305,26 +317,27 @@
                                             var r3 = '결제 금액 : ' +rsp.paid_amount;
                                             var r4 = '카드 승인 번호 : '+rsp.apply_num;
 
-                                            //$("#payCk").val("yes");
-                                            //$("#payAmount").val(rsp.paid_amount);
-                                            //$("#pmethod").val(rsp.pay_method);
-                                            //$("#pcom").val(rsp.pg_provider);
-                                            //$("#cnum").val(rsp.apply_num);
-                                            //alert(msg);
-                                            //$("#paymentResult").html(r1+"<br>"+r2+"<br>"+r3+"<br>"+r4);
+                                            // 실제 결제 창
+                                            // $("#payCk").val("yes");
+                                            // $("#payAmount").val(rsp.paid_amount);
+                                            // $("#pmethod").val(rsp.pay_method);
+                                            // $("#pcom").val(rsp.pg_provider);
+                                            // $("#cnum").val(rsp.apply_num);
+                                            // alert(msg);
+                                            // $("#paymentResult").html(r1+"<br>"+r2+"<br>"+r3+"<br>"+r4);
                                         } else{
                                             //$("#paymentResult").html('결제실패<br>'+'에러내용 : ' +rsp.error_msg);
                                         }
-
                                         //테스트용이므로 실패시에도 그냥 통과시킴
                                         $("#payCk").val("yes");
                                         $("#payAmount").val(totalPay);
-                                        $("#method").val("신용카드");
-                                        $("#com").val("삼성카드");
-                                        $("#account").val("123-1234-1234-1278");
+                                        // $("#pmethod").val("신용카드");
+                                        // $("#pcom").val("삼성카드");
+                                        // $("#cnum").val("123-1234-1234-1278");
+                                        $("#paymentResult").text("결제 완료 : "+totalPay);
+                                    });
                                     });
                                 });
-                            });
                         </script>
                     </article>
                 </div>

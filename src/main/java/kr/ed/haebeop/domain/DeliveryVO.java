@@ -7,17 +7,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Payment {
+public class DeliveryVO {
     private int pno;
     private String title;
-    private int lno;
-    private String bcode;
-    private String tcode;
     private String id;
-    private String method;
-    private String com;
-    private String price;
-    private String account;
-    private int dno;
     private String resdate;
+    private String dstatus;
+    private String dcom;
+    private String dtel;
+    private String edate;
+    private String dcode;
+    private int dno;
 }

@@ -55,7 +55,7 @@
                 <c:forEach items="${list }" var="payment" varStatus="status">
                     <tr>
                         <td class="has-text-centered">${status.count }</td>
-                        <td><a href="${path}/fileboard/detail.do?articleno=${payment.title }" style="color: #000000;">${payment.title }</a></td>
+                        <td><a href="" style="color: #000000;">${payment.title }</a></td>
                         <td>${payment.tname }</td>
                         <td class="has-text-centered">
                             ${payment.sdate} ~ ${payment.edate} (총 ${payment.tdate} 일)

@@ -59,7 +59,7 @@ public class PaymentController {
     @GetMapping("payment.do")
     public String getpaymentForm (HttpServletRequest request, Model model) throws Exception{
         int lno = Integer.parseInt(request.getParameter("lno"));
-        String bcode = (String) request.getParameter("bcode");
+        String bcode = request.getParameter("bcode");
 
         String id = (String) session.getAttribute("sid");
         User user = userService.getUser(id);
@@ -86,8 +86,10 @@ public class PaymentController {
 
             Payment payment = new Payment();
             payment.setLno(lno);
+            payment.setTitle(request.getParameter("title"));
             payment.setBcode(bcode);
             payment.setId(id);
+            payment.setTcode(request.getParameter("tcode"));
             payment.setMethod(request.getParameter("method"));
             payment.setCom(request.getParameter("com"));
             payment.setPrice(request.getParameter("price"));
@@ -110,6 +112,6 @@ public class PaymentController {
 
             paymentService.addPayment(delivery, serve, id);
 
-            return "redirect:/user/mylectureList";
+            return "redirect:/user/myLecture.do";
     }
 }

@@ -85,7 +85,7 @@
                                                         <div class="media">
                                                             <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
                                                             <div class="media-body">
-                                                                <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
+                                                                <p style="text-align: center;"><i class="fa-solid fa-school" style="font-size:60px; color: #74A984;"></i><p></p>
                                                                 <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/admin/lecList.do" style="color: #4F5665 !important;">강의목록</a></h2>
                                                             </div>
                                                         </div>
@@ -100,7 +100,7 @@
                                                         <div class="media">
                                                             <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
                                                             <div class="media-body">
-                                                                <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
+                                                                <p style="text-align: center;"><i class="fa-solid fa-pen" style="font-size:60px; color: #74A984;"></i><p></p>
                                                                 <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/admin/insert.do" style="color: #4F5665 !important;">강의등록</a></h2>
                                                             </div>
                                                         </div>
@@ -114,7 +114,7 @@
                                                             <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
                                                             <div class="media-body">
                                                                 <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
-                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/mypage.do" style="color: #4F5665 !important;">나의 정보 수정</a></h2>
+                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/admin/dlist.do" style="color: #4F5665 !important;">배송관리</a></h2>
                                                             </div>
                                                         </div>
                                                     </div>

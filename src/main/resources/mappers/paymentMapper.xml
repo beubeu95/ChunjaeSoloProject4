@@ -6,24 +6,35 @@
     <select id="lectureDetail" resultType="kr.ed.haebeop.domain.Lecture">
         select * from lecture where lno=#{lno}
     </select>
+
     <select id="bookDetail" resultType="kr.ed.haebeop.domain.Book">
         select * from book where bcode=#{bcode}
     </select>
+
     <select id="paymentDetail" resultType="kr.ed.haebeop.domain.Payment">
         select * from payment where id=#{id} and lno=#{lno}
     </select>
+
     <select id="getCount" resultType="integer">
         select count(*) from payment where lno=#{lno}
     </select>
+
     <insert id="paymentInsert">
-        insert into payment (pno, lno, bcode,id, method,com, price,account,resdate) values (DEFAULT, #{lno}, #{bcode}, #{id}, #{method}, #{com}, #{price}, #{account}, default)
+        insert into payment (pno, title, lno, bcode,id, tcode, method,com, price,account,resdate) values (DEFAULT, #{title}, #{lno}, #{bcode}, #{id},#{tcode}, #{method}, #{com}, #{price}, #{account}, default)
     </insert>
+
     <select id="paymentNo" resultType="integer">
         select pno from payment order by pno desc limit 1
     </select>
+
+    <select id="deliveryList" resultType="kr.ed.haebeop.domain.Delivery">
+        select * from delivery order by dno desc
+    </select>
+
     <insert id="deliveryInsert">
         insert into delivery values (default, #{pno}, #{id}, #{addr}, #{tel},'','',default,default,'','')
     </insert>
+
     <select id="deliveryNo" resultType="kr.ed.haebeop.domain.Delivery">
         select dno from delivery order by dno desc limit 1
     </select>
@@ -35,4 +46,17 @@
     <update id="pointUpdate">
         UPDATE user SET pt = 0 WHERE id = #{id}
     </update>
+
+    <delete id="paymentDelete">
+        delete from payment where pno=#{pno}
+    </delete>
+
+    <delete id="deliveryDelete">
+        delete from delivery where dno=#{dno}
+    </delete>
+
+    <delete id="serveDelete">
+        delete from serve where sno=#{sno}
+    </delete>
+
 </mapper>

@@ -5,8 +5,6 @@ import kr.ed.haebeop.util.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
-@Mapper
 public interface QnaMapper {
     public List<Qna> qnaList(Page page) throws Exception;
     public List<Qna> noAnswerList(Page page) throws Exception;

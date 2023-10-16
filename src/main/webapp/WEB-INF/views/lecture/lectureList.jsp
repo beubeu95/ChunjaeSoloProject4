@@ -40,13 +40,6 @@
         <div class="container">
             <div class="container-fluid pt-5">
                 <div class="container">
-                    <div>
-                        <c:if test="${sid eq 'admin'}">
-                            <div class="button-group" style="float:right; margin-bottom: 20px;">
-                                <a class="btn btn-primary px-4" href="${path}/lecture/list.do" class="button is-primary" style="width: 90px; font-size: 13px; font-weight: bold; background-color: #71A894; border:none;">글쓰기</a>
-                            </div>
-                        </c:if>
-                    </div>
                     <div class="text-center pb-2">
                         <p class="section-title px-5">
                             <span class="px-2">최신 강의</span>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -26,9 +27,9 @@ public class PaymentMapperImpl implements PaymentMapper{
     @Override
     public void pointUpdate(String id) throws Exception { sqlSession.update("payment.pointUpdate", id); }
     @Override
-    public void deliveryInsert(Delivery delivery){
-        sqlSession.insert("payment.deliveryInsert", delivery);
-    }
+    public List<Delivery> deliveryList() throws Exception { return sqlSession.selectList("payment.deliveryList"); }
+    @Override
+    public void deliveryInsert(Delivery delivery){ sqlSession.insert("payment.deliveryInsert", delivery); }
     @Override
     public void paymentInsert(Payment payment){
         sqlSession.insert("payment.paymentInsert", payment);

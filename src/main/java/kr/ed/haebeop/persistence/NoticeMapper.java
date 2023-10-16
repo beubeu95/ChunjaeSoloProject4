@@ -5,8 +5,6 @@ import kr.ed.haebeop.util.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
-@Mapper
 public interface NoticeMapper {
     public List<Notice> noticeList(Page page) throws Exception;
     public List<Notice> noticeListLimit() throws Exception;

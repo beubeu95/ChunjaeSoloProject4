@@ -13,7 +13,6 @@
 
     <title>강의 상세보기</title>
     <jsp:include page="../setting/head.jsp" />
-    <script src="${path}/resources/js/vdo.js"></script>
     <style>
         .player_btn {
             border: none;
@@ -102,6 +101,9 @@
                             <li class="py-2 border-bottom">
                                 <i class="fa-solid fa-paperclip text-primary mr-3"></i>
                                 &nbsp;&nbsp;<strong>수강인원</strong>&nbsp;&nbsp;${lecture.amt}명
+                                  <c:if test='${lecture.status eq "1"}'>
+                                    <strong style="color:darkred";>(남은 인원 : ${canApp} 명)</strong>
+                                  </c:if>
                             </li>
                         </ul>
                     </div>
@@ -110,6 +112,7 @@
                     <input type="hidden" name="id" id="id" value="${sid}">
                     <input type="hidden" id="lno" name="lno" value="${lecture.lno}">
                     <input type="hidden" id="bcode" name="bcode" value="${lecture.bcode}">
+                    <input type="hidden" id="tcode" name="tcode" value="${lecture.tcode}">
                 <button type="button" id="ck_btn" class="btn btn-primary mt-2 py-2 px-4" onclick="payCheck()" style="margin-top: 30px!important; background-color: #71A894; border: none; font-weight: bold;">수강신청</button>
                 </div>
             </div>
@@ -184,6 +187,7 @@
                                         <button id="volTxt" class="player_btn">50%</button>
                                         <button id="full" class="player_btn"><i class="fa-solid fa-expand"></i></button>
                                     </div>
+                                    <script src="${path}/resources/js/vdo.js"></script>
                                 </div>
                             </div>
                         </figure>
@@ -199,6 +203,7 @@
                                             <textarea name="content" id="content" class="form-control" maxlength="990" rows="2" placeholder="댓글을 달아주세요 :)"></textarea>
                                         </div>
                                         <div class="col" style="margin-left: 50px;">
+                                            <input type="hidden" id="lno" name="lno" value="${lecture.lno}">
                                             <input type="hidden" id="amt" name="amt" value="${lecture.amt}">
                                             <input type="hidden" id="page" name="page" value="${curPage}">
                                             <c:if test="${!empty cate}">
@@ -218,7 +223,7 @@
                                         <fmt:formatDate value="${resdate }" pattern="yyyy-MM-dd" />
                                     </h6>
                                     <c:if test="${(sid eq 'admin') or (sid eq comment.author)}">
-                                        <a style="width: 10%; margin-bottom: 10px;" href="${path}/comment/deleteLec.do?comNo=${comment.comNo}&bno=${lecture.lno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="btn btn-sm btn-danger">Delete</a>
+                                        <a style="width: 10%; margin-bottom: 10px;" href="${path}/comment/deleteLec.do?comNo=${comment.comNo}&lno=${lecture.lno}&page=${curPage}&commentPage=${i}<c:if test="${!empty cate}">&cate=${cate}</c:if>" class="btn btn-sm btn-danger">Delete</a>
                                     </c:if>
                                 </div>
                                 <div class="row">

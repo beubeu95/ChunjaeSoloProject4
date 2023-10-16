@@ -1,6 +1,7 @@
 package kr.ed.haebeop.service;
 
 import kr.ed.haebeop.domain.Payment;
+import kr.ed.haebeop.domain.PaymentVO;
 import kr.ed.haebeop.domain.Teacher;
 import kr.ed.haebeop.domain.User;
 import kr.ed.haebeop.persistence.UserMapper;
@@ -21,8 +22,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> userList() throws Exception { return userMapper.userList(); }
 
-    @Override
-    public List<Teacher> tList() throws Exception { return userMapper.tList(); }
+
 
     @Override
     public User getUser(String id) {
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<Payment> mylectureList(String id) throws Exception { return userMapper.mylectureList(id); }
+    public List<PaymentVO> mylectureList(String id) throws Exception { return userMapper.mylectureList(id); }
 
     @Override
     public boolean idCheck(String id) {
@@ -70,8 +70,4 @@ public class UserServiceImpl implements UserService{
         userMapper.userDelete(id);
     }
 
-    @Override
-    public void teacherDelete(String tcode) throws Exception {
-        userMapper.teacherDelete(tcode);
-    }
 }

@@ -5,6 +5,8 @@ import kr.ed.haebeop.persistence.PaymentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PaymentServiceImpl implements PaymentService{
 
@@ -53,4 +55,10 @@ public class PaymentServiceImpl implements PaymentService{
     public void addPayment (Delivery delivery,Serve serve, String id) throws Exception {
         paymentMapper.addPayment(delivery, serve, id);
     }
+
+    @Override
+    public List<Delivery> deliveryList() throws Exception {
+        return paymentMapper.deliveryList();
+    }
+
 }

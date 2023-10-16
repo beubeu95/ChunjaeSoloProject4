@@ -141,8 +141,7 @@ public class UserController {
     public String getmyLectureList(HttpServletRequest request, Model model) throws Exception{
 
         String id = (String) session.getAttribute("sid");
-        List<Payment> list= userService.mylectureList(id);
-
+        List<PaymentVO> list= userService.mylectureList(id);
 
         model.addAttribute("list", list);
         return "/user/mylectureList";

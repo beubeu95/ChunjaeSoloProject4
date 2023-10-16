@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="delivery">
+
+    <select id="deliveryList" resultType="kr.ed.haebeop.domain.DeliveryVO">
+        select pno, title, id, resdate, dstatus
+        from delivery a join payment b on (a.pno = b.pno)
+        order by dno desc
+    </select>
+
+    <select id="deliveryDetail" resultType="kr.ed.haebeop.domain.DeliveryVO">
+        select dno, title, id, tel, addr,resdate, dstatus
+        from delivery a join payment b on (a.pno = b.pno)
+        where dno=#{dno}
+    </select>
+
+    <update id="deliveryUpdate">
+        update delivery set dcom =#{dcom}, dtel=#{dtel}, dstatus=#{dstatus}, edate=#{edate}, dcode=#{dcode} where dno=#{dno}
+    </update>
+
+</mapper>

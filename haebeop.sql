@@ -20,9 +20,11 @@ CREATE TABLE user(
     visited INT DEFAULT 0
 );
 ​
-SELECT * FROM USER;
-​
+SELECT * FROM user;
+
 UPDATE user SET pw='$2a$10$WD5g5GdtR3qbpiwV5OVDMuAfKq/IA8LtbHaTVTetRTeq4jsdDLj0C' WHERE id='admin';
+UPDATE user SET pt=300 WHERE id='kimhkk';
+
 ​
 -- 공지사항 테이블 생성 
 CREATE TABLE notice(
@@ -137,11 +139,11 @@ CREATE TABLE COMMENT(
 	resdate DATETIME DEFAULT CURRENT_TIMESTAMP(),
 	content VARCHAR(1000) NOT NULL,
 	FOREIGN KEY(bno) REFERENCES board(bno) ON DELETE CASCADE,
-	FOREIGN KEY(lno) REFERENCES lecture(lno) ON DELETE CASCADE,
 	FOREIGN KEY(author) REFERENCES user(id) ON DELETE CASCADE
 ); 
 ​
-SELECT * FROM COMMENT;
+SELECT * FROM comment;
+
 ​
 -- 자료실 자료 데이터 테이블 생성
 CREATE TABLE fileInfo(
@@ -199,6 +201,9 @@ INSERT INTO teacher VALUES ('D-1', '최선생', '010-1111-2225', 'choi@edu.com')
 INSERT INTO teacher VALUES ('E-1', '채선생', '010-1111-2226', 'chae@edu.com');
 INSERT INTO teacher VALUES ('A-2', '우선생', '010-1111-2227', 'woo@edu.com');
 INSERT INTO teacher VALUES ('A-3', '한선생', '010-1111-2228', 'han@edu.com');
+
+SELECT * FROM teacher ;
+
 -- 강의 테이블 생성
 CREATE TABLE lecture(
 	lno INT PRIMARY KEY AUTO_INCREMENT,
@@ -234,6 +239,7 @@ INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUE
 -- 결제 테이블 생성
 create table payment(
 	   pno INT primary KEY AUTO_INCREMENT,
+	   title VARCHAR(100) NOT NULL,
 		lno INT NOT NULL,		
 		bcode VARCHAR(20) NOT NULL,
 		tcode VARCHAR(20),
@@ -241,7 +247,7 @@ create table payment(
 	   method varchar(100),		
 	   com varchar(100),			
 	   price int default 1000,
-		dno INT NOT NULL,	
+		dno INT,	
 	   account varchar(100) NOT NULL,
 	   resdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	   FOREIGN KEY (lno) REFERENCES lecture (lno) ON DELETE CASCADE,
@@ -250,24 +256,27 @@ create table payment(
 		FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE
 );
 
-
+SELECT * FROM payment;
+        
 -- 배송 테이블 생성
 create table delivery(
-       dno int primary KEY AUTO_INCREMENT,
-       pno int, 					
-       id varchar(20) not NULL,				
-       addr VARCHAR(200),	
-       tel varchar(13) not null,				
-       dcom varchar(100),					
-       dtel varchar(13),			
-       dstatus int default 0,				
-       ddate timestamp default current_timestamp,
-       edate varchar(13),						
-       dcode varchar(30),
-	    FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE					
+	 dno int primary KEY AUTO_INCREMENT,
+	 pno int, 					
+	 id varchar(20) not NULL,				
+	 addr VARCHAR(200),	
+	 tel varchar(13) not null,				
+	 dcom varchar(100),					
+	 dtel varchar(13),			
+	 dstatus int default 0,				
+	 ddate timestamp default current_timestamp,
+	 edate varchar(13),						
+	 dcode varchar(30),
+	 FOREIGN KEY (pno) REFERENCES payment(pno) ON DELETE CASCADE,
+	 FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE,					
 );
 
 SELECT * FROM delivery;
+
 
 -- 출고 테이블 생성
 create table serve(
@@ -279,9 +288,10 @@ create table serve(
 	 FOREIGN KEY (bcode) REFERENCES book (bcode) ON DELETE CASCADE    
 );
 
+SELECT * FROM serve;
+
 COMMIT;
 
-SELECT * FROM payment WHERE id ='kimhkk';
 
 -- 메인기능 : 공지사항 , 자료실, 자유게시판, 강의별 댓글, 교재와 시범강의
 -- 부가 기능 : 파일업로드, 채팅, 타계정 또는 sns 로그인

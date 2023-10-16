@@ -18,24 +18,10 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <button class="nav-link dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" style="border: none; font-weight: bold;">
-                            온라인 강의
-                        </button>
-                        <ul class="dropdown-menu rounded-0 m-0">
-                            <li><a class="dropdown-item" href="${path}/onlecture/list.do">강의</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" style="border: none; font-weight: bold;">
                             오프라인 강의
                         </button>
                         <ul class="dropdown-menu rounded-0 m-0">
                             <li><a class="dropdown-item" href="${path}/lecture/list.do">강의</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -47,7 +33,6 @@
                         <ul class="dropdown-menu rounded-0 m-0">
                             <li><a class="dropdown-item" href="${path}/board/list.do">자유게시판</a></li>
                             <li><a class="dropdown-item" href="${path}/fileboard/list.do">자료실</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
                 </ul>

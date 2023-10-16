@@ -1,18 +1,16 @@
 package kr.ed.haebeop.controller;
 
-import kr.ed.haebeop.domain.Category;
-import kr.ed.haebeop.domain.LectureVO;
-import kr.ed.haebeop.domain.Teacher;
-import kr.ed.haebeop.domain.User;
+import kr.ed.haebeop.domain.*;
+import kr.ed.haebeop.service.DeliveryService;
 import kr.ed.haebeop.service.LectureService;
+import kr.ed.haebeop.service.PaymentService;
 import kr.ed.haebeop.service.UserService;
 import kr.ed.haebeop.util.BoardPage;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +28,12 @@ public class AdminController {
 
     @Autowired
     private LectureService lectureService;
+
+    @Autowired
+    private DeliveryService deliveryService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @GetMapping("index.do")
     public String getAdminIndex(Model model) {
@@ -54,17 +58,17 @@ public class AdminController {
 
     @GetMapping("tlist.do")
     public String getTeacherList(Model model) throws Exception {
-        List<Teacher> tlist = userService.tList();
+        List<Teacher> tlist = lectureService.tList();
         model.addAttribute("tlist", tlist);
 
         return "/admin/teacherList";
     }
 
-    @GetMapping("delete.do")
-    public String teacherDelete(HttpServletRequest request, Model model) throws Exception {
-        String tcode = request.getParameter("tcode");
-        userService.teacherDelete(tcode);
-        return "redirect:/admin/teacherList";
+    @RequestMapping(value="delete.do", method = RequestMethod.GET)
+    public String teacherDelete(@RequestParam String tcode, Model model, HttpSession session) throws Exception {
+        lectureService.teacherDelete(tcode);
+        session.invalidate();
+        return "redirect:/admin/tlist.do";
     }
 
     @GetMapping("lecList.do")
@@ -89,10 +93,65 @@ public class AdminController {
 
     @GetMapping("insert.do")
     public String lectureInsertForm(Model model) throws Exception{
+        List<Teacher> tnameList = lectureService.tnameList();
+        List<Book> bnameList = lectureService.bnameList();
+
+        model.addAttribute("tList", tnameList);
+        model.addAttribute("bList", bnameList);
         return "/lecture/lectureInsert";
     }
 
+    @PostMapping("insert.do")
+    public String lectureInsert(HttpServletRequest request, Model model) throws Exception{
+        Lecture lecture= new Lecture();
+        lecture.setCate(request.getParameter("cate"));
+        lecture.setTitle(request.getParameter("title"));
+        lecture.setContent(request.getParameter("content"));
+        lecture.setPrice(request.getParameter("price"));
+        lecture.setTdate(request.getParameter("tdate"));
+        lecture.setSdate(request.getParameter("sdate"));
+        lecture.setEdate(request.getParameter("edate"));
+        lecture.setBcode(request.getParameter("bcode"));
+        lecture.setTcode(request.getParameter("tcode"));
+        lecture.setStatus(request.getParameter("status"));
+        lecture.setAmt(Integer.parseInt(request.getParameter("amt")));
+        lectureService.lectureInsert(lecture);
+
+        return "redirect:/admin/index.do";
+    }
 
 
+    @GetMapping("dlist.do")
+    public String getdeliveryList(Model model) throws Exception{
+
+        List<DeliveryVO> list = deliveryService.deliveryList();
+        List<Delivery> delList = paymentService.deliveryList();
+        model.addAttribute("list", list);
+        model.addAttribute("delList", delList);
+        return "/admin/deliveryList";
+    }
+
+    @GetMapping("delUpdate.do")
+    public String deliveryDetail(HttpServletRequest request, Model model) throws Exception{
+        int dno = Integer.parseInt(request.getParameter("dno"));
+        DeliveryVO delivery= deliveryService.getdelivery(dno);
+
+        model.addAttribute("delivery", delivery);
+
+        return "/admin/deliveryUpdate";
+    }
+
+    @PostMapping("UpdateDeliveryPro.do")
+    public String deliveryUpdate(HttpServletRequest request, Model model) throws Exception {
+
+        Delivery del = new Delivery();
+        del.setDcom(request.getParameter("dcom"));
+        del.setDtel(request.getParameter("dtel"));
+        del.setEdate(request.getParameter("edate"));
+        del.setDcode(request.getParameter("dcode"));
+        deliveryService.deliveryUpdate(del);
+
+        return "redirect:/admin/dlist.do";
+    }
 
 }

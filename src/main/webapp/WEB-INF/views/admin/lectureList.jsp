@@ -50,7 +50,7 @@
                                 <c:if test="${cate.cate ne curCategory}">
                                 <label class="btn btn-primary" style=" background-color: lightgray; color:#000000; border: none; font-weight: bold;">
                                     </c:if>
-                                    <input type="radio" checked="checked" onclick="javascript:location.href='${path}/admin/Leclist.do?cate=${cate.cate}'" style="opacity: 0;"/> ${cate.cateName}
+                                    <input type="radio" checked="checked" onclick="javascript:location.href='${path}/admin/lecList.do?cate=${cate.cate}'" style="opacity: 0;"/> ${cate.cateName}
                                 </label>
                                 </c:forEach>
                     </div>
@@ -65,6 +65,7 @@
                     <th>제목</th>
                     <th width="150">수강인원</th>
                     <th width="300">수강기간</th>
+                    <th width="100">수강일</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,7 +75,8 @@
                         <td>${lecture.cateName}</td>
                         <td>${lecture.title }</td>
                         <td>${lecture.amt }</td>
-                        <td>${lecture.sdate }~ ${lecture.edate} (총 ${lecture.tdate} 일)</td>
+                        <td>${lecture.sdate }~ ${lecture.edate}</td>
+                        <td>${lecture.tdate} 일</td>
                     </tr>
                 </c:forEach>
                 <c:if test="${empty list}">
