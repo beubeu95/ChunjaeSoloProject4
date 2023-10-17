@@ -170,9 +170,11 @@
                         <figure class="image is-4by3" style="padding-top: 0;">
                             <div class="player" style="width:800px; margin: 0 auto;">
                                 <div class="vdo_fr">
+                                    <c:forEach var="item" items="${file}">
                                     <video id="video" style="width: 100%">
-                                        <source src="${path}/resources/img/sample1.mp4" type="video/mp4"/>
+                                        <source src=${pageContext.request.contextPath}/resources/upload/${item.saveFolder}/${item.saveFile}" type="video/mp4"/>
                                     </video>
+                                    </c:forEach>
                                 </div>
                                 <div id="progress">
                                     <div id="progressBar" class="mb-2"></div>

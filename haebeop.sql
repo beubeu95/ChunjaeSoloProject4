@@ -149,12 +149,13 @@ SELECT * FROM comment;
 CREATE TABLE fileInfo(
 	fno int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	articleno INT,
+	lno INT,
 	saveFolder VARCHAR(300) NOT NULL,
 	originFile VARCHAR(300) NOT NULL,
 	saveFile VARCHAR(300) NOT NULL
 );
 ​
-SELECT * FROM fileInfo;
+SELECT * FROM fileinfo;
                          
 -- 자료실 테이블 생성
 CREATE TABLE fileboard (

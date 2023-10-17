@@ -35,10 +35,38 @@
     <select id="canApply" resultType="integer">
         SELECT (SELECT amt FROM lecture WHERE lno = #{lno}) - (SELECT COUNT(*) FROM payment WHERE lno = #{lno});
     </select>
-    <insert id="lectureInsert">
+
+    <insert id="lectureInsert" parameterType="lecture">
         insert into lecture (cate, title, content, price, bcode,tcode, status, sdate,edate, tdate,amt)
         values(#{cate},#{title},#{content},#{price},#{bcode},#{tcode},#{status},#{sdate},#{edate},#{tdate},#{amt})
+        <selectKey resultType="int" keyProperty="lno" order="AFTER">
+            SELECT LAST_INSERT_title()
+        </selectKey>
     </insert>
+
+    <!-- 파일 추가 -->
+    <insert id="fileRegister" parameterType="lecture">
+        insert into fileinfo (lno, savefolder, originfile, savefile)
+        values
+        <foreach collection="fileInfos" item="fileinfo" separator=" , ">
+            (#{lno}, #{fileinfo.saveFolder}, #{fileinfo.originFile}, #{fileinfo.saveFile})
+        </foreach>
+    </insert>
+    <resultMap type="lecture" id="lectureList">
+        <result property="lno" column="lno"/>
+        <result property="cate" column="cate"/>
+        <result property="content" column="content"/>
+        <result property="price" column="price"/>
+        <result property="bcode" column="bcode"/>
+        <result property="tcode" column="tcode"/>
+        <result property="status" column="status"/>
+        <result property="sdate" column="sdate"/>
+        <result property="edate" column="edate"/>
+        <result property="tdate" column="tdate"/>
+        <result property="amt" column="amt"/>
+        <collection property="fileInfos" column="lno" javaType="list" ofType="FileInfo" select="fileInfos"/>
+    </resultMap>
+
     <select id="teacherList" resultType="kr.ed.haebeop.domain.Teacher">
         select * from teacher
     </select>

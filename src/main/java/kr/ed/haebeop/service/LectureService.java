@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface LectureService {
     public List<LectureVO> lectureList(Page page) throws Exception;
+    public List<LectureVO> lectureList2() throws Exception;
     public int getCount(Page page) throws Exception;
     public List<Category> categoryList() throws Exception;
     public LectureVO getLecture (int lno) throws Exception;
@@ -16,4 +17,6 @@ public interface LectureService {
     public List<Teacher> tnameList() throws Exception;
     public List<Book> bnameList() throws Exception;
     public void teacherDelete(String tcode) throws Exception;
+    public void writeArticle(Lecture lecture) throws Exception;
+    public void fileRegister(Lecture lecture) throws Exception;
 }

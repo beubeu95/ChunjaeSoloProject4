@@ -34,4 +34,34 @@
         </foreach>
     </insert>
 
+    <!-- 강의 자료 -->
+    <!-- 첨부된 파일 정보 보기-->
+    <select id="fileInfoDetail2" resultType="kr.ed.haebeop.domain.FileInfo">
+        select * from fileInfo where lno=#{lno}
+    </select>
+
+    <update id="fileboardEdit2">
+        update fileInfo set saveFolder=#{saveFolder}, originFile=#{originFile}, saveFile=#{saveFile} where lno=#{lno}
+    </update>
+
+    <!-- 자료실 번호 별 파일 리스트 가져오기 -->
+    <select id="fileInfoList2" resultType="kr.ed.haebeop.domain.FileInfo">
+        select * from fileInfo
+        where lno=#{lno}
+    </select>
+
+    <!-- 파일 삭제 -->
+    <delete id="fileInfoDelete2">
+        delete from fileInfo
+        where lno=#{lno}
+    </delete>
+
+    <!-- 파일 추가 -->
+    <insert id="fileInfoInsert2">
+        insert into fileInfo(lno, savefolder, originfile, savefile)
+        values
+        <foreach collection="fileInfos" item="fileInfo" separator=" , ">
+            (#{lno}, #{fileInfo.saveFolder}, #{fileInfo.originFile}, #{fileInfo.saveFile})
+        </foreach>
+    </insert>
 </mapper>

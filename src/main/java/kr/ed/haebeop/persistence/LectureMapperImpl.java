@@ -45,6 +45,21 @@ public class LectureMapperImpl implements LectureMapper{
     }
 
     @Override
+    public void writeArticle(Lecture lecture) throws Exception {
+        sqlSession.insert("lecture.writeLno", lecture);
+    }
+
+    @Override
+    public void fileRegister(Lecture lecture) throws Exception {
+        sqlSession.update("lecture.fileRegister", lecture);
+    }
+
+    @Override
+    public List<LectureVO> lectureList2() throws Exception {
+        return sqlSession.selectList("lecture.lectureList");
+    }
+
+    @Override
     public List<Teacher> tList() { return sqlSession.selectList("lecture.teacherList");}
 
     @Override
@@ -55,4 +70,5 @@ public class LectureMapperImpl implements LectureMapper{
 
     @Override
     public void teacherDelete(String tcode) throws Exception { sqlSession.delete("lecture.teacherDelete", tcode); }
+
 }

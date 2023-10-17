@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,4 +24,5 @@ public class Lecture {
     private String bcode;
     private String tcode;
     private int amt;
+    private List<FileInfo> fileInfos;
 }

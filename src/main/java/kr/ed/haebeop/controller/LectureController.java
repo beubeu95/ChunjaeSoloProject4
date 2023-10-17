@@ -2,6 +2,7 @@ package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
 import kr.ed.haebeop.service.CommentService;
+import kr.ed.haebeop.service.FileInfoService;
 import kr.ed.haebeop.service.LectureService;
 import kr.ed.haebeop.util.BoardPage;
 import kr.ed.haebeop.util.CommentLecPage;
@@ -20,7 +21,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,10 +34,16 @@ import java.util.UUID;
 public class LectureController {
 
     @Autowired
+    private HttpSession session;
+
+    @Autowired
     private LectureService lectureService;
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private FileInfoService fileInfoService;
 
     @GetMapping("list.do")
     public String getLectureList (HttpServletRequest request,Model model) throws Exception{
@@ -65,6 +76,7 @@ public class LectureController {
     public String getLecture(HttpServletRequest request, Model model) throws Exception {
         LectureVO lecture = lectureService.getLecture(Integer.parseInt(request.getParameter("lno")));
         int canApp = lectureService.canApply(Integer.parseInt(request.getParameter("lno")));
+        List<FileInfo> file = fileInfoService.fileInfoDetail(Integer.parseInt(request.getParameter("lno"))); //해당 자료실에 첨부된 파일 객체 값 생성
 
 
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -81,6 +93,7 @@ public class LectureController {
         List<Comment> commentList = commentService.lecCommentList(page);
 
         model.addAttribute("lecture", lecture);
+        model.addAttribute("file", file);
         model.addAttribute("canApp", canApp);
         model.addAttribute("commentList", commentList);
         model.addAttribute("curPage", curPage);
@@ -88,6 +101,57 @@ public class LectureController {
         model.addAttribute("page", page);
         model.addAttribute("cate", request.getParameter("cate"));
         return "/lecture/lectureDetail";
+    }
+
+
+    @RequestMapping(value = "insert.do", method = RequestMethod.GET)
+    public String write() {
+        return "/lecture/lectureInsert";
+    }
+
+    @RequestMapping(value = "insert.do", method = RequestMethod.POST)
+    public String write(Lecture lecture, @RequestParam("upfile") MultipartFile[] files, Model model, HttpServletRequest req) throws IllegalStateException, IOException {
+        //    Member member = (Member) session.getAttribute("member");
+        String id = (String) session.getAttribute("sid");
+        if (id != null && id.equals("admin")) { //관리자만 등록가능
+            //String realPath = req.getRealPath("/pro3_war/resources/upload");
+            String realPath = req.getSession().getServletContext().getRealPath("/resources/upload/"); // 경로설정
+            System.out.println("path : " + realPath);
+            String today = new SimpleDateFormat("yyMMdd").format(new Date()); //오늘 날짜
+            String saveFolder = realPath + today; // 저장되는 폴더 경로
+            System.out.println(saveFolder);
+            File folder = new File(saveFolder);
+            if (!folder.exists()) // 폴더가 존재하지 않으면 생성함
+                folder.mkdirs();
+            List<FileInfo> fileInfos = new ArrayList<>(); //첨부파일 정보를 리스트로 생성
+            for (MultipartFile mfile : files) {
+                FileInfo fileInfoDto = new FileInfo();
+                String originalFileName = mfile.getOriginalFilename(); //첨부파일의 실제 파일명을 저장
+                if (!originalFileName.isEmpty()) {
+                    String saveFileName = UUID.randomUUID() + originalFileName.substring(originalFileName.lastIndexOf('.')); // 랜덤으로 파일이름 설정
+                    fileInfoDto.setSaveFolder(today); // 파일인포 객체에 값저장
+                    fileInfoDto.setOriginFile(originalFileName); // 파일인포 객체에 값저장
+                    fileInfoDto.setSaveFile(saveFileName); // 파일인포 객체에 값저장
+                    System.out.println(mfile.getOriginalFilename() + "   " + saveFileName);
+                    mfile.transferTo(new File(folder, saveFileName)); // 파일을 업로드 폴더에 저장
+                }
+                fileInfos.add(fileInfoDto);
+            }
+            lecture.setFileInfos(fileInfos);
+            try {
+                lectureService.writeArticle(lecture);
+                List<LectureVO> lectureList = lectureService.lectureList2();
+                model.addAttribute("lectureList", lectureList);
+                return "/lecture/lectureList";
+            } catch (Exception e) {
+                e.printStackTrace();
+                model.addAttribute("msg", "글 작성중 문제가 발생했습니다.");
+                return "/error/error";
+            }
+        } else {
+            model.addAttribute("msg", "로그인 후 사용 가능한 페이지입니다.");
+            return "/error/error";
+        }
     }
 
     //ckeditor를 이용한 이미지 업로드

@@ -68,7 +68,7 @@
                                     <td>
                                         <div class="product-item">
                                             <div class="product-info">
-                                                <h4 class="product-title" name="lname" id="lname">${lecture.title}</h4>
+                                                <h4 class="product-title">${lecture.title}</h4>
 
                                             </div>
                                         </div>
@@ -193,7 +193,8 @@
                                                 <span>Subtotal</span><span id="bprice">${book.price}</span>
                                             </div>
                                             <div class="d-flex justify-content-between mb-1 small">
-                                                <span>Point </span> <input type="text" name="point" id="point" max="${user.pt}" min="1" >
+                                                <span>Point </span> <input type="number" name="point" id="point" max="${user.pt}" min="0" value="0" >
+                                                <button id="pointApply" class="btn btn-secondary btn-sm">적용</button>
                                                 <input type="hidden" name="pt" id="pt" value="" >
                                             </div>
                                             <hr>
@@ -217,17 +218,6 @@
                             </div>
                         </div>
                         </form>
-                        <script>
-                            const userPt = ${user.pt};
-                            const pointInput = document.getElementById('point');
-                            const ptInput = document.getElementById('pt');
-
-                            pointInput.addEventListener('input', () => {
-                                const getPoint = parseFloat(pointInput.value) || 0;
-                                const newPoint = userPt - getPoint;
-                                ptInput.value = newPoint;
-                            });
-                        </script>
                         <script>
                             $(document).ready(function(){
                                 var cardArr1 = ["현대카드","농협카드","BC카드","KB카드"];
@@ -279,16 +269,44 @@
                         <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                         <script>
                             //결제모듈 API 연동
-                            $(document).ready(function(){
-                                var totalPay=0;
-                                var lname;
+                            $(document).ready(function() {
+                                var totalPay = 0;
+                                var title;
+                                var userPt = ${user.pt};
+
+                                console.log($("#bprice").text());
 
                                 totalPay = totalPay + parseInt($("#bprice").text());
-                                totalPay = totalPay -parseInt($("#point").text());
 
-                                //합계를 출력
-                                $("#subprice").html("<input type='text' readonly id='subprice' value='"+totalPay+"'>");
-                                $("#totalprice").html("<input type='text' readonly id='price' name='price' value='"+totalPay+"'>");
+                                $("#subprice").html("<input type='text' readonly id='subprice' value='" + totalPay + "'>");
+                                $("#totalprice").html("<input type='text' readonly id='price' name='price' value='" + totalPay + "'>");
+
+
+                                $("#point").val(0);
+
+                                $("#point").on("input", function() {
+                                    var pointInput = $("#point");
+                                    var ptInput = $("#pt");
+                                    var pointValue = parseInt(pointInput.val());
+                                    if (!isNaN(pointValue) && pointValue >= 0 && pointValue <= userPt) {
+                                        ptInput.val(userPt - pointValue);
+                                    } else {
+                                        ptInput.val("");
+                                        alert("잘못된 포인트 입력입니다. 0 이상 " + userPt + " 이하의 값을 입력해주세요.");
+                                    }
+                                });
+
+                                $("#pointApply").click(function() {
+                                    var pointValue = parseInt($("#point").val());
+                                    if (!isNaN(pointValue) && pointValue >= 0) {
+                                        totalPay -= pointValue;
+                                        // 합계를 출력
+                                        $("#subprice").html("<input type='text' readonly id='subprice' value='" + totalPay + "'>");
+                                        $("#totalprice").html("<input type='text' readonly id='price' name='price' value='" + totalPay + "'>");
+                                    } else {
+                                        alert("잘못된 포인트 입력입니다. 0 이상의 값을 입력해주세요.");
+                                    }
+                                });
 
                                 $("#pay").click(function(){
                                     var email = $("#email").val();
@@ -296,15 +314,13 @@
                                     var tel = $("#tel").val();
                                     var addr = $("#addr").val();
                                     var postcode = $("#postcode").val();
-                                    lName = $("#lName").val();
-                                    if($("#price").val()!="") {
-                                        totalPay;
-                                    } else {
+                                    title = $("#title").val();
+                                    if ($("#price").val() == "") {
                                         alert("구매할 수량을 입력하지 않으셨습니다.");
                                         $("#totalprice").focus();
                                         return;
                                     }
-                                    alert("결제할 금액 : "+totalPay);
+                                    alert("결제할 금액 : " + totalPay);
                                     //상품명_현재시간
                                     var d = new Date();
                                     var date = d.getFullYear()+''+(d.getMonth()+1)+''+d.getDate()+''+d.getHours()+''+d.getMinutes()+''+d.getSeconds();
@@ -313,7 +329,7 @@
                                     IMP.request_pay({		//결제 요청
                                         pg: "T5102001",
                                         merchant_uid : '상품명_' + date, //상점 거래 ID
-                                        name :lName,				// 결제 명
+                                        name :title,				// 결제 명
                                         amount : totalPay,					// 결제금액
                                         buyer_email : email, // 구매자 email
                                         buyer_name : cname,				// 구매자 이름

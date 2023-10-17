@@ -5,6 +5,7 @@ import kr.ed.haebeop.persistence.LectureMapper;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,9 +15,29 @@ public class LectureServiceImpl implements LectureService{
     @Autowired
     private LectureMapper lectureMapper;
 
+    @Transactional
+    @Override
+    public void writeArticle(Lecture lecture) throws Exception {
+        if(lecture.getTitle() == null || lecture.getContent() == null){
+            throw new Exception();
+        }
+        lectureMapper.writeArticle(lecture);
+        lectureMapper.fileRegister(lecture);
+    }
+
+    @Override
+    public void fileRegister(Lecture lecture) throws Exception {
+        lectureMapper.fileRegister(lecture);
+    }
+
     @Override
     public List<LectureVO> lectureList(Page page) throws Exception {
         return lectureMapper.lectureList(page);
+    }
+
+    @Override
+    public List<LectureVO> lectureList2() throws Exception {
+        return lectureMapper.lectureList2();
     }
 
     @Override
