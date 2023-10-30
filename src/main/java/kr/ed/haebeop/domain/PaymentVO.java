@@ -19,10 +19,12 @@ public class PaymentVO {
     private String bname;
     private String id;
     private int pt;
+    private String bprice;
     private String method;
     private String com;
     private String price;
     private String account;
     private String dno;
     private String resdate;
+    private int dstatus;
 }

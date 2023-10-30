@@ -195,6 +195,7 @@ public class AdminController {
 
         return "/admin/lectureEdit";
     }
+    
 
 
 }
