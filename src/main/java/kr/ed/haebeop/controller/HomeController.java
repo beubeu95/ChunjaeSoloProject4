@@ -1,26 +1,26 @@
 package kr.ed.haebeop.controller;
 
+import kr.ed.haebeop.domain.LectureVO;
+import kr.ed.haebeop.service.LectureService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
 public class HomeController {
 
+    @Autowired
+    private LectureService lectureService;
+
     @RequestMapping("/")
-    public String home (Locale locale, Model model)  throws Exception {
+    public String home (Model model)  throws Exception {
 
-        Date date = new Date();
-        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
-                DateFormat.LONG, locale);
-        String today = dateFormat.format(date);
-
-        model.addAttribute("today", today);
-        model.addAttribute("myName", "김현경");
+        List<LectureVO> popularLectures = lectureService.getLectureList2();
+        model.addAttribute("popularLectures", popularLectures);
 
         return "/index";
     }

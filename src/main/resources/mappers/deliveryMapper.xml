@@ -20,4 +20,10 @@
         update delivery set dcom =#{dcom}, dtel=#{dtel}, dstatus=#{dstatus}, edate=#{edate}, dcode=#{dcode} where dno=#{dno}
     </update>
 
+    <select id="myDeliveryDetail" resultType="kr.ed.haebeop.domain.DeliveryVO">
+        select a.dstatus as dstatus, a.id as id, a.tel as tel, a.addr as addr, a.dcode as dcode, a.dcom as dcom, a.dtel as dtel, b.name as name
+        from delivery a join user b on (a.id = b.id)
+        where dno=#{dno}
+    </select>
+
 </mapper>

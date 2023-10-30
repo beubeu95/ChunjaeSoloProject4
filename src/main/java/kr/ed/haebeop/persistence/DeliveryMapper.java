@@ -10,5 +10,6 @@ public interface DeliveryMapper {
     public List<DeliveryVO> deliveryList() throws Exception;
     public DeliveryVO getdelivery(int dno) throws Exception;
     public void deliveryUpdate (Delivery delivery) throws Exception;
+    public DeliveryVO myDeliveryDetail(int dno) throws Exception;
 
 }

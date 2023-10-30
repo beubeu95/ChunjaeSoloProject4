@@ -76,7 +76,7 @@
                         <c:forEach var="item" items="${list}">
                         <div class="col-lg-4 mb-5">
                             <div class="card border-0 bg-light shadow-sm pb-2">
-                                <img class="card-img-top mb-2" src="${path}/resources/img/${item.img}" alt="" />
+                                <img class="card-img-top mb-2" src="${path}/resources/upload/lecture/${item.img}" alt="" />
                                 <div class="card-body text-center">
                                     <h4 class="card-title">${item.title}</h4>
                                     <p class="card-text">${item.content}</p>

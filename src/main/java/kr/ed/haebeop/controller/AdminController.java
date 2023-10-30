@@ -1,20 +1,25 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
-import kr.ed.haebeop.service.DeliveryService;
-import kr.ed.haebeop.service.LectureService;
-import kr.ed.haebeop.service.PaymentService;
-import kr.ed.haebeop.service.UserService;
+import kr.ed.haebeop.service.*;
 import kr.ed.haebeop.util.BoardPage;
 import kr.ed.haebeop.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/")
@@ -34,6 +39,9 @@ public class AdminController {
 
     @Autowired
     private PaymentService paymentService;
+
+    @Autowired
+    private FileInfoService fileInfoService;
 
     @GetMapping("index.do")
     public String getAdminIndex(Model model) {
@@ -93,29 +101,47 @@ public class AdminController {
 
     @GetMapping("insert.do")
     public String lectureInsertForm(Model model) throws Exception{
+
+        List<Category> categories = lectureService.categoryList();
         List<Teacher> tnameList = lectureService.tnameList();
         List<Book> bnameList = lectureService.bnameList();
 
+        model.addAttribute("categories", categories);
         model.addAttribute("tList", tnameList);
         model.addAttribute("bList", bnameList);
-        return "/lecture/lectureInsert";
+        return "/admin/lectureInsert";
     }
 
     @PostMapping("insert.do")
-    public String lectureInsert(HttpServletRequest request, Model model) throws Exception{
-        Lecture lecture= new Lecture();
-        lecture.setCate(request.getParameter("cate"));
-        lecture.setTitle(request.getParameter("title"));
-        lecture.setContent(request.getParameter("content"));
-        lecture.setPrice(request.getParameter("price"));
-        lecture.setTdate(request.getParameter("tdate"));
-        lecture.setSdate(request.getParameter("sdate"));
-        lecture.setEdate(request.getParameter("edate"));
-        lecture.setBcode(request.getParameter("bcode"));
-        lecture.setTcode(request.getParameter("tcode"));
-        lecture.setStatus(request.getParameter("status"));
-        lecture.setAmt(Integer.parseInt(request.getParameter("amt")));
+    public String write(Lecture lecture, @RequestParam("upfile") MultipartFile[] files, Model model, HttpServletRequest req) throws Exception {
+
+        String realPath = req.getSession().getServletContext().getRealPath("/resources/upload/"); // 경로설정
+        System.out.println("path : " + realPath);
+        String today = new SimpleDateFormat("yyMMdd").format(new Date()); //오늘 날짜
+        String saveFolder = realPath + today; // 저장되는 폴더 경로
+        System.out.println(saveFolder);
+        File folder = new File(saveFolder);
+        if (!folder.exists()) // 폴더가 존재하지 않으면 생성함
+            folder.mkdirs();
+        List<FileInfo> fileInfos = new ArrayList<>(); //첨부파일 정보를 리스트로 생성
+        for (MultipartFile mfile : files) {
+            FileInfo fileInfoDto = new FileInfo();
+            String originalFileName = mfile.getOriginalFilename(); //첨부파일의 실제 파일명을 저장
+            if (!originalFileName.isEmpty()) {
+                String saveFileName = UUID.randomUUID() + originalFileName.substring(originalFileName.lastIndexOf('.')); // 랜덤으로 파일이름 설정
+                fileInfoDto.setSaveFolder(today); // 파일인포 객체에 값저장
+                fileInfoDto.setOriginFile(originalFileName); // 파일인포 객체에 값저장
+                fileInfoDto.setSaveFile(saveFileName); // 파일인포 객체에 값저장
+                System.out.println(mfile.getOriginalFilename() + "   " + saveFileName);
+                mfile.transferTo(new File(folder, saveFileName)); // 파일을 업로드 폴더에 저장
+            }
+            fileInfos.add(fileInfoDto);
+        }
+
+
+        lecture.setFileInfos(fileInfos);
         lectureService.lectureInsert(lecture);
+
 
         return "redirect:/admin/index.do";
     }
@@ -153,5 +179,22 @@ public class AdminController {
 
         return "redirect:/admin/dlist.do";
     }
+
+    @RequestMapping("lectureEdit")
+    public String lectureEditForm(@RequestParam int lno, HttpServletRequest request, Model model) throws Exception {
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+        LectureVO lecture = lectureService.getLecture(lno);
+        model.addAttribute("detail", lecture);
+
+        // 과목 목록 불러오기
+        List<Category> subjects = lectureService.categoryList();
+        model.addAttribute("subjects", subjects);
+
+
+        model.addAttribute("curPage", curPage);
+
+        return "/admin/lectureEdit";
+    }
+
 
 }

@@ -43,7 +43,7 @@
         <div class="col-md-8">
             <form action="${path }/admin/insert.do" method="post">
                 <div class="form-group">
-                    <label for="cate" class="form-label">카테고리</label>
+                    <label for="cate" class="form-label">과목</label>
                     <select name="cate" id="cate" class="form-select">
                         <c:forEach var="category" items="${categories}">
                             <option value="${category.cate}">${category.cateName}</option>
@@ -51,18 +51,16 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="title">제목</label>
+                    <label for="title">강의명</label>
                     <input type="text" name="title" id="title" class="form-control" placeholder="제목 입력" maxlength="98" required>
                 </div>
-
-                <div class="form-group">
-                    <label for="title">교재명</label>
-                    <input type="text" name="bcode" id="bcode" class="form-control" placeholder="제목 입력" maxlength="98" required>
-                </div>
-
                 <div class="form-group">
                     <label for="title">강사명</label>
                     <input type="text" name="tcode" id="tcode" class="form-control" placeholder="제목 입력" maxlength="98" required>
+                </div>
+                <div class="form-group">
+                    <label for="title">교재명</label>
+                    <input type="text" name="bcode" id="bcode" class="form-control" placeholder="제목 입력" maxlength="98" required>
                 </div>
 
                 <div class="form-group">
@@ -89,25 +87,8 @@
                     <input type="date" name="edate" id="edate" class="form-control" placeholder="종료일 지정해주세요" autocomplete="off" required>
                 </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group mt-3">
-                            <label for="price"> 강의 단가 </label>
-                            <input type="number" min="0" name="price" id="price" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group mt-3">
-                            <div class="form-group mt-3">
-                                <label for="amt"> 수강인원 </label>
-                                <input type="number" min="0" name="amt" id="amt"
-                                       class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
                 <div class="form-group">
-                    <label for="content">내용</label>
+                    <label for="content">강의소개</label>
                     <textarea name="content" id="content" class="form-control" placeholder="내용 입력" rows="8" maxlength="1400" required></textarea>
                     <script>
                         CKEDITOR.replace('content', { filebrowserUploadUrl: '${path}/lecture/imageUpload.do' });
@@ -128,6 +109,7 @@
                 </div>
 
                 <div class="col-md-8">
+                    <input type="hidden" id="price" name="price" value="0">
                     <button type="submit" class="btn btn-primary" style="float:right; background-color: #74A984;">글 등록</button>
                 </div>
             </form>

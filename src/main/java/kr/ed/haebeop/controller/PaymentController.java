@@ -1,9 +1,12 @@
 package kr.ed.haebeop.controller;
 
 import kr.ed.haebeop.domain.*;
+import kr.ed.haebeop.service.DeliveryService;
 import kr.ed.haebeop.service.PaymentService;
 import kr.ed.haebeop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +28,9 @@ public class PaymentController {
 
     @Autowired
     private HttpSession session;
+
+    @Autowired
+    private DeliveryService deliveryService;
 
     @RequestMapping(value = "payCheck.do", method = RequestMethod.POST)
     @ResponseBody
@@ -114,5 +120,33 @@ public class PaymentController {
             paymentService.addPayment(delivery, serve, pt, id);
 
             return "redirect:/user/myLecture.do";
+    }
+
+    @GetMapping("payDetail")
+    public String getPayment(HttpServletRequest request, Model model) throws Exception{
+        int pno = Integer.parseInt(request.getParameter("pno"));
+        PaymentVO payment = paymentService.myPaymentDetail(pno);
+        model.addAttribute("payment", payment);
+        return "/user/payDetail";
+    }
+
+    @GetMapping("deliveryDetail")
+    public String getDelivery(HttpServletRequest request, Model model) throws Exception{
+        int dno = Integer.parseInt(request.getParameter("dno"));
+        DeliveryVO delivery = deliveryService.myDeliveryDetail(dno);
+        model.addAttribute("delivery", delivery);
+        return "/user/deliveryDetail";
+    }
+
+    @GetMapping("paymentDelete")
+    @ResponseBody
+    public ResponseEntity<String> getPaymentDelete(@RequestParam int lno, @RequestParam int pno, HttpSession session, Model model) {
+        String id = (String) session.getAttribute("sid");
+        try {
+            paymentService.deletePayment(lno, id, pno);
+            return new ResponseEntity<>("구매취소 성공", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("구매취소 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

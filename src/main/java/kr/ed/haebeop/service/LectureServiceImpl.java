@@ -84,4 +84,14 @@ public class LectureServiceImpl implements LectureService{
     public void teacherDelete(String tcode) throws Exception {
         lectureMapper.teacherDelete(tcode);
     }
+
+    @Override
+    public List<LectureVO> getLectureList2() throws Exception {
+        return lectureMapper.getLectureList2();
+    }
+
+    @Override
+    public void lectureUpdate(Lecture lecture) throws Exception {
+        lectureMapper.lectureUpdate(lecture);
+    }
 }

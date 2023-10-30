@@ -71,4 +71,13 @@ public class LectureMapperImpl implements LectureMapper{
     @Override
     public void teacherDelete(String tcode) throws Exception { sqlSession.delete("lecture.teacherDelete", tcode); }
 
+    @Override
+    public List<LectureVO> getLectureList2() throws Exception {
+        return sqlSession.selectList("lecture.getLectureList2");
+    }
+
+    @Override
+    public void lectureUpdate(Lecture lecture) throws Exception {
+        sqlSession.update("lecture.lectureUpdate", lecture);
+    }
 }

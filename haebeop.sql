@@ -21,8 +21,9 @@ CREATE TABLE user(
 );
 ​
 SELECT * FROM user;
-
-UPDATE user SET pw='$2a$10$WD5g5GdtR3qbpiwV5OVDMuAfKq/IA8LtbHaTVTetRTeq4jsdDLj0C' WHERE id='admin';
+INSERT INTO USER (id, pw, NAME, tel) VALUES ('admin', '1234', '관리자', '010-1111-2222');
+INSERT INTO USER (id,pw,NAME,tel) VALUES ('kimhkk', '1234', '김이름', '010-1111-3333');
+UPDATE user SET pw='$2a$10$WD5g5GdtR3qbpiwV5OVDMuAfKq/IA8LtbHaTVTetRTeq4jsdDLj0C' WHERE id='kimhkk';
 UPDATE user SET pt=300 WHERE id='kimhkk';
 
 ​
@@ -154,7 +155,7 @@ CREATE TABLE fileInfo(
 	originFile VARCHAR(300) NOT NULL,
 	saveFile VARCHAR(300) NOT NULL
 );
-​
+
 SELECT * FROM fileinfo;
                          
 -- 자료실 테이블 생성
@@ -178,8 +179,7 @@ CREATE TABLE book (
 	price INT(11) NOT NULL
 );
 
-SELECT * FROM lecture;
-​
+
 INSERT INTO book VALUES ('A-1','빠삭중학국어', '중학국어입니다.', '김이름', 12000);
 INSERT INTO book VALUES ('B-1','빠삭중학수학', '중학수학입니다.', '김이름', 12000);
 INSERT INTO book VALUES ('C-1','빠삭중학영어', '중학영어입니다.', '김이름', 12000);
@@ -212,7 +212,6 @@ CREATE TABLE lecture(
 	title VARCHAR(100) NOT NULL,
 	content VARCHAR(1000),
 	img VARCHAR(5000) DEFAULT 'class-1.jpg',
-	video varchar(256) default 'sample1.mp4',
 	price INT DEFAULT 0,
 	STATUS VARCHAR(5) CHECK(status IN(0, 1)),
    sdate DATE,
@@ -225,7 +224,10 @@ CREATE TABLE lecture(
    FOREIGN KEY(bcode) REFERENCES book(bcode) ON DELETE CASCADE,
 	FOREIGN KEY(tcode) REFERENCES teacher(tcode) ON DELETE CASCADE
 );
-​
+
+DROP TABLE teacher;
+
+
 SELECT * FROM lecture;
 ​
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭중학국어', '중학생국어수업입니다.', 0, 90, 'A-1','A-1', 30); 
@@ -236,6 +238,7 @@ INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUE
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭고등국어', '고등학생국어수업입니다.', 0, 90,'A-1','A-2', 30);
 INSERT INTO lecture (cate, title, content,price, tdate, bcode, tcode, amt) VALUES ( 'A', '빠삭초등국어', '초등학생국어수업입니다.', 0, 90,'A-1','A-3', 30);
 ​
+
 
 -- 결제 테이블 생성
 create table payment(
@@ -266,7 +269,7 @@ SELECT (SELECT amt FROM lecture WHERE lno = 5) - (SELECT COUNT(*) FROM payment W
 create table delivery(
 	 dno int primary KEY AUTO_INCREMENT,
 	 pno int, 					
-	 id varchar(20) not NULL,				
+	 id varchar(20),				
 	 addr VARCHAR(200),	
 	 tel varchar(13) not null,				
 	 dcom varchar(100),					
@@ -276,7 +279,7 @@ create table delivery(
 	 edate varchar(13),						
 	 dcode varchar(30),
 	 FOREIGN KEY (pno) REFERENCES payment(pno) ON DELETE CASCADE,
-	 FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE,					
+	 FOREIGN KEY (id) REFERENCES user(id) ON DELETE CASCADE			
 );
 
 SELECT * FROM delivery;

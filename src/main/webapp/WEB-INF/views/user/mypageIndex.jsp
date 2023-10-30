@@ -37,7 +37,7 @@
 </section>
 <!--Banner End-->
 
-<!-- adminIndex Start -->
+<!-- mypageIndex Start -->
 <div class="page-title background-primary is-relative">
     <div style="display:flex;">
         <div style="width: 30%;">
@@ -93,34 +93,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row pt-2 pb-2">
-                                            <div class="col-md-6">
-                                                <div class="bg-white card addresses-item mb-4 border ">
-                                                    <div class="gold-members p-4">
-                                                        <div class="media">
-                                                            <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
-                                                            <div class="media-body">
-                                                                <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
-                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/mypage.do" style="color: #4F5665 !important;">나의 정보 수정</a></h2>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="bg-white card addresses-item mb-4 border ">
-                                                    <div class="gold-members p-4">
-                                                        <div class="media">
-                                                            <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
-                                                            <div class="media-body">
-                                                                <p style="text-align: center;"><i class="fa-solid fa-face-smile" style="font-size:60px; color: #74A984;"></i><p></p>
-                                                                <h2 class="mb-1 text-secondary" style="text-align: center;"><a href="${path}/mypage.do" style="color: #4F5665 !important;">나의 정보 수정</a></h2>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +103,7 @@
         </div>
     </div>
 </div>
-<!-- adminIndex End -->
+<!-- mypageIndex End -->
 
 <!-- Footer Start -->
 <jsp:include page="../setting/footer.jsp" />

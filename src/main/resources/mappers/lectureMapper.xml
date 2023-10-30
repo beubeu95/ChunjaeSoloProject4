@@ -27,7 +27,7 @@
     </select>
 
     <select id="lectureDetail" resultType="kr.ed.haebeop.domain.LectureVO">
-        SELECT lno,c.bcode as bcode, cateName, title, a.content as content, img, a.price as price, status, sdate, edate, tdate, tname, bname, amt
+        SELECT lno,c.bcode as bcode, cateName, title, a.content as content, img, video, a.price as price, status, sdate, edate, tdate, tname, bname, amt
         FROM lecture a JOIN teacher b ON a.tcode = b.tcode JOIN book c ON a.bcode = c.bcode JOIN category d ON a.cate=d.cate
         WHERE lno=#{lno}
     </select>
@@ -37,8 +37,8 @@
     </select>
 
     <insert id="lectureInsert" parameterType="lecture">
-        insert into lecture (cate, title, content, price, bcode,tcode, status, sdate,edate, tdate,amt)
-        values(#{cate},#{title},#{content},#{price},#{bcode},#{tcode},#{status},#{sdate},#{edate},#{tdate},#{amt})
+        insert into lecture (cate, title, content, price, bcode,tcode, status, sdate,edate,amt)
+        values(#{cate},#{title},#{content},#{price},#{bcode},#{tcode},#{status},#{sdate},#{edate},#{amt})
         <selectKey resultType="int" keyProperty="lno" order="AFTER">
             SELECT LAST_INSERT_title()
         </selectKey>
@@ -82,4 +82,15 @@
     <select id="bnameList" resultType="kr.ed.haebeop.domain.Book">
         select bname from book
     </select>
+
+    <select id="getLectureList2" resultType="kr.ed.haebeop.domain.LectureVO">
+    SELECT l.lno AS lno, l.title, tname, l.img AS img
+    FROM lecture l JOIN payment r ON (l.lno=r.lno) JOIN teacher t ON (l.tcode=t.tcode) GROUP BY l.lno
+    ORDER BY COUNT(*) DESC LIMIT 6
+    </select>
+
+    <update id="lectureUpdate" >
+        update lecture set cate=#{cate}, title=#{title}, content=#{content}, price=#{price}, bcode=#{bcode},tcode=#{tcode}, status=#{status}, sdate=#{sdate},edate=#{edate},amt=#{amt}
+        where lno=#{lno}
+    </update>
 </mapper>

@@ -49,6 +49,7 @@
                     <th>제목</th>
                     <th width="150">강사</th>
                     <th width="300">수강기간</th>
+                    <th>비고</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +60,12 @@
                         <td>${payment.tname }</td>
                         <td class="has-text-centered">
                             ${payment.sdate} ~ ${payment.edate} (총 ${payment.tdate} 일)
+                        </td>
+                        <td>
+                            <div>
+                                <button type="button" onclick="payCheck2(${payment.pno})" class="btn btn-secondary">주문상세</button>
+                                <button type="button" onclick="delCheck(${payment.dno})" class="btn btn-secondary" style="margin: 10px;">배송조회</button>
+                            </div>
                         </td>
                     </tr>
                 </c:forEach>
@@ -76,6 +83,18 @@
     jQuery(function ($) {
         $("#lecture-table").DataTable();
     })
+</script>
+<script>
+    function payCheck2(pno) {
+        var child;
+        child = window.open("${path}/payment/payDetail?pno=" + pno, "child", "width=700, height=900");
+    }
+</script>
+<script>
+    function delCheck(dno) {
+        var child;
+        child = window.open("${path}/payment/deliveryDetail?dno=" + dno, "child", "width=700, height=900");
+    }
 </script>
 <!-- mylectureList End -->
 

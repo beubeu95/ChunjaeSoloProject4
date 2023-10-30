@@ -11,10 +11,6 @@
         select * from book where bcode=#{bcode}
     </select>
 
-    <select id="paymentDetail" resultType="kr.ed.haebeop.domain.Payment">
-        select * from payment where id=#{id} and lno=#{lno}
-    </select>
-
     <select id="getCount" resultType="integer">
         select count(*) from payment where lno=#{lno}
     </select>
@@ -62,5 +58,14 @@
     <delete id="serveDelete">
         delete from serve where sno=#{sno}
     </delete>
+
+    <select id="paymentDetail" parameterType="hashMap" resultType="kr.ed.haebeop.domain.Payment">
+        select * from payment where id=#{id} and lno=#{lno}
+    </select>
+
+    <select id="myPaymentDetail" resultType="kr.ed.haebeop.domain.PaymentVO">
+        select a.price as price, a.resdate as resdate, a.method as method , b.title as title, c.bname as bname, b.price as price, c.bprice as bprice, d.dstatus as dstatus, a.pno as pno, b.lno as lno
+        From payment a JOIN lecture b ON (a.lno=b.lno) JOIN book c ON (a.bcode=c.bcode) JOIN delivery d ON (a.dno = d.dno) AND a.pno=#{pno}
+    </select>
 
 </mapper>

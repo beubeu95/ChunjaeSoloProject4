@@ -63,12 +63,22 @@ public class PaymentServiceImpl implements PaymentService{
     }
 
     @Override
-    public void deletePayment(int pno, int sno) throws Exception {
+    public void deletePayment(int pno, String id, int sno) throws Exception {
         paymentMapper.deletePayment(pno, sno);
     }
 
     @Override
     public void pointUpdate(int pt, String id) throws Exception {
         paymentMapper.pointUpdate(pt, id);
+    }
+
+    @Override
+    public Payment paymentDetail(String id, int lno) throws Exception {
+        return paymentMapper.paymentDetail(id, lno);
+    }
+
+    @Override
+    public PaymentVO myPaymentDetail(int pno) throws Exception {
+        return paymentMapper.myPaymentDetail(pno);
     }
 }

@@ -16,6 +16,7 @@ public class PaymentVO {
     private String edate;
     private String tdate;
     private String bcode;
+    private String bname;
     private String id;
     private int pt;
     private String method;

@@ -17,7 +17,10 @@ public interface LectureMapper {
     public List<Book> bnameList() throws Exception;
     public List<Teacher> tnameList() throws Exception;
     public void teacherDelete(String tcode) throws Exception;
-
+    public List<LectureVO> getLectureList2() throws Exception;
     public void writeArticle(Lecture lecture) throws Exception;
     public void fileRegister(Lecture lecture) throws Exception;
+    public void lectureUpdate(Lecture lecture) throws Exception;
+
+
 }

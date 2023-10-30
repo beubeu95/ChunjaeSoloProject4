@@ -11,7 +11,7 @@
                 <h4 class="fa fa-map-marker-alt text-primary"></h4>
                 <div class="pl-3">
                     <h5 class="text-white">Address</h5>
-                    <p>123 Street, New York, USA</p>
+                    <p>서울시 금천구 디지털로 9길 23</p>
                 </div>
             </div>
             <div class="d-flex">
@@ -25,7 +25,7 @@
                 <h4 class="fa fa-phone-alt text-primary"></h4>
                 <div class="pl-3">
                     <h5 class="text-white">Phone</h5>
-                    <p>+012 345 67890</p>
+                    <p>02-123-2345</p>
                 </div>
             </div>
         </div>

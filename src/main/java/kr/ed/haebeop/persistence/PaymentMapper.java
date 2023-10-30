@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+
 public interface PaymentMapper {
 
     public Payment getPayment(String id, int lno) throws Exception;
@@ -25,4 +27,6 @@ public interface PaymentMapper {
     public void pointUpdate(int pt, String id) throws Exception;
     public void deletePayment (int pno, int sno) throws Exception;
 
+    public Payment paymentDetail(String id, int lno) throws Exception;
+    public PaymentVO myPaymentDetail(int pno) throws Exception;
 }

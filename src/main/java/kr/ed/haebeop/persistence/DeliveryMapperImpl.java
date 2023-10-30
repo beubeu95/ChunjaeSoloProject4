@@ -28,4 +28,9 @@ public class DeliveryMapperImpl implements DeliveryMapper{
     public void deliveryUpdate(Delivery delivery) throws Exception {
         sqlSession.update("delivery.deliveryUpdate", delivery);
     }
+
+    @Override
+    public DeliveryVO myDeliveryDetail(int dno) throws Exception {
+        return sqlSession.selectOne("delivery.myDeliveryDetail", dno);
+    }
 }

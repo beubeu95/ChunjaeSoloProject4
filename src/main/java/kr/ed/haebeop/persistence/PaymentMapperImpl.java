@@ -91,4 +91,17 @@ public class PaymentMapperImpl implements PaymentMapper{
         pnt.put("id", id);
         sqlSession.update("pointUpdate", pnt);
     }
+
+    @Override
+    public Payment paymentDetail(String id, int lno) throws Exception {
+        Map<String, Object> pay = new HashMap<>();
+        pay.put("id", id);
+        pay.put("lno", lno);
+        return sqlSession.selectOne("paymentDetail", pay);
+    }
+
+    @Override
+    public PaymentVO myPaymentDetail(int pno) throws Exception {
+        return sqlSession.selectOne("myPaymentDetail", pno);
+    }
 }

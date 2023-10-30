@@ -45,7 +45,7 @@
 
     <!-- 내 수강신청 -->
     <select id="mylectureList" resultType="kr.ed.haebeop.domain.PaymentVO">
-        SELECT a.pno, c.tname, b.sdate, b.edate, b.tdate, b.title
+        SELECT a.pno, c.tname, b.sdate, b.edate, b.tdate, b.title, a.dno
         FROM payment a JOIN lecture b ON (a.bcode = b.bcode) JOIN teacher c ON (a.tcode = c.tcode)
         WHERE a.id = #{id}
     </select>

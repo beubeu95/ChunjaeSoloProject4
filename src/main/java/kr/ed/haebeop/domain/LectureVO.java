@@ -16,6 +16,7 @@ public class LectureVO {
     private String title;
     private String content;
     private String img;
+    private String video;
     private String price;
     private String status;
     private String sdate;

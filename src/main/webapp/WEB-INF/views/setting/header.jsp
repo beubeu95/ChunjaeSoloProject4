@@ -7,7 +7,7 @@
     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
         <div class="container-fluid align-items-center py-2" style="margin-top: 25px;">
             <a class="navbar-brand flex-center" href="${path}">
-                <img class="logo" src="${path}/resources/img/logo.png" alt="open enterprise" /><span class="ms-2 d-none d-sm-block fw-bold">Open Enterprise</span>
+                <img class="logo" src="${path}/resources/img/logo.png" alt="open enterprise" /><span class="ms-2 d-none d-sm-block fw-bold"></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
