@@ -52,15 +52,15 @@
                 </div>
                 <div class="form-group">
                     <label for="title">강의명</label>
-                    <input type="text" name="title" id="title" class="form-control" value="${lecture.title}" placeholder="제목 입력" maxlength="98" required>
+                    <input type="text" name="title" id="title" class="form-control" value="${detail.title}" placeholder="제목 입력" maxlength="98" required>
                 </div>
                 <div class="form-group">
                     <label for="title">강사명</label>
-                    <input type="text" name="tcode" id="tcode" class="form-control" value="${lecture.tcode}" placeholder="제목 입력" maxlength="98" required>
+                    <input type="text" name="tcode" id="tcode" class="form-control" value="${detail.tcode}" placeholder="제목 입력" maxlength="98" required>
                 </div>
                 <div class="form-group">
                     <label for="title">교재명</label>
-                    <input type="text" name="bcode" id="bcode" class="form-control" value="${lecture.bcode}" placeholder="제목 입력" maxlength="98" required>
+                    <input type="text" name="bcode" id="bcode" class="form-control" value="${detail.bcode}" placeholder="제목 입력" maxlength="98" required>
                 </div>
 
                 <div class="form-group">
@@ -79,17 +79,17 @@
 
                 <div class="form-group">
                     <label for="sdate">시작일</label>
-                    <input type="date" name="sdate" id="sdate" value="${lecture.sdate}" class="form-control" placeholder="시작일 지정해주세요" autocomplete="off" required>
+                    <input type="date" name="sdate" id="sdate" value="${detail.sdate}" class="form-control" placeholder="시작일 지정해주세요" autocomplete="off" required>
                 </div>
 
                 <div class="form-group">
                     <label for="edate">종료일</label>
-                    <input type="date" name="edate" id="edate" value="${lecture.edate}" class="form-control" placeholder="종료일 지정해주세요" autocomplete="off" required>
+                    <input type="date" name="edate" id="edate" value="${detail.edate}" class="form-control" placeholder="종료일 지정해주세요" autocomplete="off" required>
                 </div>
 
                 <div class="form-group">
                     <label for="content">강의소개</label>
-                    <textarea name="content" id="content" value="${lecture.content}" class="form-control" placeholder="내용 입력" rows="8" maxlength="1400" required></textarea>
+                    <textarea name="content" id="content" class="form-control" value="${detail.content}" rows="8" maxlength="1400" required></textarea>
                     <script>
                         CKEDITOR.replace('content', { filebrowserUploadUrl: '${path}/lecture/imageUpload.do' });
                     </script>

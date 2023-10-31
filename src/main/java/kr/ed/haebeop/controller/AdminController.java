@@ -151,9 +151,7 @@ public class AdminController {
     public String getdeliveryList(Model model) throws Exception{
 
         List<DeliveryVO> list = deliveryService.deliveryList();
-        List<Delivery> delList = paymentService.deliveryList();
         model.addAttribute("list", list);
-        model.addAttribute("delList", delList);
         return "/admin/deliveryList";
     }
 
@@ -162,6 +160,9 @@ public class AdminController {
         int dno = Integer.parseInt(request.getParameter("dno"));
         DeliveryVO delivery= deliveryService.getdelivery(dno);
 
+        String[] str = delivery.getAddr().split("<br>");
+        String addrNew= str[0]+str[1];
+        model.addAttribute("addrNew", addrNew);
         model.addAttribute("delivery", delivery);
 
         return "/admin/deliveryUpdate";
@@ -187,15 +188,15 @@ public class AdminController {
         model.addAttribute("detail", lecture);
 
         // 과목 목록 불러오기
-        List<Category> subjects = lectureService.categoryList();
-        model.addAttribute("subjects", subjects);
+        List<Category> categories = lectureService.categoryList();
+        model.addAttribute("categories", categories);
 
 
         model.addAttribute("curPage", curPage);
 
         return "/admin/lectureEdit";
     }
-    
+
 
 
 }

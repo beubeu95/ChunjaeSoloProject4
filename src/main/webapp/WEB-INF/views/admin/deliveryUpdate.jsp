@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="form-outline">
-                <input class="form-control form-control" type="text" name="addr" id="addr" value="${delivery.addr}" readonly>
+                <input class="form-control form-control" type="text" name="addr" id="addr" value="${addrNew}" readonly>
                 <label for="addr" class="form-label"> 배송지주소 </label>
             </div>
         </div>
@@ -98,14 +98,9 @@
                 </div>
                 <div class="form-outline mb-4 col col-4">
                     <select class="form-control" name="dstatus" id="dstatus">
-                        <c:forEach var="dstatus" items="${state_list}" varStatus="status">
-                            <c:if test="${delivery.current_state eq dstatus}">
-                                <option value="${status.index}" selected> ${dstatus} </option>
-                            </c:if>
-                            <c:if test="${delivery.current_state ne dstatus}">
-                                <option value="${status.index}"> ${dstatus} </option>
-                            </c:if>
-                        </c:forEach>
+                        <option value="0" selected> 배송준비중</option>
+                        <option value="1">배송중 </option>
+                        <option value="2">배송완료</option>
                     </select>
                     <label for="dstatus" class="form-label"> 배송상태 </label>
                 </div>

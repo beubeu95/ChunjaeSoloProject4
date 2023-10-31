@@ -11,7 +11,7 @@
     <meta content="Free HTML Templates" name="keywords" />
     <meta content="Free HTML Templates" name="description" />
 
-    <title>회원관리</title>
+    <title>강의관리</title>
     <jsp:include page="../setting/head.jsp" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -73,7 +73,7 @@
                     <tr>
                         <td class="has-text-centered">${status.count }</td>
                         <td>${lecture.cateName}</td>
-                        <td>${lecture.title }</td>
+                        <td><a href="${path}/admin/lectureEdit?lno=${lecture.lno}">${lecture.title }</a></td>
                         <td>${lecture.amt }</td>
                         <td>${lecture.sdate }~ ${lecture.edate}</td>
                         <td>${lecture.tdate} 일</td>

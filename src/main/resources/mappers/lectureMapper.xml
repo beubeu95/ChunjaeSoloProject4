@@ -27,7 +27,7 @@
     </select>
 
     <select id="lectureDetail" resultType="kr.ed.haebeop.domain.LectureVO">
-        SELECT lno,c.bcode as bcode, cateName, title, a.content as content, img, video, a.price as price, status, sdate, edate, tdate, tname, bname, amt
+        SELECT lno,c.bcode as bcode, cateName, title, a.content as content, img, video, a.price as price, status, sdate, edate, tdate, tname, bname, amt, b.tcode
         FROM lecture a JOIN teacher b ON a.tcode = b.tcode JOIN book c ON a.bcode = c.bcode JOIN category d ON a.cate=d.cate
         WHERE lno=#{lno}
     </select>

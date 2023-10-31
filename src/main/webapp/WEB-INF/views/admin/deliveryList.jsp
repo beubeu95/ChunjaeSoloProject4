@@ -46,9 +46,9 @@
     <div class="container" style="margin-top: 30px; width: 80%;">
         <div class="row portfolio-container">
             <div>
-            <h2>결제 목록</h2>
+            <h2>배송 목록</h2>
             </div>
-            <table id="pay-table">
+            <table id="del-table">
                 <thead>
                 <tr>
                     <th width="80">번호</th>
@@ -57,7 +57,7 @@
                     <th width="150">주문ID</th>
                     <th width="300">결제일</th>
                     <th width="100">배송상태</th>
-                    <th>수정</th>
+                    <th>비고</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -93,51 +93,14 @@
                 </tbody>
             </table>
         </div>
-
-        <div class="row portfolio-container">
-            <div>
-                <h2>배송 목록</h2>
-            </div>
-            <table id="del-table">
-                <thead>
-                <tr>
-                    <th width="80">결제번호</th>
-                    <th>송장번호</th>
-                    <th>상품명</th>
-                    <th width="300">배송예정일</th>
-                    <th width="100">배송안내</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${delList }" var="del" >
-                    <tr>
-                        <td class="has-text-centered">${del.pno }</td>
-                        <td>${del.dcode}</td>
-                        <td>${del.title }</td>
-                        <td>${del.edate }</td>
-                        <td>${del.dstatus }</td>
-                    </tr>
-                </c:forEach>
-                <c:if test="${empty delList}">
-                    <tr>
-                        <td colspan="6" class="has-text-centered">배송 예정중인 상품이 없습니다.</td>
-                    </tr>
-                </c:if>
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>
-<script type="text/javascript">
-    jQuery(function ($) {
-        $("#pay-table").DataTable();
-    })
-</script>
 <script type="text/javascript">
     jQuery(function ($) {
         $("#del-table").DataTable();
     })
 </script>
+
 <!-- deliveryList End -->
 
 <!-- Footer Start -->

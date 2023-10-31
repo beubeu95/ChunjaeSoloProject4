@@ -11,9 +11,9 @@
     </select>
 
     <select id="deliveryDetail" resultType="kr.ed.haebeop.domain.DeliveryVO">
-        select dno, title, id, tel, addr,resdate, dstatus
+        select a.dno, b.title, a.id, a.tel, a.addr,b.resdate, a.dstatus
         from delivery a join payment b on (a.pno = b.pno)
-        where dno=#{dno}
+        where a.dno=#{dno}
     </select>
 
     <update id="deliveryUpdate">
